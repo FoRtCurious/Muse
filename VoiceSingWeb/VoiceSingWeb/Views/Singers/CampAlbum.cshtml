@@ -1,0 +1,212 @@
+﻿@model  Models.Active
+@{
+    ViewBag.Title = Model.actname;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Css{
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <script src="~/Scripts/ckeditor/config.js"></script>
+}
+<style>
+    .part-txt {
+        line-height: 2;
+    }
+
+    .part-body {
+        font-size: 36px;
+        text-align: center;
+        color: #8cbfb4;
+    }
+    .photo {
+        width: 200px;
+        height: 200px;
+        margin-top: 50px;
+        border: 5px solid white;
+    }
+
+    .ul-li {
+        display: inline-block;
+        margin-left: 20px;
+        padding: 3px;
+    }
+
+        .ul-li > li {
+            width: 25px;
+        }
+
+    .span {
+        display: inline-block;
+        width: 100px;
+        font-size: 20px;
+        color: #f3af2a;
+        font-weight: 600;
+    }
+
+    .button {
+        margin-top: 230px;
+    }
+
+        .button > button {
+            width: 120px;
+            border-radius: 0px;
+        }
+
+    ::-moz-list-bullet {
+        font-size: 0;
+        float: left;
+    }
+
+    summary {
+        user-select: none;
+        outline: 0;
+    }
+
+    .more {
+        display: none;
+    }
+
+    [open] .more {
+        display: block;
+    }
+
+    [open] summary a {
+        font-size: 0;
+    }
+
+        [open] summary a::before {
+            content: '收起';
+            font-size: 14px;
+        }
+
+    .Input {
+        overflow: auto;
+        line-height: 24px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1;
+        flex: 1 1;
+        padding: 0;
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        background: transparent;
+        resize: none;
+        width: 790px;
+        height: 120px;
+    }
+</style>
+
+
+<div class="container">
+    <div class="row clearfix box" style="height:270px;width:960px; background:url(@Model.image_url) no-repeat;">
+        <div class="col-md-12 column">         
+            <div class="col-md-8 column">
+                <section style="margin-top:50px;height :120px;">
+                    @*<h3 style="float:left;margin-top:0px;color:red ;">@Model.actname </h3>*@                  
+                </section>
+                @*<br><br><br><br><br><br><br><br>*@
+                <p style="font-weight:600;">
+                    主持人: @Model.Holder 
+                </p>             
+                <p style="font-weight:600;">
+                    活动截止时间 : @Model.DDLine.ToString().Substring(0, Model.DDLine.ToString().Length - 7)
+                </p>
+                <span class="span">参与: <span style="color:red;">@Model.Joinsum </span></span>
+                <span class="span">人气: <span style="color:red;">@Model.Viewsum </span></span>
+            </div>
+            <div class="col-md-4 column">
+                @*<div class="button">
+                    <button class="btn btn-warning btn-lg" type="button" onclick="location.href='@Url.Action("Adduser", "UserManage",new{ id = @Model.userId})'">+关注</button>
+                    <button class="btn btn-lg btn-success" type="button" style="margin-left:20px;"><a href="@Url.Action("Write", "Mail")"> 站内信</a></button>
+                </div>*@
+            </div>
+        </div>
+    </div>
+
+
+    <hr> <hr>
+    @*——————专辑包括留言大页面——————*@
+    <div class="row clearfix box" style="min-height:555px;margin-top:10px;">
+        <div class="col-md-12 column">
+            <div class="row clearfix" style="min-height:100px;overflow-y:hidden; overflow-x :hidden ;">
+                <div class="col-md-8 column">
+                    <h3>
+                        音悦板
+                    </h3>
+                    @Html.Action("CA1", "Singers", new { id = Model.actno })   @*跳往专辑内容页*@     @*修改为CA1*@
+
+                </div>
+                <div class="col-md-4 column">
+                    <h4 id="list-data" style="color :blue;">
+                        这些用户关注了主持人~
+                    </h4>
+                    @Html.Action("SA2", "Singers", new { id = Model.Holder })      @*跳往专辑关注人页面，采用SA相同的方法*@   
+                </div>
+            </div>
+            <hr><hr>
+
+            @*——————留言页面——————*@
+            <div class="row clearfix" style="min-height:530px;overflow-y:hidden; overflow-x :hidden ;">
+                <h3>
+                    &nbsp;  留言板
+                </h3>
+                @*评论部分*@
+                <div class="col-md-1  column">
+                    @*头像*@
+                    <div class="col-md-12 column">
+                        @{
+                            if (Session["Userphoto"] == null)
+                            {
+                                <img alt="140x140" src="~/Content/images/user_photo/default.jpg" class="img-circle" width="60" />
+                            }
+                            else
+                            {
+                                <img alt="140x140" src="@Session["Userphoto"]" class="img-circle" width="60" />
+                            }
+                        }
+                    </div>
+
+                </div>
+                @using (Ajax.BeginForm("PostActiveLeave", "Singers", new AjaxOptions { HttpMethod = "post", OnSuccess = "LeaveSuccess" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <div class="row clearfix" style="min-height:120px;overflow-y:hidden; ">
+                        <div class="col-md-12  column">
+                            <textarea class="Input" name="content" id="content"></textarea>
+                            <input type="hidden" id="id" name="id" value="@Model.actno " />
+                        </div>
+                    </div>
+                    <div class="row clearfix" style="min-height:50px;overflow-y:hidden; margin-left :800px;">
+
+                        <br />
+                        <button type="submit" class="btn btn-default" style="background-color:green;color:white;">发布留言</button>
+                    </div>
+                }
+                <hr>
+                @Html.Action("CampLeave", "Singers", new { id = Model.actno })    @*展示所有的留言*@
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    function LeaveSuccess(data) {
+        if (data == "success") {
+
+            alert("留言成功");
+            window.location.reload();
+        }
+        else {
+            alert('留言失败！请尝试重新登录后操作');
+        }
+    }
+</script>
+
+@*主页内容*@

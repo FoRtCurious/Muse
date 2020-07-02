@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Models.Topic>
+    @{ 
+        Layout = null;
+    }
+
+
+
+@foreach (var item in Model)
+{
+    <div class="background">
+        <div class="transbox">
+            <p>
+                <a href="@Url.Action("circle", "Circle")">
+                    @Html.DisplayFor(modelItem => item.TContent)
+                </a>
+            </p>
+        </div>
+    </div>
+    <br />
+}

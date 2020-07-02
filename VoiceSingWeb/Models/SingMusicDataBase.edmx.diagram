@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f42de56d7c3f42eb9233fd8035e54192" Name="Diagram1">
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.AccusedUsers" Width="1.5" PointX="5.25" PointY="33.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.Active" Width="1.5" PointX="5.25" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.ActiveAlbum" Width="1.5" PointX="15.5" PointY="52.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.ActiveComplain" Width="1.5" PointX="15.5" PointY="55.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.Activehide" Width="1.5" PointX="16.5" PointY="44.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.Administrator" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.Block" Width="1.5" PointX="11" PointY="33.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.Cart" Width="1.5" PointX="8.25" PointY="47.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.Category" Width="1.5" PointX="3" PointY="55.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.Circle" Width="1.5" PointX="5.25" PointY="44.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.CircleComplain" Width="1.5" PointX="10.5" PointY="46.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.Circlereply" Width="1.5" PointX="10.5" PointY="50.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.CircleUserReply" Width="1.5" PointX="15.75" PointY="48.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.Collect" Width="1.5" PointX="8.25" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.CompanyMusics" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.Goods" Width="1.5" PointX="6" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.GoodsType" Width="1.5" PointX="3.75" PointY="30" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.JoinAct" Width="1.5" PointX="8.25" PointY="50.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.MailChat" Width="1.5" PointX="5.25" PointY="53.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.MailChatRecords" Width="1.5" PointX="7.5" PointY="54.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.Mails" Width="1.5" PointX="5.25" PointY="57.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.MusicCollectRecord" Width="1.5" PointX="8.25" PointY="41.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.MusicComment" Width="1.5" PointX="11.25" PointY="42.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.MusicType" Width="1.5" PointX="11" PointY="62.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.Orderdetails" Width="1.5" PointX="9.75" PointY="59" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.Orders" Width="1.5" PointX="7.5" PointY="58.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.PlayRecord" Width="1.5" PointX="5.25" PointY="40.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.Receipt_address" Width="1.5" PointX="5.25" PointY="72.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.Reply" Width="1.5" PointX="10.25" PointY="54.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.SingerAlbumLeave" Width="1.5" PointX="5.25" PointY="79.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.Topic" Width="1.5" PointX="13.25" PointY="47.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.UpType" Width="1.5" PointX="11" PointY="65.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.User_friends" Width="1.5" PointX="5.25" PointY="86.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.UserComplain" Width="1.5" PointX="5.25" PointY="89" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.UserLeave" Width="1.5" PointX="5.25" PointY="92.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.UserMusics" Width="1.5" PointX="13.25" PointY="51.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.Users" Width="1.5" PointX="3" PointY="43.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.UserSingerApply" Width="1.5" PointX="5.25" PointY="100.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.UserType" Width="1.5" PointX="0.75" PointY="48" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.VideoCollectRecord" Width="1.5" PointX="11.25" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.VideoComment" Width="1.5" PointX="8.25" PointY="38.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.Videos" Width="1.5" PointX="14.25" PointY="41.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.VideoType" Width="1.5" PointX="12" PointY="37" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.Suggest_good" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.Suggest_type" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.View_showactive" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__AccusedUs__userI__2057CCD0" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__active__Holder__47A6A41B" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__active__Location__489AC854" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__ActiveAlb__Activ__4589517F" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__ActiveCom__activ__7908F585" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__Activehid__activ__6F7F8B4B" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__ActiveAlb__Music__467D75B8" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__ActiveCom__useri__7814D14C" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__Activehid__useri__6E8B6712" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__Reply__RBLocatio__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__Topic__Location__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__cart__goodsid__1EA48E88" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__cart__userid__1DB06A4F" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__JoinAct__JoinCat__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__Circle__userid__093F5D4E" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__CircleCom__circl__1699586C" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__Circlerep__at_cn__0D0FEE32" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__CircleCom__useri__15A53433" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__Circlerep__useri__0C1BC9F9" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__CircleUse__reply__11D4A34F" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__CircleUse__useri__10E07F16" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__Collect__goodsid__36470DEF" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__Collect__userId__3552E9B6" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__Goods__goodstype__1332DBDC" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__Orderdeta__goods__1AD3FDA4" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__JoinAct__JoinUse__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__MailChat__recipi__603D47BB" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__MailChat__sentid__5F492382" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__MailChatR__recor__6501FCD8" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__MailChatR__recip__66EA454A" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__MailChatR__senti__65F62111" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__Mails__recip_use__1C5231C2" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__Mails__sent_user__1B5E0D89" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__musicColl__music__2DE6D218" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__musicColl__user___2CF2ADDF" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__MusicComm__Comme__41B8C09B" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__MusicComm__music__42ACE4D4" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__userMusic__music__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__Orderdeta__order__19DFD96B" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__orders__addressi__17036CC0" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__orders__userid__160F4887" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__playRecor__music__2A164134" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__playRecor__user___29221CFB" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__Receipt_a__useri__0E6E26BF" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__Reply__Responder__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__Reply__RTLocatio__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__SingerAlb__leave__74444068" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__SingerAlb__useri__73501C2F" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__Topic__Holder__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__userMusic__upTyp__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__user_frie__addus__3D2915A8" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__user_frie__userI__3C34F16F" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__UserCompl__compl__5B78929E" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__UserCompl__useri__5A846E65" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__userLeave__Leave__503BEA1C" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__userLeave__user___4F47C5E3" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__userMusic__user___24927208" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__users__userType___15502E78" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__UserSinge__userI__0880433F" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__videoComm__Comme__4B7734FF" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__videoReco__user___0A9D95DB" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__videos__user_id__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__videoReco__video__0B91BA14" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__videoComm__video__4C6B5938" ManuallyRouted="false" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__videos__videoTyp__70DDC3D8" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.Addcomment" Width="1.5" PointX="14.875" PointY="37.5" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.GoodsComment" Width="1.5" PointX="8.625" PointY="34.5" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.Add_comment" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.orderdetail_View" Width="1.5" PointX="0.75" PointY="6.75" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__Addcommen__goods__2B947552" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__Addcommen__goods__2C88998B" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__Addcommen__userI__2AA05119" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__GoodsComm__goods__220B0B18" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__GoodsComm__userI__2116E6DF" />
+        <EntityTypeShape EntityType="SingMusicDataBaseModel.ActiveAlbumLeave" Width="1.5" PointX="5.25" PointY="36.875" />
+        <AssociationConnector Association="SingMusicDataBaseModel.FK__ActiveAlb__useri__3429BB53" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

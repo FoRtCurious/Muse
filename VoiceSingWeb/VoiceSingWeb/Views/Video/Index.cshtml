@@ -1,0 +1,143 @@
+﻿@model IEnumerable<Models.VideoType>
+@{
+    ViewBag.Title = "MV";
+}
+@section Css{
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/videoIndex.css" rel="stylesheet" type="text/css" />
+}
+<div class="container">
+    <div class="video-navbar">
+        <video class="video-nav" autoplay loop muted>
+            <source src="https://s3.pstatp.com/aweme/resource/web/static/image/index/tvc-v3_4138031.mp4" type="video/mp4" />
+        </video>
+        <h1 class="video-text1" style="font-size: 100px;">
+            音悦网
+            <span class="video-text2">原创音乐的天堂</span>
+        </h1>
+    </div>
+</div>
+        
+<div style="width:1200px;margin:0px auto;">
+    <div class="row clearfix">
+        <div class="column col-md-12" style="height:520px;">
+            <div class="teaching-video">
+                <div class="tea-video-title text-center">
+                    <div class="text-center tea-video-h1"><i class="fa fa-video-camera" style="font-weight:600;">&nbsp;&nbsp;精选视频</i></div>
+                </div>
+                <div class="tea-video-cont">
+                    <div class="video">
+                        <div><img src="~/Content/images/load/btn-left.png" style="height:50px;width:50px;margin-top:170px;" /></div>
+                        <div>
+                            <ul>
+                                <li class="video1"><div><video preload="metadata" controls loop poster="~/Content/images/videos/videos-post/1.jpg"><source src="~/Content/source/video-source/16.mp4">您的浏览器不支持HTML5视频播放，请升级浏览器。</video><h3></h3></div></li>
+                                <li class="video2"><div><video preload="metadata" controls loop poster="~/Content/images/videos/videos-post/2.jpg"><source src="~/Content/source/video-source/16.mp4">您的浏览器不支持HTML5视频播放，请升级浏览器。</video><h3></h3></div></li>
+                                <li class="video3"><div><video preload="metadata" controls loop autoplay muteds poster="~/Content/images/videos/videos-post/3.jpg"><source src="~/Content/source/video-source/16.mp4">您的浏览器不支持HTML5视频播放，请升级浏览器。</video><h3></h3></div></li>
+                                <li class="video4"><div><video preload="metadata" controls loop poster="~/Content/images/videos/videos-post/4.jpg"><source src="~/Content/source/video-source/16.mp4">您的浏览器不支持HTML5视频播放，请升级浏览器。</video><h3></h3></div></li>
+                                <li class="video5"><div><video preload="metadata" controls loop poster="~/Content/images/videos/videos-post/5.jpg"><source src="~/Content/source/video-source/16.mp4">您的浏览器不支持HTML5视频播放，请升级浏览器。</video><h3></h3></div></li>					
+                            </ul>
+                        </div>
+                        <div><img src="~/Content/images/load/btn-right.png" style="height:50px;width:50px;margin-top:170px;float:right;" /></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>       
+</div> 
+
+<div class="container box">
+    <div class="row clearfix" style="min-height:870px;">
+        <h3 class="text-center" style="font-size:25px;color: #bb0606;">
+            <i class="fa fa-calendar-check-o" style="font-weight:600;">&nbsp;&nbsp;视频分类</i>
+        </h3>
+        <div class="search-Box">
+            @using (Ajax.BeginForm("SearchVideo", "Video", new AjaxOptions() { HttpMethod = "post", UpdateTargetId = "V-content" }, new { id = "searchVideo" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <input type="text" name="searchtxt" placeholder="搜索视频" />
+                <button type="submit" class="btn-search">搜索</button>
+            }
+        </div>
+        <div id="V-content">
+            <div class="zhonglei" id="zhonglei">
+                <div class="info">
+                    @Ajax.ActionLink("全部", "VideoTypePageShow", "Video", new { typeName = "" }, new AjaxOptions()
+                   {
+                       UpdateTargetId = "Div1",
+                       InsertionMode = InsertionMode.Replace,
+                       HttpMethod = "GET"
+                   }, new { @class = "on" })
+                    @foreach (var item in Model)
+                    {
+                        @Ajax.ActionLink(item.typeName, "VideoTypePageShow", "Video", new { typeName = item.typeName }, new AjaxOptions()
+                       {
+                           UpdateTargetId = "Div1",
+                           InsertionMode = InsertionMode.Replace,
+                           HttpMethod = "GET",
+                       })
+                    }
+                </div>
+                <hr />
+                <div class="xian"></div>
+            </div>
+            <div class="col-md-12 column">
+                <div class="row clearfix">
+                    <div class="col-md-12 column" style="min-height:650px;" id="Div1">
+                        @{Html.RenderAction("VideoTypePageShow", "Video");}
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        var click = 0;
+        var right = 0;      //解决第一次右边点击没反应
+        $('.video>div:first-child>img').click(function(){
+            //当点击左边按钮
+            for(var i=0; i<5; i++)
+            {
+                document.getElementsByTagName('video')[i].pause();
+            }
+            click+=1;
+            if(click>=6)
+                click=1;
+            right=1;
+            $('.video li:nth-of-type('+(((click+0)<=5) ? (click+0) : (click+0-5))+')').attr('class','video5');
+            $('.video li:nth-of-type('+(((click+1)<=5) ? (click+1) : (click+1-5))+')').attr('class','video1');
+            $('.video li:nth-of-type('+(((click+2)<=5) ? (click+2) : (click+2-5))+')').attr('class','video2');
+            $('.video li:nth-of-type('+(((click+3)<=5) ? (click+3) : (click+3-5))+')').attr('class','video3');
+            $('.video li:nth-of-type(' + (((click + 4) <= 5) ? (click + 4) : (click + 4 - 5)) + ')').attr('class', 'video4');
+        })
+        $('.video>div:last-child>img').click(function(){
+            //当点击右边按钮
+            for(var i=0; i<5; i++)
+            {
+                document.getElementsByTagName('video')[i].pause();
+            }
+            click-=1;
+            if(click<=0)
+                click=5;
+            if (!right)
+                click = 4;  //解决第一次右边点击没反应
+            right = 1;
+            $('.video li:nth-of-type(' + (((click + 0) <= 5) ? (click + 0) : (click + 0 - 5)) + ')').attr('class', 'video5');
+            $('.video li:nth-of-type(' + (((click + 1) <= 5) ? (click + 1) : (click + 1 - 5)) + ')').attr('class', 'video1');
+            $('.video li:nth-of-type(' + (((click + 2) <= 5) ? (click + 2) : (click + 2 - 5)) + ')').attr('class', 'video2');
+            $('.video li:nth-of-type(' + (((click + 3) <= 5) ? (click + 3) : (click + 3 - 5)) + ')').attr('class', 'video3');
+            $('.video li:nth-of-type(' + (((click + 4) <= 5) ? (click + 4) : (click + 4 - 5)) + ')').attr('class', 'video4');
+        })
+    })
+    $(document).ready(function () {
+        var $zhonglei_a = $('#zhonglei a');
+        $zhonglei_a.click(function () {
+            $(this).addClass('on').siblings().removeClass('on');
+        });
+    });
+</script>
+
+
+

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Models.User_friends>
+@{
+    ViewBag.Title = "我的关注";
+    Layout = null;
+}
+<div class="u-title u-title-1 f-cb">
+    <h3><span class="f-ff2 s-fc3">关注（<span id="follow_count_down">@Model.Count()</span>）</span></h3>
+</div>
+@{
+    if (Model.Count() != 0)
+    {
+        <ul class="m-fans f-cb" id="main-box">
+            @foreach (var item in Model)
+            {
+                <li class="">
+                    <a href="@Url.Action("UserSingerInfo","Singers",new { id = item.Users.userId })" class="ava f-pr" title="@item.Users.name">
+                        <img src="@item.Users.photo">
+                    </a>
+                    <div class="info">
+                        <p>
+                            <a href="@Url.Action("UserSingerInfo","Singers",new { id = item.Users.userId})" class="s-fc7 f-fs1 nm f-thide" title="@item.Users.name">@item.Users.name</a>&nbsp;
+                            <sup class="u-icn u-icn-1 ">@item.Users.UserType.userType_name</sup>
+                        </p>
+                        <p>
+                            <a>动态<em class="s-fc7">@item.Users.Circle.Count()</em></a>
+                            <span class="line">|</span>
+                            <a>关注<em class="s-fc7">@item.Users.user_add</em></a>
+                            <span class="line">|</span>
+                            <a>粉丝<em class="s-fc7">@item.Users.user_fans</em></a>
+                        </p>
+                        <p class="s-fc3 f-thide">@item.Users.user_info</p>
+                    </div>
+                    <div class="oper">
+                        <a class="u-btn u-btn-7 f-tdn" href="#" ><i class="fa fa-envelope-o"></i>发私信</a>
+                        <p class="s-fc4"><i class="u-icn u-icn-67"></i>已关注</p>
+                        <p class="s-fc4" style="display:none;"><i class="u-icn u-icn-66"></i>相互关注</p>
+                        <a class="u-btn u-btn-8 f-tdn" href="#" style="display:none;">关 注</a>
+                    </div>
+                </li>
+            }            
+        </ul>
+    }
+    else
+    {
+        <div class="f-cb">
+            <img src="~/Content/images/load/nulladdtion.png" style="width:920px;" />
+        </div>
+    }
+}

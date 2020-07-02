@@ -1,0 +1,82 @@
+﻿
+.FoodMenu {
+        background: url(../img/fxhd_bg.jpg) no-repeat center -120px;
+        /*position:relative;*/
+        padding-bottom:80px;
+    }
+
+.FoodMenu .content {
+    width: 1000px;
+    margin: 10px auto;
+}
+
+.FoodMenu .content .donghua {
+    margin-bottom: 20px;
+}
+
+.FoodMenu .content .donghua img {
+    width: 1220px;
+    height: 100px;
+}
+
+.FoodMenu .content .menu {
+    margin-bottom: 20px;
+           
+}
+
+.FoodMenu .content .menu .zhonglei {
+    background-color: rgba(14, 159, 223, 0.88);
+    padding: 10px;
+    border-radius:5px;
+}
+
+.FoodMenu .zhonglei b {
+    float: left;
+    font-weight: 400;
+    margin-top: 3px;
+    font-size: 16px;
+}
+
+.FoodMenu .zhonglei .info {
+    overflow: hidden;
+}
+
+.FoodMenu .zhonglei .info .on, .FoodMenu .zhonglei .info a:hover {
+    background:rgba(221,59,68,.4);
+    color: #fff;
+    border-radius:4px;
+}
+
+.FoodMenu .zhonglei .info a {
+    margin: 0 5px 5px 5px;
+    padding: 3px 10px;
+    color:#555;
+    float: left;
+    font-size: 16px;
+}
+
+.FoodMenu .zhonglei .xian {
+    margin: 15px 0 20px 0;
+    border-top:2px solid #fff;
+}
+
+hr {
+    margin: 15px 0 20px 0;
+    border-top: none;
+    border-color: #ffd800;
+}
+
+.FoodMenu .list {
+    margin-top: 20px;
+    height: 1000px;
+    background:url(../img/a.jpg)
+}
+.snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100001;
+}

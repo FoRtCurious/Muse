@@ -1,0 +1,72 @@
+﻿@model Models.Users
+@{
+    ViewBag.Title = "发件箱";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Css{
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+}
+
+<div class="container">
+    <div class="row clearfix" style="min-height :200px; overflow-y:hidden;">
+        <div class="col-md-12 column">
+            @*顶部导航*@
+            <div class="row clearfix" style="height:90px;">
+                <div class="col-md-1 column">
+                    <img class="img-circle photo" alt="singer" src="@Model.photo" style="width:70px;" />
+                </div>
+                <div class="col-md-3 column">
+                    <p style="color :red">音悦网免费邮箱 </p>
+                    <small>
+                        @@@Model.userId .yinyue.com
+                        <br />
+                        @Model.name
+                    </small>
+                </div>
+                <div class="col-md-8 column">
+                    <ul class="nav nav-pills">
+                        <li class="active">
+                            <a href="@Url.Action("Index", "Mail")"> 邮件</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Friends", "Mail")">  通讯录</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Write", "Mail")">   写信</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("ChatIndex", "Mail")">私信</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row clearfix">
+                @*左侧导航*@
+                <div class="col-md-2 column" style="min-height :200px; overflow-y:hidden;">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">   
+                                <a href="@Url.Action("Index", "Mail",new { id = Model.userId  })"> 收件箱  </a>    @*index页面默认为收件箱*@
+                            </div>
+                        </div>
+                        <div class="panel-body">  
+                            <a href="@Url.Action("Sent", "Mail",new { id = Model.userId  })">  发件箱 </a>
+                        </div>
+                        <div class="panel-footer">
+                             <a href="@Url.Action("Rubbish", "Mail",new { id = Model.userId  })">  垃圾箱  </a>
+                        </div>
+                    </div>
+                </div>                         @*以上为页面固定内容*@
+
+                @*右侧邮件*@
+          
+
+                    <div class="col-md-10 column" style="min-height :200px; overflow-y:hidden;">
+                        @Html.Action("Smail", "Mail", new { id = Model.userId  })   @*收件箱邮件详情页*@
+                    </div>                              @*邮件展示结束*@            
+            </div>
+        </div>
+    </div>
+</div>

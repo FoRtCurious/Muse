@@ -1,0 +1,110 @@
+﻿@model VoiceSingWeb.Models.MyCircleViewModels
+@{
+    ViewBag.Title = "MyCircle";
+    Layout = null;
+}
+<div class="u-title u-title-1 f-cb">
+    <h3><span class="f-ff2 s-fc3">我的动态（<span id="event_count2">@Model.circles.Count()</span>）</span></h3>
+</div>
+<div class="g-bd1 g-bd1-1 f-cb">
+    <div class="g-mn1">
+        <div class="g-mn1c">
+            @{
+                if (Model.circles.Count() != 0)
+                {
+                    <div class="g-wrap10" id="eventListBox">
+                        <div id="">
+                            <div class="m-timeline">
+                                <ul class="m-dlist j-flag">
+                                    @foreach (var item in Model.circles)
+                                    {
+                                        <li class="itm">
+                                            <div class="gface">
+                                                <a href="/user/home?id=598861716" class="ficon">
+                                                    <img class="j-flag" src="@item.Users.photo">
+                                                </a>
+                                            </div>
+                                            <div class="gcnt j-flag">
+                                                <div class="dcntc">
+                                                    <div class="type f-pr f-fs1">
+                                                        <a href="/user/home?id=598861716" class="s-fc7">_南浅</a>
+                                                        <span class="sep s-fc3">分享单曲</span>
+                                                    </div>
+                                                    <div class="time"><a class="s-fc4" href="/event?id=12537157431&amp;uid=598861716">@item.uptime.ToString()</a></div>
+                                                    <div class="text f-fs1  f-brk j-text">                                                                                                             
+                                                        <div id="">
+                                                            @Html.Raw(@item.content)
+                                                        </div>
+                                                    </div>
+                                                    <div class="doper j-flag">
+                                                        <a href="javascript:" class="s-fc7" data-action="like">
+                                                            <i class="fa fa-thumbs-o-up" style="font-size:14px;"></i>                                     
+                                                        </a>
+                                                        <span class="line">|</span>
+                                                        <a href="javascript:" class="s-fc7">转发</a>
+                                                        <span class="line">|</span>
+                                                        <a href="javascript:" class="s-fc7">评论</a>
+                                                    </div>
+                                                    <div class="arrow u-dicn u-dicn-2 j-flag" @*style="display: block;"*@style="display:none;" title="动态管理">
+                                                        <ul class="mng j-flag f-hide">
+                                                            <li>
+                                                                <a href="javascript:" class="li f-fl s-fc3" data-action="delete">
+                                                                    <i class="icn u-dicn u-dicn-27 f-fl"></i>删除
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="g-wrap10" id="eventListBox">
+                        <div id="">
+                            <div class="m-timeline">
+                                <img src="~/Content/images/load/nullcircle.png" style="width:500px;" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="g-sd1">
+        <div class="g-wrap11">
+            <h4 class="v-hd4">我的关注</h4>
+            @{
+                if (Model.myattention.Count() != 0)
+                {
+                <ul class="m-gz f-cb">
+                    @foreach (var item in Model.myattention)
+                            {
+                            <li>
+                                <a href="@Url.Action("UserSingerInfo","Singers",new { id = item.Users.userId })" title="@item.Users.name">
+                                    <img src="@item.Users.photo" style="height:64px;width:64px;">
+                                </a>
+                                <p class="nm">
+                                    <a href="@Url.Action("UserSingerInfo","Singers",new { id = item.Users.userId })" class="nm-icn f-thide s-fc1" title="@item.Users.name">@item.Users.name</a>
+                                </p>
+                            </li>
+                            }
+                </ul>
+                }
+                else
+                {
+            <div style="padding:20px;">
+                <p>你还没有关注好友哦~</p>
+            </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+

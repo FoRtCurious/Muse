@@ -1,0 +1,48 @@
+﻿@{ 
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>管理员登录</title>
+    <link href="~/Content/css/bootstrap.min.css" title="" rel="stylesheet" />
+    <link href="~/Content/css/adminlogin.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+    <div style="height:1px;"></div>
+    <div class="login">
+        <header>
+            <h1>管理员登陆</h1>
+        </header>
+        <div class="sr">
+            @using (Ajax.BeginForm("Login", "Admin", new AjaxOptions() { HttpMethod = "post", OnSuccess = "AdminLoginCheck" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="name">
+                    <label>
+                        <i class="sublist-icon glyphicon glyphicon-user"></i>
+                    </label>
+                    <input type="text" placeholder="输入登录账号" class="name_inp" name="admin_id">
+                </div>
+                <div class="name">
+                    <label>
+                        <i class="sublist-icon glyphicon glyphicon-pencil"></i>
+                    </label>
+                    <input type="password" placeholder="输入登录密码" class="name_inp" name="admin_pwd">
+                </div>
+                <button type="submit" class="dl">登录</button>
+                <button type="button" class="dl" onclick="location.href='@Url.Action("Index","Home")'">返回</button>
+            }
+        </div>
+    </div>
+
+</body>
+</html>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Content/js/Layout.js"></script>
+

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Models.Users>
+@{
+    Layout = null;
+}
+@foreach (var item in Model)
+{
+    <div class="col-md-3">
+        <div class="thumbnail">
+            <img alt="300x200" src="@item.photo" style="width:150px;" class="img-thumbnail" />
+            <div class="caption">
+                <h3>
+                    @item.name
+                </h3>
+                <p>
+                    邮箱:@@@item.userId .yinyue.com
+                </p>
+                <p>
+                    性别：@item.user_sex 
+                </p>
+                <p>
+                    现居地：@item.area 
+                </p>
+                <p>
+                    @item.user_info
+                </p>
+                <p>
+                    <a class="btn btn-primary" href="@Url.Action("Write","Mail" ,new {id =item.userId  })">写信给ta</a>
+                    <a class="btn" href="@Url.Action("Removelike","Mail" , new {id = item.userId  })">移除关注</a>
+                </p>
+            </div>
+        </div>
+    </div>
+}

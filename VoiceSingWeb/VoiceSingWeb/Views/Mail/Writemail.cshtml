@@ -1,0 +1,50 @@
+﻿@model Models.Mails
+@{
+    Layout = null;
+}
+
+@*废弃*@
+
+@using (Ajax.BeginForm("Write", "Mails", new AjaxOptions() { HttpMethod = "post", OnSuccess = "Write" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="row clearfix" style="min-height:50px;overflow-y:hidden;">
+        <button type="submit" class="btn btn-default" style="background-color:green;color:white;height:40px;">
+            <span class="glyphicon glyphicon-send"> &nbsp;发送  &nbsp; </span>
+        </button>
+    </div>
+            <div class="row clearfix" style="min-height:50px;overflow-y:hidden;">
+                <div class="col-md-1 column">
+                    <h5><strong>收件人 :</strong> </h5>
+                </div>
+                <div class="col-md-11 column">
+                    <div class="input-group">
+                        <span class="input-group-addon">@@</span>
+
+                        <input id="recip" name="recip" class="form-control" type="text">      @*收件人框*@
+                        <span class="input-group-addon">.yinyue.com</span>
+                    </div>
+                </div>
+                <br><br>
+                <div class="col-md-1 column">
+                    <h5><strong>主题 :</strong> </h5>
+                </div>
+                <div class="col-md-11 column">
+                    <div class="input-group" style="width :870px;">
+                        <input id="title" name="title" type="text" class="form-control">      @*主题框*@
+                    </div>
+                </div>
+            </div>
+
+            @*输入框*@
+            <div class="row clearfix" style="min-height:120px;overflow-y:hidden; ">
+                <div class="col-md-12  column">
+                    <textarea name="content" id="editor" required="required"></textarea>
+                    <script>
+                        var editor = CKEDITOR.replace('editor');
+                    </script>
+                </div>
+            </div>
+
+}

@@ -1,0 +1,161 @@
+﻿@model VoiceSingWeb.Models.AccompanyMusicIndexViewModels
+@{
+    ViewBag.Title = "伴奏";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Css{
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+}
+<style>
+    a{
+        outline:none;
+    }
+    .img:hover {
+        transform: scale(1.1); /*鼠标经过放大1.1倍*/
+    }
+    .s {
+        color: green;
+    }
+
+    .s:hover {
+        color: #B72712;
+    }
+</style>
+<div class="container box">
+    <div class="row clearfix" style="height:1243px;">
+        <div class="col-md-8 column">
+            <h4>伴奏查询</h4>
+            <hr color="grey" style="margin-top:0px;border-left:75px solid green;height:2px;" />
+            <div class="row clearfix" style="height:180px;">          
+                <div class="col-md-7 column">
+                    <nav class="navbar navbar-default" role="navigation" style="height:140px;padding:5px;">
+                        <h4 style="color:green;font-weight:600">海量伴奏免费下载</h4>
+                        <p>(下载伴奏，让更多的人一起享受音乐带来的快乐)</p>
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
+                            @using (Html.BeginForm("SearchAccompany", "AccompanyMusic", FormMethod.Get,htmlAttributes: new { @class = "navbar-form navbar-left" }))
+                            {
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="search"/>
+                                </div> 
+                                <button class="btn btn-default" type="submit" placeholder="输入伴奏名">搜索</button>                               
+                            }
+                        </div>                      
+                    </nav>
+                </div>
+                <div class="col-md-5 column">
+                    <img src="~/Content/images/load/comp.jpg" alt="load" style="height:140px;width:245px;border-radius:5px;"/>
+                </div>
+            </div>
+
+            <h4>热门伴奏</h4>
+            <hr color="grey" style="margin-top:0px;border-left:75px solid green;height:2px;" />
+            <div class="row clearfix" style="height:513px;">    
+                <div class="col-md-12 column">
+                    <ul>                      
+                        @{
+                            int i = 1;
+                        }
+                        <li style="padding:5px;background-color:lightgrey;font-weight:600;font-size:15px;border-radius:4px;">
+                            <span>
+                                伴奏名
+                                <span style="float:right;margin-left:27px;">下载</span>
+                                <span style="float:right;margin-left:27px;">试听</span>
+                                <span style="float:right;margin-left:27px;">格式</span>
+                                <span style="float:right;">下载次数</span>
+                            </span>
+                        </li>
+
+                        @foreach (var item in Model.HotAccompanyMusic)
+                        {
+                            <li style="height:25px;">
+                                @(i++).
+                                <a href="#" class="s">
+                                    <span>
+                                        @Html.DisplayFor(modelItem => item.cm_name)
+                                        <span style="float:right;margin:3px 10px 0px 45px;color:green;" class="fa fa-download"></span>
+                                        <span style="float:right;margin:3px 0px 0px 40px;color:green;" class="fa fa-play-circle"></span>
+                                        <span style="float:right;margin-left:33px;color:gray;">@Html.DisplayFor(modelItem => item.music_type)</span>
+                                        <span style="float:right;color:grey;">@Html.DisplayFor(modelItem => item.music_down)次</span>
+                                    </span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <h4>名人堂</h4>
+            <hr color="grey" style="margin-top:0px;border-left:75px solid green;height:2px;" />
+            <div class="row clearfix" style="height:340px;">              
+                <div class="col-md-12 column">
+                    <div class="row clearfix" style="height:320px;">
+                        @foreach (var item in Model.Singers)
+                        {
+                            <div class="col-md-3 column" style="margin-bottom:20px;">
+                                <a href="@Url.Action("UserSingerInfo","Singers",new { id = item.userId})">
+                                    <img class="img" alt="140x140" src="@item.photo" style="height:140px;width:140px;" />
+                                </a>
+                            </div>
+                        }
+                    </div>                  
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 column">
+
+            <h4>最近更新</h4>
+            <hr color="grey" style="margin-top:0px;border-left:75px solid green;height:2px;" />
+            <div class="row clearfix" style="height:330px;">                
+                <div class="col-md-12 column">
+                    <ul>
+                        @{
+                            int j = 1;
+                        }
+                        @foreach (var item in Model.NewUpAccompanyMusic)
+                        {
+                            <li style="height:25px;">
+                                @(j++).
+                                <a href="#" class="s">
+                                    <span style="width:100px;">
+                                        @Html.DisplayFor(modelItem => item.cm_name)
+                                        <span style="float:right;color:gray;font-size:13px;">@item.music_upTime.ToString().Substring(0, 4)-@item.music_upTime.ToString().Substring(5, 2)-@item.music_upTime.ToString().Substring(8, 2)</span>
+                                    </span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <h4>下载排行</h4>
+            <hr color="grey" style="margin-top:0px;border-left:75px solid green;height:2px;" /> 
+            <div class="row clearfix" style="height:743px;">
+                <div class="col-md-12 column">
+                    <ul>
+                        @{
+                            int k = 1;
+                        }
+                        @foreach (var item in Model.RankAccompanyMusic)
+                        {
+                            <li style="height:25px;">
+                                @(k++).
+                                <a href="#" class="s">
+                                    <span style="width:100px;">
+                                        @Html.DisplayFor(modelItem => item.cm_name)
+                                        <span style="float:right;color:grey;font-size:13px;">下载 @item.music_down 次</span>
+                                    </span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                    <div>
+                        <img src="~/Content/images/load/comp2.jpg" alt="img" style="height:213px;width:305px;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

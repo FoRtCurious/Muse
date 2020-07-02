@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Models.Circle>
+
+@{
+    Layout = null;
+}
+
+<style >
+    .box4 {
+        display: flex;
+        height :200px;
+        margin-left: 15px;
+    }
+    .box5 {
+        width: 585px;
+        height: 10px;
+        margin-top: 10px;
+        margin-left: 10px;
+    }
+</style>
+
+
+@foreach (var item in Model)
+{
+
+    <div class="box4">
+        <hr>
+        <img class="img-circle photo" style="height:60px;margin-top :5px;" alt="user" src="@item.Users.photo " />
+        <div class="box5 ">
+            <strong> @item.Users.name </strong> <br />
+            <small>@item.uptime </small>
+            <div style="margin-top :10px;">
+                <p> @Html.Raw(item.content) </p>
+            </div>
+            <div class="doper j-flag" style="margin-left :400px; color:#808080 ;">
+                <a href="#" class="s-fc7" data-action="like" style="display:inline-block;"> <i class="icn u-dicn u-dicn-3"> </i></a>
+                <a href="@Url.Action("Like","Circle",new { id = item.cno})" class="s-fc7" data-action="like" style="display:inline-block;color:#808080; font-size :13px;"> 喜欢 <span class="j-flag " data-count="666">(@Html.DisplayFor(modelItem => item.thumbs))</span></a>
+                <span class="line" style="display:inline-block;">|</span>
+                <a href="@Url.Action("circledetail","Circle",new { id = item.cno})" class="s-fc7" data-action="comment" style="display:inline-block;color:#808080; font-size :13px;">评论 <span class="j-flag " data-count="25">(@Html.DisplayFor(modelItem => item.replysum))</span></a>
+            </div>
+        </div>
+    </div>
+
+
+
+}

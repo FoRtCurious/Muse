@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Models.SingerAlbumLeave>
+@{
+    Layout = null;
+}
+<style>
+
+</style>
+
+@foreach (var item in Model)
+{
+
+    <div class="row clearfix" style="min-height:100px;  overflow-y:hidden; margin-left :40px;">
+        <div class="col-md-12 column">
+            @*头像及id*@
+            <div class="row clearfix" style="height :70px; overflow:hidden ;">
+                <div class="col-md-1 column">
+                    <img alt="140x140" style="margin-top :15px;margin-left :15px;" src="@item.Users1.photo" class="img-circle" width="50" onclick="location.href='@Url.Action("Zone", "Circle",new { id =item.Users.userId} )'" />   @*头像*@
+                </div>
+                <div class="col-md-11 column">
+                    <h4 style="color:black ; "><a href="@Url.Action("userSingerDetails","Singers" ,new { id = @item.userid})">&nbsp;@Html.DisplayFor(model => item.Users1.name)</a> </h4>
+                    <div style="display : flex ;">
+                        <small><span class="glyphicon glyphicon-music"> @Html.DisplayFor(modelItem => item.Users1.UserType.userType_name) </span></small>  @*身份*@
+                        <p style="color :#808080 ;font-size :10px; margin-left :20px; margin-top :3px;"> @item.leave_time   </p>
+                    </div> 
+                </div>
+             
+            </div>
+            @*显示内容*@
+            <div class="col-md-1 column">
+            </div>
+            <div class="col-md-9 column" style="min-height:70px; margin-top :10px;">
+                <p> @Html.Raw(item.content) </p>
+            </div>
+            <div class="col-md-2 column">
+            </div>
+        </div>
+        @*转赞评*@
+     
+        <div class="col-md-12 column">
+            @*<div class="doper j-flag">
+                <a href="#" class="s-fc7" data-action="like" style="display:inline-block;"> <i class="icn u-dicn u-dicn-3"> </i></a>
+                <a href="@Url.Action("Like","Circle",new { id = item.cno})" class="s-fc7" data-action="like" style="display:inline-block;"> 喜欢 <span class="j-flag " data-count="666">(@Html.DisplayFor(modelItem => item.thumbs))</span></a>
+                <span class="line" style="display:inline-block;">|</span>
+                <a href="@Url.Action("circledetail","Circle",new { id = item.cno})" class="s-fc7" data-action="comment" style="display:inline-block;">评论 <span class="j-flag " data-count="25">(@Html.DisplayFor(modelItem => item.replysum))</span></a>
+            </div>*@
+        </div>
+    </div>
+}

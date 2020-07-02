@@ -1,0 +1,114 @@
+﻿
+.all {
+    padding-bottom: 435px;
+    min-height: calc(-233px + 100%);
+    width: 1100px;
+    margin: 0 auto;
+    background: #fff;
+    height: 150px;
+}
+.C-head {
+    min-height: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #333;
+}
+
+    .C-head .block {
+        padding: 30px 0 19px 0;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .C-head .pointer {
+        font-size: 16px;
+        color: #999;
+        font-weight: 600;
+    }
+
+
+
+        .address-gray .form-box .box-title {
+            text-align: center;
+            display: block;
+            padding-top: 20px;
+            font-size: 19px;
+            font-weight: 300;
+        }
+
+          .address-gray .form-box form .row {
+              margin: 25px 202px;
+           }
+
+            .address-gray .form-box form .row::after {
+                content: "";
+                display: block;
+                clear: both;
+            }
+
+            .address-gray .form-box form .row .txt-title {
+                display: block;
+                width: 78px;
+                text-align: right;
+                float: left;
+                font-size: 14px;
+            }
+
+                .address-gray .form-box form .row .txt-title span {
+                    color: red;
+                }
+
+        .address-gray .form-box form input {
+            outline: none;
+        }
+
+            .address-gray .form-box form input[type="text"] {
+                box-sizing: border-box;
+                padding-left: 10px;
+                border: 1px solid #ccc;
+                float: left;
+                margin-left: 15px;
+                height: 40px;
+                width: 600px;
+            }
+
+                .address-gray .form-box form input[type="text"].err {
+                    border-color: red;
+                    color: red;
+                }
+
+                .address-gray .form-box form input[type="text"]:hover {
+                    border: 1px solid black;
+                }
+
+        .address-gray .form-box form .btn {
+            text-align: center;
+        }
+
+            .address-gray .form-box form .btn input {
+                width: 172px;
+                height: 46px;
+                box-sizing: border-box;
+                font-size: 18px;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+                .address-gray .form-box form .btn input[type="button"] {
+                    border: 1px solid #ccc;
+                    background: white;
+                    margin-right: 10px;
+                }
+
+                    .address-gray .form-box form .btn input[type="button"]:hover {
+                        border-color: black;
+                    }
+
+                .address-gray .form-box form .btn input[type="submit"] {
+                    background: #8eaea1;
+                    border: 0;
+                    color: white;
+                }
+
+                    .address-gray .form-box form .btn input[type="submit"]:hover {
+                        background: #7d9d90;
+                    }

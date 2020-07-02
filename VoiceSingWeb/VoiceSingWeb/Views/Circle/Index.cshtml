@@ -1,0 +1,180 @@
+﻿@model Models.Users
+
+@{
+    ViewBag.Title = "圈子";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Css{
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <script src="~/Scripts/ckeditor/config.js"></script>
+}
+<style>
+    p {
+        text-indent: 30px;
+    }
+
+    h4 {
+        color: palegreen;
+    }
+
+    .u-icn-1 {
+        width: 11px;
+        height: 13px;
+        background-position: 0 1px;
+        font-size: 100%;
+        font-style: normal;
+    }
+
+    .u-icn, .u-icn2, .u-icn3 {
+        display: inline-block;
+        overflow: hidden;
+        vertical-align: middle;
+    }
+
+    .s-fc3, a.s-fc3:hover {
+        color: #666;
+    }
+
+    .like {
+        font-size: 10px;
+        color: #ccc;
+        cursor: pointer;
+    }
+
+    .cs {
+        color: #f00;
+    }
+</style>
+
+<div class="container">
+    <div class="row clearfix" style="min-height :600px; overflow-y:hidden; width :1000px">
+        @*活动发布调整*@
+        <div class="col-md-8 column">
+            <div class="row clearfix" style="height :120px;">
+                <div class="col-md-9 column" style="height :100px;">
+                    <h2>
+                        音乐人动态
+                    </h2> <hr>
+                </div>
+                <div class="col-md-3 column">
+                    <h3> <a href="#section-1"> >> 发布 <<    </a>  </h3>
+                </div>
+            </div>
+            <div>
+                @Html.Action("circle1", "Circle")      @*音乐人动态板块*@
+            </div>
+        </div>
+        <div class="col-md-4 column">
+            @*右侧头像ID*@
+            <div class="row clearfix" style="min-height :240px;">
+                <div class="col-md-4 column">
+                    <br>
+                    <img alt="140x140" src="@Session["Userphoto"]" width="90" />
+                </div>
+                <div class="col-md-8 column">
+                    <br>
+                    <h4 style="color:black;"> @Session["Username"]  </h4>
+                    <small> &nbsp;<span class="glyphicon glyphicon-user">我的粉丝：99 </span>  </small>
+                    <small> &nbsp;<span class="glyphicon glyphicon-heart">我的关注：99 </span>  </small>
+                </div>
+            </div>
+            @*热门音乐人部分*@
+            <dl>
+                <dt style="font-size :medium ;">
+                    热门音乐人
+                </dt>
+                @Html.Action("circle2", "Circle")
+            </dl>
+        </div>
+    </div>
+</div>
+
+
+@*第二部分*@
+<div class="container">
+    <div class="row clearfix" style="min-height:230px; overflow-y:hidden;overflow-x:hidden ; ">
+        <hr>
+        <h4 style="color:black;" id="section-1"><strong> 发布动态 </strong></h4>
+        <hr>
+        @*评论部分*@
+
+        <div class="col-md-1  column">
+            @*头像*@
+            <div class="col-md-12 column">
+                @{
+                    if (Session["Userphoto"] == null)
+                    {
+                        <img alt="140x140" src="~/Content/images/user_photo/default.jpg" class="img-circle" width="60" />
+                    }
+                    else
+                    {
+                        <img alt="140x140" src="@Session["Userphoto"]" class="img-circle" width="60" />
+                    }
+                }
+            </div>
+
+        </div>
+        @using (Ajax.BeginForm("postMessage", "UserManage", new AjaxOptions { HttpMethod = "post", OnSuccess = "addcircle" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <div class="row clearfix" style="min-height:120px;overflow-y:hidden; ">
+                <div class="col-md-12  column">
+                    <textarea name="content" id="editor" placeholder="来说点什么..." required="required"></textarea>
+                    <script>
+                        var editor = CKEDITOR.replace('editor');
+                    </script>
+                </div>
+            </div>
+            <div class="row clearfix" style="min-height:50px;overflow-y:hidden;">
+                <div class="col-md-10 column">
+
+                </div>
+                <div class="col-md-2 column">
+                    <br />
+                    <button type="submit" class="btn btn-default" style="background-color:green;color:white;">发布动态</button>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="row clearfix" style="min-height :200px;  overflow-y:hidden;  ">
+        @*展示已经发布的动态*@
+        <div class="col-md-12 column">
+            <div>
+                <hr> <h4 style="color:black;"><strong> 最近动态 </strong></h4> <hr>
+            </div>
+            <div class="no-data" style="min-height:120px;">
+                @Html.Action("allcircle", "Circle")    @*所有圈子内容分页*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script>
+    function addcircle(data) {
+        if (data == "Login")
+        {
+            alert("请先登录！");
+            history.go(0);
+        }
+        else if(data == "Fault")
+        {
+            alert("发布失败！");
+        }
+        else
+        {
+            alert("发布成功！");
+            $('.no-data').before(data);
+        }
+    }
+</script>
+
+
+
+

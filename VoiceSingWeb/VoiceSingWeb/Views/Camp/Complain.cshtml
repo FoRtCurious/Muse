@@ -1,0 +1,66 @@
+﻿@model Models.Active 
+@{
+    ViewBag.Title = "活动投诉";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Css{
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+}
+<style >
+    .flex-container {
+        display: flex;
+        display: flex;
+        width: 910px;
+        height: 40px;
+        margin-left :40px;
+        background-color: lightgrey;
+    }
+</style>
+
+<div class="container" @*style="background-color :aqua;"*@>
+    <div class="row clearfix" style="overflow :hidden ;">
+        <div class="col-md-12 column">
+            <div class="row clearfix" style="overflow:hidden ; margin-top :10px;"> 
+                <div class="col-md-4 column">
+                    <a href="@Url.Action("CampDetails","Camp",new { id =Model.actno})" style="font-size:large ; color :black;">
+                        <span class="glyphicon glyphicon-chevron-left" style="display :inline ;"> 取消投诉  </span>
+                    </a>
+                </div>
+                <div class="col-md-4 column">
+                    <p class="serif" style="font-size :x-large; text-align:center ; "> 投诉 </p>
+                </div>
+                <div class="col-md-4 column">
+                    <a href="@Url.Action("Index", "Camp")" style="font-size:large ; color :black; margin-left :200px ;">
+                        返回首页 <span class="glyphicon glyphicon-chevron-right" style="display :inline ;">   </span>
+                    </a>
+                </div>
+            </div>
+            <hr>
+
+@using (Html.BeginForm("Complain", "Camp", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+            <div>
+                <h4> 我要投诉的是 @@@Model.Users.name  的活动：  </h4>
+                <div class="flex-container">
+                    <p>@@@Model.Users.name： @Model.actinfo     </p>
+                </div>
+                <h4>  被投诉的活动编号是：  </h4>
+                <input type="text" class="form-control"  id="actid" name="actid"  value="@Model.actno " readonly="readonly">
+                <h4 style="margin-top :20px;"> 请输入你投诉的原因： </h4>
+                <input type="text" class="form-control" id="content" name="content" style="min-height:100px;" placeholder="请阅读《投诉须知》" required>
+                <br>
+                <div class="checkbox">
+                    <label><input type="checkbox" required />我已阅读并同意：<a href="#">《投诉须知》</a></label>
+                </div>
+               
+                <button type="submit" class="btn btn-default" style="height:50px; width:250px;background-color:forestgreen;color:white;">提交</button>
+            </div>
+}
+
+        </div>
+    </div>
+</div>

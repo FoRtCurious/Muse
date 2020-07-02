@@ -1,0 +1,220 @@
+﻿@model Models.UserMusics
+@{
+    ViewBag.Title = "翻唱上传";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Css{
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/upsource.css" rel="stylesheet" />
+}
+
+<div class="container box">
+    <h5 class="first">
+        <a href="#">个人中心</a> &rang;
+        <a href="#">歌曲管理</a> &rang;
+        <a href="#">上传作品</a>
+    </h5>
+    <div class="row">
+        <div class="span8">
+            @*种类导航*@
+            <ul class="nav nav-pills">
+                <li><a href="@Url.Action("UpOrigin", "UserManage")"><h2>原创</h2></a></li>
+                <li class="active"><a href=""><h2>翻唱</h2></a></li>
+                <li><a href="@Url.Action("UpVideo", "UserManage")"><h2>视频</h2></a></li>
+            </ul>
+        </div>
+    </div>
+    <hr> <hr>
+    @using (Html.BeginForm("UpCover", "UserManage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div>
+            <div class="well">
+                <a href="#" id="example" class="btn btn-danger" rel="popover" data-content="这将直接影响您的歌曲审核情况" data-original-title="请仔细阅读原创审核标准">
+                    <span class="glyphicon glyphicon-warning-sign"> 翻唱审核标准(必看)</span>
+                </a><br>
+                1.必须是上传人自己参与创作的翻唱歌曲。<br>
+                &nbsp; 1.1上传者请正确、完整地填写好歌曲信息，包括自己参与歌曲的身份，若提供的填写框没有对应的身份，请填写在<span class="color-red"> 歌词头部。</span><br>
+                &nbsp; 1.2上传者与作词、作曲、编曲、演唱、策划、统筹、剧本、监制、发行(如社团名、工作室名称)、后期（后期包括混音、调教、母带）、配音（CV）等其中之一的信息相符。<br>
+                &nbsp; 1.3<span class="color-red">上传者填写的名字，需要跟个人主页昵称或实名认证名称保持一致。 </span>   <br>
+                2.引用他人的词、曲、伴奏（填词、歌曲改编、朗诵等）进行二度创作的作品只能传到翻唱。<br>
+                3.不能上传他人作品作为收藏。<br>
+                4.歌曲伴奏请传到伴奏区，不要传原创。<br>
+                5.歌曲及歌曲信息中请勿涉及政治、广告、色情、暴力、低俗等违规内容，违反者直接删除内容。多次违反将封号。请不要对红歌进行任何的改编。
+            </div>
+        </div>
+        <script>
+            $(function (){
+	            $("#example").popover();
+            });
+        </script>
+        <hr>
+        <hr>
+        @*文件上传*@
+        <h4>选择歌曲文件</h4> <br>
+        <div class="row clearfix" style="height:130px ">
+            <div class="col-md-2 column">
+                <div class="form-group">
+                    <div class="col-sm-8">
+                        <label for="id_avatar">
+
+                        </label>
+                        <input type="file" name="musicfile" id="file" style="width:160px;" required accept=".mp3,.wma,.wav">
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-10 column">
+                <br><small>&nbsp;&nbsp;&nbsp;请上传码率不低于128Kbps，且200M以内的mp3/wma/wav格式的文件</small>
+            </div>
+        </div>
+
+        @*歌曲信息*@
+        <h4>填写歌曲信息</h4>
+        <br>
+        <div class="row clearfix" style="height:900px;">
+            <div class="col-md-12 column" style="height:750px;">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td valign="middle">
+                                <em class="up_file_red">*</em>歌曲封面：
+                            </td>
+                            <td>
+                                <label for="img">
+                                    <img id="avatar-img" src="~/Content/images/load/upImg.png" alt="" style="width:100px;height:100px;">
+                                </label>
+                                <input type="file" name="musicImg" id="img" style="width:65px;" required accept=".jpg,.png,.gif,.bmp">
+                                <span class="help-block"></span>
+                            </td>
+                        </tr>
+
+                        <tr class="table">
+                            <td style="width:100px;">
+                                <em class="up_file_red">*</em>歌曲名称:
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="musicname" name="musicname" placeholder="请阅读《歌曲名称审核标准》" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div style="width :620px;">
+                                    <div class="well">
+                                        <a href="#" id="example" class="btn btn-danger" rel="popover" data-content="这将直接影响您的歌曲审核情况" data-original-title="请仔细阅读歌曲名称审核标准 ">
+                                            <span class="glyphicon glyphicon-warning-sign"> 歌曲名称审核标准 (必看)  </span>
+                                        </a><br>
+                                        1.歌曲名后可添加歌曲信息备注，包含但不限于时间、歌曲类型、歌曲用途等，但需要统一用“（）”
+                                        歌曲名（XXXX） 例子，说了再见（电影《电影天堂》主题曲）<br>
+                                        2.翻唱歌曲，若歌曲名上要加上原创歌手名字（可选择不加），用“（cover：）”
+                                        多个歌手名字时，用“、”：
+                                        歌曲名（cover：）
+                                        例子，说了再见（cover：周杰伦）； 说了再见（cover：周杰伦、袁咏琳）<br>
+                                        3.歌曲包含版本信息，需要统一用“（）”
+                                        歌曲名（版本信息）
+                                        例子，说了再见（纯歌版）<br>
+                                        4.身份信息和歌曲类型请不要写在歌名里，否则歌曲无法推荐到TME其他平台，若坚持要写，需要统一格式。歌曲名里只能最多写一个身份或一个歌曲类型，且身份信息和歌曲信息只能二选一：
+                                        【身份类型】歌曲名，例子，【策划】说了再见
+                                        【歌曲类型】歌曲名，例子，【填翻】说了再见
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="table">
+                            <td style="height:20px;line-height:20px;">
+                                <em class="up_file_red">*</em>演唱:
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" value="@Session["Username"]" readonly="readonly">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <em class="up_file_red">*</em>语种:
+                            </td>
+                            <td>
+                                <div><input type="text" class="form-control" placeholder="单选"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div class="hp_jobs hp_language">
+                                    <ul>
+                                        <li><a href="###yc" title="点击选中">华语</a></li>
+                                        <li><a href="###yc" title="点击选中">欧美</a></li>
+                                        <li><a href="###yc" title="点击选中">日语</a></li>
+                                        <li><a href="###yc" title="点击选中">韩语</a></li>
+                                        <li><a href="###yc" title="点击选中">俄语</a></li>
+                                        <li><a href="###yc" title="点击选中">法语</a></li>
+                                        <li><a href="###yc" title="点击选中">德语</a></li>
+                                        <li><a href="###yc" title="点击选中">粤语</a></li>
+                                        <li><a href="###yc" title="点击选中">闽南语</a></li>
+                                        <li><a href="###yc" title="点击选中">方言</a></li>
+                                        <li><a href="###yc" title="点击选中">西班牙语</a></li>
+                                        <li><a href="###yc" title="点击选中">其它</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <em class="up_file_red">*</em>曲风：
+                            </td>
+                            <td>
+                                <div>
+                                    @Html.DropDownList("musicType_id", null, htmlAttributes: new { @class = "form-control" })
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <em class="up_file_red">*</em>歌曲描述:
+                            </td>
+                            <td>
+                                <textarea name="musicInfo" class="form-control" placeholder="请对歌曲进行简单描述~"></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+          </div>
+            @*歌曲设置*@
+            <h4>歌曲设置</h4>
+            <div class="row clearfix" style="height:180px;z-index:-1;">
+                <div class="col-md-2 column">
+                </div>
+                <div class="col-md-10 column" style="height:130px ;">
+                    <strong>下载设置：  </strong>
+                    <input id="dowmload" name="download" type="radio" checked="checked" />不许下载
+                    <input id="dowmload" name="download" type="radio" />免费下载
+                    <input id="dowmload" name="download" type="radio" />付费下载
+                    <br>
+                    <div class="checkbox">
+                        <label><input type="checkbox" required />我已阅读并同意：<a href="~/Views/UploadOriginal/Index.cshtml">《授权协议》</a></label>
+                    </div>
+                    <button type="submit" class="btn btn-default" style="height:50px; width:250px;background-color:forestgreen;color:white;">上传并递交审核</button>
+                </div>
+            </div>
+            }
+        </div>
+
+<script>
+    // 找到海报的input标签绑定change事件
+    $("#img").change(function () {
+        // 1. 创建一个读取文件的对象
+        var fileReader = new FileReader();
+        // 取到当前选中的头像文件
+        // console.log(this.files[0]);
+        // 读取你选中的那个文件
+        fileReader.readAsDataURL(this.files[0]);  // 读取文件是需要时间的
+        fileReader.onload = function () {
+            // 2. 等上一步读完文件之后才 把图片加载到img标签中
+            $("#avatar-img").attr("src", fileReader.result);
+        };
+    });
+</script>

@@ -1,0 +1,120 @@
+﻿@model Models.Users
+@{
+    ViewBag.Title = "修改基本信息";
+    Layout = null;
+}
+
+<a href="@Url.Action("UserCenter","UserManage")" class="backcenter">个人中心</a>
+<hr class="hr"/>
+<h3 class="headtitle">修改个人信息</h3>
+    <div class="n-base f-cb">
+        @using (Ajax.BeginForm("SaveEditInfo", "UserManage",null, new AjaxOptions() { HttpMethod = "post", OnSuccess = "SaveISuccess" }))
+        {
+         @Html.AntiForgeryToken()
+         @Html.ValidationSummary(true)
+        <div class="frm m-frm">
+            <div class="itm">
+                <label class="lab">账号：</label>
+                <div style="line-height:35px;">@Model.userId</div>                
+            </div>
+            <div class="itm">
+                <label class="lab">昵称：</label>
+                <input type="text" class="u-txt txt" value="@Model.name" name="nickname" maxlength="30">
+                <div class="u-err" style="display:none;" id="err"><i class="u-icn u-icn-25"></i><span>昵称已存在！</span></div>
+            </div>
+            <div class="itm f-cb">
+                <label class="lab">性别：</label>
+                <div class="f-cb">
+                    @{
+                        if (Model.user_sex == "男")
+                        {
+                            <label class="check"><input name="gender" type="radio" class="u-rdi" checked value="男"> 男</label>
+                            <label class="check"><input name="gender" type="radio" class="u-rdi" value="女"> 女</label>
+                            <label class="check"><input name="gender" type="radio" class="u-rdi" value=""> 保密</label>
+                        }
+                        else if (Model.user_sex == "女")
+                        {
+                            <label class="check"><input name="gender" type="radio" class="u-rdi" value="男"> 男</label>
+                            <label class="check"><input name="gender" type="radio" class="u-rdi" checked value="女"> 女</label>
+                            <label class="check"><input name="gender" type="radio" class="u-rdi" value="密"> 保密</label>
+                        }
+                        else
+                        {
+                            <label class="check"><input name="gender" type="radio" class="u-rdi" value="男"> 男</label>
+                            <label class="check"><input name="gender" type="radio" class="u-rdi" value="女"> 女</label>
+                            <label class="check"><input name="gender" type="radio" class="u-rdi" checked value=""> 保密</label>
+                        }
+                    }                                        
+                </div>
+            </div>
+            <div class="itm f-cb" style="z-index:11;">
+                <label class="lab">生日：</label>
+                <input type="date" name="date" class="u-txt txt" value="2020-01-01" style="width:100px;"/>
+                <span>@Model.birthday.ToString().Substring(0, Model.birthday.ToString().Length - 7)</span>
+            </div>
+            <div class="itm itm-1 f-cb" style="z-index:10;">
+                <label class="lab">地区：</label>
+                <input type="text" name="area" class="u-txt txt" value="@Model.area"/>
+            </div>
+            <div class="itm f-cb">
+                <label class="lab">介绍：</label>
+                <div class="u-txtwrap f-pr">
+                    <textarea class="u-txt area" name="introduce" maxlength="300">@Model.user_info</textarea>
+                    <span class="zs s-fc2" id="remain">300字以内</span>
+                </div>
+            </div>
+            <div class="itm ft">
+                <button type="submit" class="u-btn2 u-btn2-2 u-btn2-w2"><i>保 存</i></button>
+                <button type="reset" class="u-btn2 u-btn2-2 u-btn2-w2"><i>取 消</i></button>
+            </div>
+        </div>
+        }
+        @using (Ajax.BeginForm("SavePhoto", "UserManage",null, new AjaxOptions() { HttpMethod = "post", OnSuccess = "SavePSuccess" }, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <div class="avatar f-pr">
+                <img src="@Model.photo" id="avatar">
+                <input type="file" name="photo" id="id_avatar" style="width:75px;display:none;" accept=".jpg,.png,.gif,.bmp">
+                <div><button type="submit" class="savephoto">保存头像</button></div>
+            </div>       
+        }
+    </div>
+<script type="text/javascript">
+    function SaveISuccess(data) {
+        if (data == "suc") {
+            alert("保存成功！");
+        }
+        else {
+            alert("保存失败！");
+        }
+    }
+    function SavePSuccess(data) {
+        if (data == "suc") {
+            alert("更改头像成功！");
+            location.reload();
+        }
+        else if (data == "fail") {
+            alert("更改头像失败！");
+        }
+        else {
+            alert("读取文件失败！");
+        }
+    }
+    $("#avatar").click(function () {
+        document.getElementById('id_avatar').click();//id_avatar隐藏的input[file]的id
+    });
+    // 找到头像的input标签绑定change事件
+    $("#id_avatar").change(function () {
+        // 获取上传文件对象
+        var file = $(this)[0].files[0];
+        // 读取文件URL
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        // 阅读文件完成后触发的事件
+        reader.onload = function () {
+            // 读取的URL结果：this.result
+            $("#avatar").attr("src", this.result);//avatar  img标签的ID
+        }
+    });
+</script>

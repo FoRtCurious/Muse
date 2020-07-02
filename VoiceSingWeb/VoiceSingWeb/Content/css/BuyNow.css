@@ -1,0 +1,28 @@
+﻿.Right-list {
+    width: 900px;
+    height: 459px;
+    background-color: antiquewhite;
+    margin: 0 auto;
+}
+
+.add :hover {
+    cursor: pointer;
+}
+/*选择地址*/
+.address-H.active {
+    border: 2px solid red;
+}
+.address-H {
+    width: 280px;
+    height: 150px;
+    background-color: aqua;
+    float: left;
+    margin: 10px 10px;
+    box-sizing: border-box;
+} 
+.txtbox {
+    display: inline-block;
+    width: 55px;
+    height: 30px;
+    text-align: center;
+}

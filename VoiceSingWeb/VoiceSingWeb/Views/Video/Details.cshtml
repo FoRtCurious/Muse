@@ -1,0 +1,214 @@
+﻿@model VoiceSingWeb.Models.VideoDetailsIndexViewModels
+@{
+    ViewBag.Title = Model.video.video_name;
+}
+@section Css{
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/videodetailIndex.css" rel="stylesheet" type="text/css" />
+}
+<script src="~/Scripts/ckeditor/ckeditor.js"></script>
+<script src="~/Scripts/ckeditor/config.js"></script>
+<div class="container">
+    <div class="row clearfix" style="height:560px;overflow-y:hidden;">
+        <div class="col-md-8 column">
+            <div class="row clearfix" style="height:110px;overflow-y:hidden;">
+                <div class="col-md-8 column">
+                    <h3>
+                        @Model.video.video_name @*（视频标题）*@
+                    </h3>
+                </div>
+                <div class="col-md-2 column">
+                    <br><h5><span class="glyphicon glyphicon-expand">播放:@Model.video.video_look</span></h5>
+                </div>
+                <div class="col-md-2 column">
+                    <br><h5><span class="glyphicon glyphicon-star-empty">收藏:123</span></h5>
+                    <button class="btn" style="height:25px; width:50px;padding:0px;" onclick="location.href='@Url.Action("VideoCollect","UserManage", new { id = Model.video.video_id })'"><i class="glyphicon glyphicon-heart">收藏</i></button>
+                </div>
+            </div><hr>
+            @*视频播放页面*@
+
+            <div style="width: 500px;height: 400px" align="center">
+                <iframe height=400 width=640 src="@Model.video.video_url" frameborder=0></iframe>
+            </div>
+        </div>
+        @*右侧个人信息*@
+        <div class="col-md-4 column" style="height :550px;">
+            <div class="row clearfix" style="height:110px;">
+                <div class="col-md-3 column">
+                    <br>
+                    <a href="@Url.Action("UserSingerInfo","Singers",new { id = Model.video.Users.userId})"><img alt="img" src="@Model.video.Users.photo" class="img-circle" width="68" /></a>
+                </div>
+                <div class="col-md-6 column">
+                    <h4>
+                        <br> &nbsp; @Model.video.Users.name
+                    </h4>
+                    <small> &nbsp;<span class="glyphicon glyphicon-user">粉丝数：@Model.video.Users.user_fans</span></small>
+                </div>
+                <br>
+                <div class="col-md-3 column">
+                    <br>
+                    <button type="button" class="btn btn-default" style="height:35px;" onclick="location.href='@Url.Action("Adduser", "UserManage", new { id = @Model.video.user_id })'"><span class="glyphicon glyphicon-plus">关注</span></button>
+                </div>
+            </div>    <hr>
+            @*右侧视频信息*@
+            <div class="row clearfix" style="height :350px;">
+                <div class="col-md-12 column">
+                    <dl>
+                        <dt>
+                            视频简介
+                        </dt>
+                        <dd class="thin">
+                            <small>发布时间：@Model.video.video_upTime.ToString()</small> <br><br>
+                        </dd>
+                        <dd class="thin">
+                            &nbsp;“@Model.video.video_info”~   <br> <br>
+                        </dd>
+                    </dl>
+                    <hr>
+
+                    <dl>
+                        <dt>
+                            关联歌曲
+                        </dt>
+                        <dd class="center">
+                            @{
+                                if (Model.video.relate_music == "")
+                                {
+                                    <br><br><small>还没有关联歌曲啊！！ (✺ω✺) </small> <br><br>
+                                }
+                                else
+                                {
+                                    <br><br><small>@Model.video.relate_music</small> <br><br>
+                                }
+                            }                           
+                        </dd>
+                    </dl>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>  
+
+      @*评论模块*@    
+    <div class="row clearfix">
+        <div class="col-md-8 column" style="min-height:725px;overflow-y:hidden;">
+            @*左8*@
+            <div class="row clearfix" style="min-height:60px;overflow-y:hidden;">
+                <div class="col-md-12 column">
+                    @{
+                        if (Session["Userphoto"] == null)
+                        {
+                            <img alt="140x140" src="~/Content/images/user_photo/default.jpg" class="img-circle" width="50" />
+                        }
+                        else
+                        {
+                            <img alt="140x140" src="@Session["Userphoto"]" class="img-circle" width="50" />
+                        }
+                    }
+                </div>
+            </div>
+            <h5> 评论：</h5>
+            @using (Ajax.BeginForm("VideoComment", "UserManage", new AjaxOptions { HttpMethod = "post", OnSuccess = "Comment" }))
+            {
+             @Html.AntiForgeryToken()
+             @Html.ValidationSummary(true)
+            <div class="row clearfix" style="min-height:120px;overflow-y:hidden;">
+                <div class="col-md-12  column">
+                    <input type="hidden" name="id" value="@Model.video.video_id" />
+                    <textarea name="content" id="editor">                        
+                    </textarea>
+                    <script>
+                        var editor = CKEDITOR.replace('editor');
+                    </script>
+                </div>
+            </div>
+            <div class="row clearfix" style="min-height:50px;overflow-y:hidden;">
+                <div class="col-md-10 column">
+
+                </div>
+                <div class="col-md-2 column">
+                    <br/>
+                    <button type="submit" class="btn btn-default" style="background-color:green;color:white;">发表评论</button>
+                </div>
+            </div>
+            }
+            <br>
+            <strong> 全部评论：</strong> <hr>
+            <div id="comment-data" style="min-height:120px;">
+                @{
+                    if (Model.comment.Count() != 0)
+                    {
+                        foreach (var item in Model.comment)
+                        {
+                            <div>
+                                <a href="@Url.Action("UserSingerInfo","Singers",new { id=item.user_id})" style="display:inline-block;outline:none;">@@@item.Users.name</a>
+                                <span style="display:inline-block;">
+                                    @item.Comment_time.ToString()
+                                </span>
+                                <div>
+                                    @Html.Raw(item.Comment_content)
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div>
+                            快来留下你的感想吧~
+                        </div>
+                    }
+
+                }           
+            </div>          
+        </div>
+
+        <div class="col-md-4 column" style="min-height:460px;"> @*右4*@ 
+            <dl>
+                <dt>
+                    精选推荐
+                </dt>
+                @foreach (var item in Model.VideoRecommd)
+                {
+                    <dd>
+                        <br>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row clearfix" style="height:80px;overflow-y:hidden;">
+                                    <div class="col-md-5  column">
+                                        <a href="@Url.Action("Details","Video",new { id = item.video_id})" class="cover">
+                                            <div class="mask"></div>
+                                            <img alt="140x140" src="@item.video_photo" style="width:130px;height:75px;" />
+                                        </a>
+                                    </div>
+                                    <div class="col-md-6 column" style="margin-left:5px;overflow-y:hidden;">
+                                        <a href="@Url.Action("Details","Video",new { id = item.video_id})" class="hover"><strong> @item.video_name </strong></a><br>
+                                        <small style="display:inline-block;"><span class="glyphicon glyphicon-expand">@item.video_look</span></small>
+                                        <small style="display:inline-block;"><span class="glyphicon glyphicon-star-empty">@item.video_look</span></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </dd>
+                }
+            </dl>
+        </div>
+     </div> 
+</div>
+<script>
+    function Comment(obj) {
+        if (obj == "Login")
+        {
+            alert("请先登录！");
+        }
+        else if(obj == "Fault")
+        {
+            alert("评论失败！");
+        }
+        else
+        {
+            alert("评论成功！");
+            $('#comment-data').before(obj);
+        }
+    }
+</script>

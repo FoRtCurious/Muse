@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Models.Circlereply>
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model)
+{
+
+<div class="row clearfix" style="overflow :hidden ; margin-top :40px;">
+    <div class="col-md-1 column">
+        <img alt="140x140" src="@item.Users.photo " class="img-circle" width="60" />     @*发布动态用户头像*@
+    </div>
+    <div class="col-md-10 column">
+        <div class="row clearfix">
+            <div class="col-md-12 column" style="min-height :50px; overflow:hidden ; ">
+                <div >
+                    <a >@item.Users.name     </a>
+                  
+                </div>
+                <div style="margin-top:15px;">
+                    <small> @item.reply_time  &nbsp; @item.Users.user_info    </small>
+                </div>
+            </div>
+        </div>
+        @*正文*@
+        <div style="margin-top :20px;text-indent:30px; ">
+            <p>@item.content </p>                   @*文本*@
+
+@using (Ajax.BeginForm("AddUserReply", "Circle", new AjaxOptions { HttpMethod = "post", OnSuccess = "addreply" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+            <div style="margin-left :590px;">
+                <input class="btn btn-info"  type="button" value="回复" onClick="ShowTxt(@item.id)" ondblclick="HiddenTxt(@item.id)" />
+            </div>
+
+            <div class="reply" name="txt" rows="5" cols="20" style="display:none ;width :700px;" id="@item.id">
+                <textarea style="width :650px;height:80px;" name="content" id="content" placeholder="发表回复..."></textarea>
+                <input type="hidden" class="form-control" value="@item.id" id="id" name="id">
+                <button type="submit" class="btn btn-info" style="margin-left :620px;margin-top :5px;">发送</button>
+            </div>
+}
+
+            @*<input class="btn btn-info" type="button" value="隐藏" onClick="HiddenTxt()" />*@
+        </div>
+    </div>
+    <div class="col-md-1 column">
+    </div>
+</div>
+  @Html.Action("detailreply", "Circle" , new {id = @item.id  })
+}
+
+<script >
+    function ShowTxt(obj) {
+        document.getElementById(obj).style.display = "block";
+    }
+    function HiddenTxt(obj) {
+        document.getElementById(obj).style.display = "none";
+    }
+
+
+    function addreply(data) {
+        if (data == "success") {
+            alert("回复成功");
+            window.location.reload();
+
+        }
+        else {
+            alert('回复失败！');
+        }
+    }
+
+
+</script>

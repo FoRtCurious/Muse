@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SingMusicDataBaseModelStoreContainer" CdmEntityContainer="SingMusicDataBaseEntities">
+    <EntitySetMapping Name="carts">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.carts">
+        <MappingFragment StoreEntitySet="carts">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="prod_id" ColumnName="prod_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="companymusics">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.companymusics">
+        <MappingFragment StoreEntitySet="companymusics">
+          <ScalarProperty Name="music_id" ColumnName="music_id" />
+          <ScalarProperty Name="music_name" ColumnName="music_name" />
+          <ScalarProperty Name="source_url" ColumnName="source_url" />
+          <ScalarProperty Name="musicType_id" ColumnName="musicType_id" />
+          <ScalarProperty Name="music_like" ColumnName="music_like" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="covermusics">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.covermusics">
+        <MappingFragment StoreEntitySet="covermusics">
+          <ScalarProperty Name="music_id" ColumnName="music_id" />
+          <ScalarProperty Name="music_name" ColumnName="music_name" />
+          <ScalarProperty Name="singer_name" ColumnName="singer_name" />
+          <ScalarProperty Name="image_url" ColumnName="image_url" />
+          <ScalarProperty Name="music_url" ColumnName="music_url" />
+          <ScalarProperty Name="musicType_id" ColumnName="musicType_id" />
+          <ScalarProperty Name="music_like" ColumnName="music_like" />
+          <ScalarProperty Name="video_id" ColumnName="video_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="musics">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.musics">
+        <MappingFragment StoreEntitySet="musics">
+          <ScalarProperty Name="music_id" ColumnName="music_id" />
+          <ScalarProperty Name="music_name" ColumnName="music_name" />
+          <ScalarProperty Name="singer_name" ColumnName="singer_name" />
+          <ScalarProperty Name="imgage_url" ColumnName="imgage_url" />
+          <ScalarProperty Name="music_url" ColumnName="music_url" />
+          <ScalarProperty Name="musicType_id" ColumnName="musicType_id" />
+          <ScalarProperty Name="music_like" ColumnName="music_like" />
+          <ScalarProperty Name="music_info" ColumnName="music_info" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="musicsType">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.musicsType">
+        <MappingFragment StoreEntitySet="musicsType">
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="typeName" ColumnName="typeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orders">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.orders">
+        <MappingFragment StoreEntitySet="orders">
+          <ScalarProperty Name="order_no" ColumnName="order_no" />
+          <ScalarProperty Name="prod_id" ColumnName="prod_id" />
+          <ScalarProperty Name="qty" ColumnName="qty" />
+          <ScalarProperty Name="unit_price" ColumnName="unit_price" />
+          <ScalarProperty Name="order_date" ColumnName="order_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orginmusics">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.orginmusics">
+        <MappingFragment StoreEntitySet="orginmusics">
+          <ScalarProperty Name="music_id" ColumnName="music_id" />
+          <ScalarProperty Name="music_name" ColumnName="music_name" />
+          <ScalarProperty Name="singer_name" ColumnName="singer_name" />
+          <ScalarProperty Name="image_url" ColumnName="image_url" />
+          <ScalarProperty Name="music_url" ColumnName="music_url" />
+          <ScalarProperty Name="musicType_id" ColumnName="musicType_id" />
+          <ScalarProperty Name="music_like" ColumnName="music_like" />
+          <ScalarProperty Name="video_id" ColumnName="video_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="products">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.products">
+        <MappingFragment StoreEntitySet="products">
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="product_name" ColumnName="product_name" />
+          <ScalarProperty Name="product_photo" ColumnName="product_photo" />
+          <ScalarProperty Name="product_price" ColumnName="product_price" />
+          <ScalarProperty Name="product_number" ColumnName="product_number" />
+          <ScalarProperty Name="product_info" ColumnName="product_info" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="singers">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.singers">
+        <MappingFragment StoreEntitySet="singers">
+          <ScalarProperty Name="singer_id" ColumnName="singer_id" />
+          <ScalarProperty Name="singer_name" ColumnName="singer_name" />
+          <ScalarProperty Name="singer_photo" ColumnName="singer_photo" />
+          <ScalarProperty Name="singer_sex" ColumnName="singer_sex" />
+          <ScalarProperty Name="singer_like" ColumnName="singer_like" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_friends">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.user_friends">
+        <MappingFragment StoreEntitySet="user_friends">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="friend_id" ColumnName="friend_id" />
+          <ScalarProperty Name="add_date" ColumnName="add_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="userAddress">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.userAddress">
+        <MappingFragment StoreEntitySet="userAddress">
+          <ScalarProperty Name="useraddr_id" ColumnName="useraddr_id" />
+          <ScalarProperty Name="useraddr" ColumnName="useraddr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="userinfo">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.userinfo">
+        <MappingFragment StoreEntitySet="userinfo">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="phone_num" ColumnName="phone_num" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="photo" ColumnName="photo" />
+          <ScalarProperty Name="birthday" ColumnName="birthday" />
+          <ScalarProperty Name="user_sex" ColumnName="user_sex" />
+          <ScalarProperty Name="register_time" ColumnName="register_time" />
+          <ScalarProperty Name="userType_id" ColumnName="userType_id" />
+          <ScalarProperty Name="useraddr_id" ColumnName="useraddr_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="userType">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.userType">
+        <MappingFragment StoreEntitySet="userType">
+          <ScalarProperty Name="userType_id" ColumnName="userType_id" />
+          <ScalarProperty Name="userType_name" ColumnName="userType_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Videos">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.Videos">
+        <MappingFragment StoreEntitySet="Videos">
+          <ScalarProperty Name="video_id" ColumnName="video_id" />
+          <ScalarProperty Name="video_name" ColumnName="video_name" />
+          <ScalarProperty Name="video_url" ColumnName="video_url" />
+          <ScalarProperty Name="vodeo_like" ColumnName="vodeo_like" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

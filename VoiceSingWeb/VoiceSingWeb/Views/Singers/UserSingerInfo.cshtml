@@ -1,0 +1,162 @@
+﻿@model VoiceSingWeb.Models.UserSingerInfoViewModels
+@{
+    ViewBag.Title = Model.user.name+"-个人信息";
+}
+@section Css{
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+}
+<style>
+    .photo{
+        width:200px;
+        height:200px;
+        margin-top:50px;
+        border:5px solid white;
+    }
+    .ul-li{
+        display:inline-block;
+        margin-left:20px;
+        padding:3px;
+        
+    }
+    .ul-li > li{
+        width:25px;
+    }
+    .span{
+        display:inline-block;
+        width:100px;
+        font-size:20px;
+        color:#f3af2a;
+        font-weight:600;
+    }
+    .button{
+        margin-top:230px;
+    }
+    .button > button{
+        width:120px;
+        border-radius:0px;
+    }
+    .infor{
+        font-weight:600;
+        color:white;
+    }
+</style>
+<div class="container">
+    <div class="row clearfix box" style="height:330px;background:url(../../Content/images/load/singerBg.jpg) no-repeat;">
+        <div class="col-md-12 column">
+                <div class="col-md-3 column">
+                    <img class="img-circle photo" alt="singer" src="@Model.user.photo"/>
+                </div>
+                <div class="col-md-5 column">
+                    <section style="margin-top:50px;">
+                        <h3 style="float:left;margin-top:0px;color:#ffd800;">@Model.user.name</h3>
+                        <ul class="nav nav-tabs ul-li">
+                            <li><img src="~/Content/images/load/vip.png" alt="vip" /></li>
+                            <li><img src="~/Content/images/load/shi.png" alt="shi" /></li>
+                            <li><img src="~/Content/images/load/tao.png" alt="tao" /></li>
+                            <li><img src="~/Content/images/load/yin.png" alt="yin" /></li>
+                            <li><img src="~/Content/images/load/xing.png" alt="xing" /></li>
+                        </ul>
+                    </section>
+                    <p class="infor">
+                        ID: @Model.user.userId
+                    </p>
+                    <p class="infor">
+                        性别 : &nbsp;
+                        @{
+                            if (Model.user.user_sex == "男")
+                            {
+                                  <img src="~/Content/images/load/sex-boy.jpg" alt="sex" style="width:15px;height:15px;display:inline-block;" />
+                            }
+                            else if(Model.user.user_sex == "女")
+                            {
+                                  <img src="~/Content/images/load/sex-girl.jpg" alt="sex" style="width:15px;height:15px;display:inline-block;" />
+                            }
+                        }
+                    </p>
+                    <p class="infor">
+                        生日 : @Model.user.birthday.ToString().Substring(0, Model.user.birthday.ToString().Length-7)
+                    </p>
+                    <p class="infor">
+                        入驻时间 : @Model.user.register_time.ToString().Substring(0, Model.user.register_time.ToString().Length-7)
+                    </p>
+                    <p class="infor">
+                        简介 : @Model.user.user_info
+                    </p>
+                    <span class="span">关注: <span style="color:red;">@Model.user.user_add</span></span>
+                    <span class="span">粉丝: <span style="color:red;">@Model.user.user_fans</span></span>
+                    <span class="span">动态: <span style="color:red;">1</span></span>
+                </div>
+                <div class="col-md-4 column">
+                    <div class="button">
+                        <button class="btn btn-warning btn-lg" type="button" onclick="location.href='@Url.Action("Adduser", "UserManage",new{ id = @Model.user.userId})'">+关注</button>
+                        <button class="btn btn-lg btn-success" type="button" style="margin-left:20px;">站内信</button>
+                    </div>                  
+                </div>
+        </div>
+    </div>
+    <div class="row clearfix box" style="min-height:580px;margin-top:10px;">
+        <div class="col-md-12 column">
+            <div class="row clearfix" style="min-height:540px;overflow-y:hidden;">
+                <div class="col-md-7 column">
+                    <div>
+                        <h3>@(Model.user.name)的歌曲</h3>
+                        <hr color="#a40909" style="height:2px;"/>
+                        <div>
+                            @{
+                                foreach (var item in Model.musics)
+                                {
+                                    <div style="width:120px;height:auto;float:left;margin-right:20px;">
+                                        <a href="@Url.Action("Index","MusicDetails" ,new { id = @item.music_id})"><img src="@item.imgage_url" height="120" width="120" /></a>
+                                        <p style="text-align:center;">@item.music_name</p>
+                                    </div>
+                                }
+                            }                                                     
+                        </div>
+                    </div>
+                    <h3>
+                        留言区
+                    </h3> 
+                    <hr color="#a40909" style="height:2px;" />                   
+                    @using (Ajax.BeginForm("UserLeave", "UserManage", new AjaxOptions { HttpMethod = "post", OnSuccess = "LeaveMg" }))
+                    {
+                     @Html.AntiForgeryToken()
+                     @Html.ValidationSummary(true)                    
+                    <div class="form-group">
+                        <input type="hidden" name="userid" value="@Model.user.userId" />
+                        <textarea class="form-control" id="message" name="message" rows="8" placeholder="留言内容*" required></textarea>
+                    </div>
+                    <div>
+                        <input type="checkbox" style="float:left;"/>匿名留言
+                        <button class="btn btn-success" type="submit" style="float:right;">发布留言</button>
+                    </div>
+                    }
+                </div>
+                <div class="col-md-5 column">
+                    <h3 id="list-data">
+                        留言板
+                    </h3>
+                    @Html.Action("UserLeave","Singers",new { id = Model.user.userId})                     
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    function LeaveMg(data) {
+        if (data == "Login")
+        {
+            alert("请先登录！");
+        }
+        else if(data == "Fault")
+        {
+            alert("留言失败！");
+        }
+        else
+        {
+            alert("留言成功！");
+            $('#list-data').after(data);
+        }
+    }
+</script>

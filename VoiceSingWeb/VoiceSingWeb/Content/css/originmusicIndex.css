@@ -1,0 +1,27 @@
+﻿
+.musicName{
+    font-size:15px;
+    color:green;
+}
+.musicName:hover{
+    color: #B72712;
+}
+a:hover {
+    color: #B72712;
+}
+
+.img:hover {
+    transform: scale(1.1); /*鼠标经过放大1.1倍*/
+}
+
+.span{
+    height:18px;
+    width:35px;
+    display:inline-block;
+    float:right;font-size:10px;
+    border:1px solid green;
+    text-align:center;
+    line-height:18px;
+    background-color:gold;
+}
+

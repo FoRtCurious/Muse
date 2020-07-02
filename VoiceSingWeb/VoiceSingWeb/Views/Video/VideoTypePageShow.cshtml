@@ -1,0 +1,30 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<Models.Videos>
+@{
+    Layout = null;
+}
+
+<div style="margin-top:10px;">
+    @foreach (var item in Model)
+    {
+        <div class="v-item">
+            <a href="@Url.Action("Details","Video",new { id = item.video_id})" class="cover">
+                <div class="mask"></div>
+                <img style="height:200px;width:290px;margin-right:20px;" src="@item.video_photo" />
+            </a>
+            <p style="color:green;">@item.video_name</p>
+        </div>           
+    }
+</div>
+<div class="page-list">
+    @Html.PagedListPager(Model, page => Url.Action("VideoTypePageShow", "Video", new { page, currentFilter = ViewBag.CurrentFilter }),
+       PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+             new AjaxOptions
+             {
+                 HttpMethod = "GET",
+                 InsertionMode = InsertionMode.Replace,
+                 UpdateTargetId = "Div1"
+             }))
+</div>
+
+

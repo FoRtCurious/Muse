@@ -1,0 +1,295 @@
+﻿@model VoiceSingWeb.Models.UserCenterViewModels
+@{
+    ViewBag.Title = "个人中心";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/css/usercenter.css" type="text/css" rel="stylesheet"/>
+
+<div class="g-bd">
+    <div class="g-wrap p-prf">
+        <dl class="m-proifo f-cb" id="head-box">
+            <dt class="f-pr" id="ava">
+                <img src="@Model.user.photo">
+            </dt>
+            <dd>
+                <div class="name f-cb">
+                    <div class="f-cb">
+                        <div class="intronduce">签名:&nbsp;&nbsp;@Model.user.user_info</div>
+                        <div class="edit">
+                            @Ajax.ActionLink("编辑个人资料", "UpdateInfo", "UserManage", new { userid = Convert.ToInt32(Session["UserId"]) }, new AjaxOptions { UpdateTargetId = "infocontent" })
+                        </div>
+                        <h2 id="j-name-wrap" class="wrap f-fl f-cb ">
+                            <span class="tit f-ff2 s-fc0 f-thide">@Model.user.name</span>
+                            <span class="lev u-lev u-icn2 u-icn2-lev">@Model.user.UserType.userType_name</span>
+                        </h2>
+                    </div>
+                </div>
+                <div style="width:400px;display:inline-block;" class="userinfo">
+                    <ul class="data s-fc3" id="tab-box">
+                        <li class="fst">
+                            <a href="#" onclick="MyCircle()"><strong>@Model.user.Circle.Count()</strong><span>动态</span></a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="MyAddtion()"><strong>@Model.user.user_add</strong><span>关注</span></a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="MyFans()">
+                                <strong>@Model.user.user_fans</strong>
+                                <span>粉丝</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="inf s-fc3">
+                        @{
+                            if (Model.user.user_sex == "男")
+                            {
+                                <span>性别：<i class="fa fa-mars" style="color:#1aadee;font-size:15px;"></i></span>
+                            }
+                            else if (Model.user.user_sex == "女")
+                            {
+                                <span>性别：<i class="fa fa-venus" style="color:hotpink;font-size:15px;"></i></span>
+                            }
+                            else
+                            {
+                                <span>性别：保密</span>
+                            }
+                        }                                               
+                    </div>
+                    <div class="inf s-fc3">
+                        <span>所在地区：@Model.user.area</span>
+                    </div>
+                    <div class="inf s-fc3">
+                        <span class="tit">社交网络：</span>
+                        <ul class="u-logo u-logo-s f-cb">
+                            <li><i class="fa fa-weibo" style="font-size:15px;" title="新浪微博"></i></li>
+                            <li><i class="fa fa-qq" style="font-size:15px;" title="QQ"></i></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="singerapply">
+                    @Ajax.ActionLink("申请音悦人", "UserSingerApply","UserManage", new { userid = Convert.ToInt32(Session["UserId"]) }, new AjaxOptions { UpdateTargetId = "infocontent" })
+                </div>
+            </dd>
+        </dl>
+        <div id="infocontent">
+            <div class="u-title u-title-1 f-cb m-record-title" id="rHeader">
+                <h3><span class="f-ff2 s-fc3">最近收听</span></h3>
+                <h4 style="margin-left:5px;">累积听歌 @Model.recentplay.Count() 首</h4>
+                <span class="n-iconpoint">
+                    <i class="fa fa-music"></i>
+                </span>
+            </div>
+            <div id="m-record" class="m-record">
+                <div>
+                    <div class="j-flag">                       
+                        @{
+                            int i = 1;
+                            if (Model.recentplay.Count() <= 5)
+                            {
+                                <ul>
+                                    @foreach (var item in Model.recentplay)
+                                    {
+                                        <li>
+                                            <div class="hd">
+                                                <span class="num">@(i++).</span>
+                                            </div>
+                                            <div class="song">
+                                                <div class="tt">
+                                                    <div class="ttc">
+                                                        <span class="txt">
+                                                            <a href="@Url.Action("Details","Music",new { id = item.music_id})"><b title="@item.UserMusics.music_name">@item.UserMusics.music_name</b></a>
+                                                            <span class="ar s-fc8"><em>-</em><span title="@item.UserMusics.Users.name"><a class="s-fc8" href="@Url.Action("UserSingerInfo","Singers",new { id = item.UserMusics.user_id})" hidefocus="true">@item.UserMusics.Users.name</a></span></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tops">
+                                                <span class="bg" style="width:100%;"></span>
+                                                <span class="times f-ff2">2次</span>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <ul id="recentplay">
+                                    @foreach (var item in Model.recentplay)
+                                    {
+                                        <li>
+                                            <div class="hd">
+                                                <span class="num">@(i++).</span>
+                                            </div>
+                                            <div class="song">
+                                                <div class="tt">
+                                                    <div class="ttc">
+                                                        <span class="txt">
+                                                            <a href="@Url.Action("Details","Music",new { id = item.music_id})"><b title="@item.UserMusics.music_name">@item.UserMusics.music_name</b></a>
+                                                            <span class="ar s-fc8"><em>-</em><span title="@item.UserMusics.Users.name"><a class="s-fc8" href="@Url.Action("UserSingerInfo","Singers",new { id = item.UserMusics.user_id})" hidefocus="true">@item.UserMusics.Users.name</a></span></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tops">
+                                                <span class="bg" style="width:100%;"></span>
+                                                <span class="times f-ff2">2次</span>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                                <p id="more"><a onclick="zhankai()">展开更多<i class="fa fa-sort-down"></i></a></p>
+                            }
+                        }                                    
+                    </div>
+                    <div class="j-flag"></div>
+                </div>
+            </div>
+            <div class="u-title u-title-1 f-cb" id="cHeader" style="">
+                <h3>
+                    <span class="f-ff2 f-pr s-fc3">我收藏的歌曲<span class="f-pa f-r-black-icon" style="display:inline-block;width:8px;height:8px;top:1px;background-size:cover;"></span>（@Model.collectmusic.Count()）</span>
+                </h3>
+            </div>
+            <ul class="m-cvrlst f-cb" id="cBox">
+                        @foreach (var item in Model.collectmusic)
+                        {
+                            <li>
+                                <div class="u-cover u-cover-1">
+                                    <img src="@item.UserMusics.imgage_url" style="height:140px;width:140px;">
+                                    <div class="msk"><a href="@Url.Action("Details","Music",new { id = item.music_id })" title="@item.UserMusics.music_name"><i class="fa fa-headphones" style="float:left;margin:8px;">@item.UserMusics.listen_times</i><i class="fa fa-play-circle-o" style="float:right;margin-right:20px;margin-top:8px;"></i></a></div>
+                                </div>
+                                <p class="dec"><a class="tit f-thide s-fc0" href="" title="@item.UserMusics.music_name">《@item.UserMusics.music_name》演唱:@item.UserMusics.Users.name</a></p>
+                            </li>
+                        }
+                    </ul>
+            <div class="u-title u-title-1 f-cb" id="sHeader" style="">
+                <h3><span class="f-ff2 f-pr s-fc3">我收藏的视频<span class="f-pa f-r-black-icon" style="display:inline-block;width:8px;height:8px;background-size:cover;top:1px;"></span>（@Model.collectvideo.Count()）</span></h3>
+            </div>
+            <ul class="m-cvrlst f-cb" id="sBox">
+                @foreach (var item in Model.collectvideo)
+                {
+                    <li style="width:190px;">
+                        <div class="u-cover u-cover-1">
+                            <a href="@Url.Action("Details","Video",new { id = item.video_id})">
+                                <div class="mask"></div>
+                                <img src="@item.Videos.video_photo" style="height:140px;width:190px;">
+                            </a>                            
+                        </div>
+                        <p class="dec">
+                            <a class="tit f-thide s-fc0" href="@Url.Action("Details","Video",new { id = item.video_id})" title="@item.Videos.video_name">@item.Videos.video_name</a>
+                        </p>
+                        <p class="dec">
+                            <i class="fa fa-play-circle"></i>播放量: @item.Videos.video_look
+                        </p>
+                    </li>
+                }                
+            </ul>
+            <div class="u-title u-title-1 f-cb" id="mHeader" style="">
+                <h3><span class="f-ff2 f-pr s-fc3">我上传的歌曲<span class="f-pa f-r-black-icon" style="display:inline-block;width:8px;height:8px;background-size:cover;top:1px;"></span>（@Model.upmusic.Count()）</span></h3>
+            </div>
+            <ul class="m-cvrlst f-cb" id="mBox">
+                @foreach (var item in Model.upmusic)
+                {
+                    <li>
+                        <div class="u-cover u-cover-1">
+                            <img src="@item.imgage_url" style="height:140px;width:140px;">
+                            <div class="msk"><a href="@Url.Action("Details","Music",new { id = item.music_id })" title="@item.music_name"><i class="fa fa-headphones" style="float:left;margin:8px;">@item.listen_times</i><i class="fa fa-play-circle-o" style="float:right;margin-right:20px;margin-top:8px;"></i></a></div>
+                        </div>
+                        <p class="dec">
+                            <a class="tit f-thide s-fc0" href="#" title="@item.music_name">《@item.music_name》</a>
+                        </p>
+                    </li>
+                }               
+            </ul>
+            <div class="u-title u-title-1 f-cb" id="vHeader">
+                <h3><span class="f-ff2 f-pr s-fc3">我上传的MV（@Model.upvideo.Count()）</span></h3>
+            </div>
+            <ul class="m-cvrlst f-cb list" id="vBox">
+                @foreach (var item in Model.upvideo)
+                {
+                    <li style="width:190px;">
+                        <div class="u-cover u-cover-1">
+                            <a href="@Url.Action("Details","Video",new { id = item.video_id})">
+                                <div class="mask"></div>
+                                <img src="@item.video_photo" style="height:140px;width:190px;">
+                            </a>                            
+                        </div>
+                        <p class="dec">
+                            <a class="tit f-thide s-fc0" href="@Url.Action("Details","Video",new { id = item.video_id})" title="@item.video_name">@item.video_name</a>
+                        </p>
+                        <p class="dec">
+                            <i class="fa fa-play-circle"></i>播放: @item.video_look
+                        </p>
+                    </li>
+                }
+                
+            </ul>
+        </div>        
+    </div>
+</div>
+<script>
+    function MyCircle() {
+        $.ajax({
+            type: "POST",
+            url: "/UserManage/MyCircle",
+            data: {
+            },
+            dataType: "html",
+            cache: false,
+            async: true,
+            contentType: "application/x-www-form-urlencoded;charset=utf-8",
+            success: function (value) {
+                $("#infocontent").html(value);
+            },
+            error: function () {
+            }
+        });
+    }
+    function MyAddtion() {
+        $.ajax({
+            type: "POST",
+            url: "/UserManage/MyAddtion",
+            data: {
+            },
+            dataType: "html",
+            cache: false,
+            async: true,
+            contentType: "application/x-www-form-urlencoded;charset=utf-8",
+            success: function (value) {
+                $("#infocontent").html(value);
+            },
+            error: function () {
+            }
+        });
+    }
+    function MyFans() {
+        $.ajax({
+            type: "POST",
+            url: "/UserManage/MyFans",
+            data: {
+            },
+            dataType: "html",
+            cache: false,
+            async: true,
+            contentType: "application/x-www-form-urlencoded;charset=utf-8",
+            success: function (value) {
+                $("#infocontent").html(value);
+            },
+            error: function () {
+            }
+        });
+    }
+    function zhankai() {
+        var lookmore = document.getElementById("recentplay");
+        lookmore.style.height = "auto";
+        lookmore.style.overflow = "auto";
+        var more = document.getElementById("more");
+        more.innerHTML = "<a onclick='zhedie()'>收起折叠<i class='fa fa-sort-up'></i></a>"
+    }
+    function zhedie() {
+        var lookmore = document.getElementById("recentplay");
+        lookmore.style.height = "191px";
+        lookmore.style.overflow = "hidden";
+        var more = document.getElementById("more");
+        more.innerHTML = "<a onclick='zhankai()'>展开更多<i class='fa fa-sort-down'></i></a>"
+    }
+</script>

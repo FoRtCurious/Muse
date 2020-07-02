@@ -1,0 +1,234 @@
+﻿/*轮播图*/
+.bannerBox {
+    height: 480px;
+    width: 100%;
+}
+
+.bannerBox .banner {
+     position: relative;
+    }
+
+    .bannerBox ul {
+        position: relative;
+        margin: 0 auto;
+        width: 1100px;
+        height: 480px;
+    }
+
+        .bannerBox ul li {
+            position: absolute;
+            top: 0;
+            bottom: 0
+        }
+
+    .bannerBox .banner .dots {
+        width: 100%;
+        height: 10px;
+        position: absolute;
+        bottom: 30px;
+        text-align: center;
+    }
+
+    .bannerBox .dots a {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #999;
+        display: inline-block;
+        margin: 0 2px;
+        z-index: 99999;
+    }
+
+       .bannerBox .dots a.active {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: red;
+            position: relative;
+            top: 1px;
+        }
+
+    .bannerBox .banner .goPre,
+    .goNext {
+        position: absolute;
+        width: 37px;
+        height: 60px;
+        background: #000;
+        top: 210px;
+        opacity: 0.1;
+        z-index: 10;
+        color: white;
+        line-height: 60px;
+        font-size: 40px;
+        cursor: pointer
+    }
+
+    .bannerBox .banner .goPre {
+        left: 0;
+    }
+
+    .bannerBox .banner .goNext {
+        right: 3px;
+    }
+
+    .bannerBox .banner .goPre:hover,
+    .goNext:hover {
+        opacity: 0.5;
+    }
+/*四个链接*/
+.hometab {
+    width: 100%;
+    height: 80px;
+    border-bottom: 1px solid #999
+}
+
+    .hometab ul {
+        width: 1100px;
+        height: 80px;
+        margin: 0 auto;
+    }
+
+        .hometab ul li a {
+            width: 275px;
+            height: 50px;
+            position: relative;
+            top: 15px;
+            float: left;
+            border-right: 1px solid #999;
+            box-sizing: border-box;
+            text-align: center;
+            line-height: 50px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .hometab ul li:last-child a {
+            border: none;
+        }
+
+        .hometab ul li a span {
+            font-size: 30px;
+            font-weight: normal;
+            position: relative;
+            top: 5px;
+        }
+/*两张图片*/
+.ad {
+    width: 1100px;
+    height: 300px;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+    .ad img {
+        display: block;
+        float: left;
+    }
+
+    .ad .adLeft img {
+        margin-right: 16px;
+    }
+
+
+
+/*良心推荐*/
+.suggest {
+    width: 1100px;
+    height: 408px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+    .suggest .size {
+        font-weight: bold;
+        font-size: 24px;
+    }
+
+    .suggest .ulRec {
+        margin-top: 20px;
+        height:408px;
+    }
+
+        .suggest .ulRec .liRec {
+            float: right;
+            width: 258px;
+            height: 382px;
+            margin-right: 16px;
+        }
+
+            .suggest .ulRec .liRec .goodName {
+                margin-top: 10px;
+            }
+
+                .suggest .ulRec .liRec .goodName a {
+                    cursor: pointer;
+                    font-size: 14px;
+                    text-align: center
+                }
+
+                    .suggest .ulRec .liRec .goodName a:hover {
+                        text-decoration: underline;
+                    }
+
+                .suggest .ulRec .liRec .goodName .price {
+                    font-size: 16px;
+                    color: #d33a31;
+                    padding-top: 4px;
+                    text-align: center;
+                    font-weight: bold;
+                    letter-spacing: 1px
+                }
+/*热门商品*/
+.recommended {
+    width: 1100px;
+    height: 816px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+    .recommended span:first-child {
+        font-weight: bold;
+        font-size: 24px;
+    }
+
+    .recommended .ulRec {
+        margin-top: 20px;
+    }
+
+        .recommended .ulRec .liRec {
+            float: left;
+            width: 258px;
+            height: 382px;
+            margin-right: 16px;
+        }
+
+
+.recommended .ulRec .liRec .goodName {
+    margin-top: 10px;
+}
+
+    .recommended .ulRec .liRec .goodName a {
+        cursor: pointer;
+        font-size: 14px;
+        text-align: center
+    }
+
+        .recommended .ulRec .liRec .goodName a:hover {
+            text-decoration: underline;
+        }
+
+    .recommended .ulRec .liRec .goodName .price {
+        font-size: 16px;
+        color: #d33a31;
+        padding-top: 4px;
+        text-align: center;
+        font-weight: bold;
+        letter-spacing: 1px
+    }
+
+/*小图标*/
+.hot {
+    color: red;
+    border: 1px solid red;
+    font-size: 12px !important;
+}

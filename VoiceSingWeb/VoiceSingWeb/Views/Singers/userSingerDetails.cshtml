@@ -1,0 +1,186 @@
+﻿@model Models.Users
+    @{ 
+        Layout = null;
+    }
+@{
+    ViewBag.Title = Model.name + "-个人信息";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Css{
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+}
+<style>
+    .photo {
+        width: 200px;
+        height: 200px;
+        margin-top: 50px;
+        border: 5px solid white;
+    }
+
+    .ul-li {
+        display: inline-block;
+        margin-left: 20px;
+        padding: 3px;
+    }
+
+        .ul-li > li {
+            width: 25px;
+        }
+
+    .span {
+        display: inline-block;
+        width: 100px;
+        font-size: 20px;
+        color: #f3af2a;
+        font-weight: 600;
+    }
+
+    .button {
+        margin-top: 230px;
+    }
+
+        .button > button {
+            width: 120px;
+            border-radius: 0px;
+        }
+
+    ::-moz-list-bullet {
+        font-size: 0;
+        float: left;
+    }
+
+    summary {
+        user-select: none;
+        outline: 0;
+    }
+
+    .more {
+        display: none;
+    }
+
+    [open] .more {
+        display: block;
+    }
+
+    [open] summary a {
+        font-size: 0;
+    }
+
+        [open] summary a::before {
+            content: '收起';
+            font-size: 14px;
+        }
+</style>
+<div class="container">
+    <div class="row clearfix box" style="height:330px;background:url(../../Content/images/load/singerBg.jpg) no-repeat;">
+        <div class="col-md-12 column">
+            <div class="col-md-3 column">
+                <img class="img-circle photo" alt="singer" src="@Model.photo" />
+            </div>
+            <div class="col-md-5 column">
+                <section style="margin-top:50px;">
+                    <h3 style="float:left;margin-top:0px;">@Model.name</h3>
+                    <ul class="nav nav-tabs ul-li">
+                        <li><img src="~/Content/images/load/vip.png" alt="vip" /></li>
+                        <li><img src="~/Content/images/load/shi.png" alt="shi" /></li>
+                        <li><img src="~/Content/images/load/tao.png" alt="tao" /></li>
+                        <li><img src="~/Content/images/load/yin.png" alt="yin" /></li>
+                        <li><img src="~/Content/images/load/xing.png" alt="xing" /></li>
+                    </ul>
+                </section>
+                <p style="font-weight:600;">
+                    ID: @Model.userId
+                </p>
+                <p style="font-weight:600;">
+                    性别 : &nbsp;
+                    @{
+                        if (Model.user_sex == "男")
+                        {
+                            <img src="~/Content/images/load/sex-boy.jpg" alt="sex" style="width:15px;height:15px;display:inline-block;" />
+                        }
+                        else if (Model.user_sex == "女")
+                        {
+                            <img src="~/Content/images/load/sex-girl.jpg" alt="sex" style="width:15px;height:15px;display:inline-block;" />
+                        }
+                    }
+                </p>
+                <p style="font-weight:600;">
+                    生日 : @Model.birthday.ToString().Substring(0, Model.birthday.ToString().Length - 7)
+                </p>
+                <p style="font-weight:600;">
+                    注册时间 : @Model.register_time.ToString().Substring(0, Model.register_time.ToString().Length - 7)
+                </p>
+                <p style="font-weight:600;">
+                    简介 : @Model.user_info
+                </p>
+                <span class="span">关注: <span style="color:red;">51</span></span>
+                <span class="span">粉丝: <span style="color:red;">@Model.user_fans</span></span>
+                <span class="span">人气: <span style="color:red;">3986</span></span>
+            </div>
+            <div class="col-md-4 column">
+                <div class="button">
+                    <button class="btn btn-warning btn-lg" type="button" onclick="location.href='@Url.Action("Adduser", "UserManage",new{ id = @Model.userId})'">+关注</button>
+                    <button class="btn btn-lg btn-success" type="button" onclick="location.href='@Url.Action("Write", "Mail",new{ id = @Model.userId})'" style="margin-left:20px;">站内信</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix box" style="min-height:555px;margin-top:10px;">
+        <div class="col-md-12 column">
+            <div class="row clearfix" style="min-height:530px;overflow-y:hidden;">
+                <div class="col-md-7 column">
+                    <h3>
+                        留言板
+                    </h3>
+                    @using (Ajax.BeginForm("userLeave", "UserManage", new AjaxOptions { HttpMethod = "post", OnSuccess = "LeaveMg" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <div class="form-group">
+                            <input type="hidden" name="id" value="@Model.userId" />
+                            <textarea class="form-control" id="message" name="message" rows="10" placeholder="留言内容*" required></textarea>
+                        </div>
+                        <div>
+                            <input type="checkbox" style="float:left;" />匿名留言
+                            <button class="btn btn-success" type="submit" style="float:right;">发布留言</button>
+                        </div>
+                    }
+                </div>
+                <div class="col-md-5 column">
+                    <h3 id="list-data">
+                        留言区
+                    </h3>
+                    @Html.Action("allLeaveMg", "Singers", new { id = Model.userId })
+                    <details>
+                        <summary>
+                            <div class="more">
+                                <p>dududdududududu...</p>
+                            </div>
+                            <a>更多</a>
+                        </summary>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script>
+    function LeaveMg(data) {
+        if (data == "Login")
+        {
+            alert("请先登录！");
+        }
+        else if(data == "Fault")
+        {
+            alert("留言失败！");
+        }
+        else
+        {
+            alert("留言成功！");
+            $('#list-data').after(data);
+        }
+    }
+</script>

@@ -1,0 +1,54 @@
+﻿@model IList<Models.Active>
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model)
+{
+
+    <div class="col-md-4">
+        <div class="thumbnail" style="height:450px;">
+            <img alt="300x200" src="@item.image_url" width="200" height="100" />
+            <div class="caption">
+                <h2>
+                    <small>
+                        @Html.DisplayFor(modelItem => item.actname)
+                    </small>
+                </h2>
+              
+                <p >
+                    @Html.DisplayFor(modelItem => item.actinfo)
+                </p>
+             
+                <p>
+                    <a class="btn btn-primary" href="@Url.Action("CampDetails","Camp",new { id =item.actno})">深入了解</a> 
+
+@using (Ajax.BeginForm("Hide", "Camp", new AjaxOptions { HttpMethod = "post", OnSuccess = "HideSuccess" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <input type="hidden" class="form-control" id="id" name="id" value="@item.actno" >
+    <button type="submit" class="btn btn-info" style="height:30px; width:60px;">屏蔽</button>
+}
+                </p>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+
+
+<script>
+    function HideSuccess(data) {
+        if (data == "success") {
+
+            alert("屏蔽成功");
+            window.location.reload();
+        }
+        else {
+            alert('屏蔽失败！请尝试重新登录后操作');
+        }
+    }
+</script>

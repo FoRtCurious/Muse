@@ -1,0 +1,177 @@
+﻿@{
+    Layout = null;
+}
+<style>
+    .layui-table-cell{
+        height:60px !important;
+        line-height:60px !important;
+    }
+</style>
+<div style="padding-top:5px;">
+    <label style="width:200px;font-size:15px;font-weight:600">音乐管理&nbsp;&rang;&nbsp;待审核音乐</label>
+</div>
+<table class="layui-hide" id="demo" lay-filter="tableData"></table>
+
+<script type="text/html" id="imgtmp">
+    <img src="{{d.imgage_url}}" style="width:60px;height:60px;" />
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail"><i class="layui-icon layui-icon-search"></i>审核</a>
+    <a class="layui-btn layui-btn-xs" lay-event="agree"><i class="layui-icon layui-icon-ok-circle"></i>通过</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="unagree"><i class="layui-icon layui-icon-close-fill"></i>不通过</a>
+</script>
+<script type="text/html" id="toolbar">
+    <input class="text" style="height:30px;width:168px;border-radius:20px;padding-left:5px;" name="" id="search_id" placeholder="请输入查找音乐ID">
+    <a id="search" lay-filter="" style="position: absolute;left: 144px;cursor:pointer" lay-event="search">
+        <i class="layui-icon layui-icon-search" style="background:#fff;padding:5px;"></i>
+    </a>
+</script>
+
+<script type="text/javascript" src="~/Content/layui-v2.5.6/layui/layui.all.js"></script>
+<script>
+layui.use(['laydate', 'laypage', 'layer', 'table', 'element'], function(){
+  var laydate = layui.laydate //日期
+  ,laypage = layui.laypage //分页
+  ,layer = layui.layer //弹层
+  ,table = layui.table //表格
+  ,element = layui.element //元素操作
+
+  //执行一个 table 实例
+  table.render({
+      elem: '#demo'
+    , id: 'tableData'
+    , url: '/Admin/CheckMusicsJson' //数据接口
+    , title: '音乐表'
+    , page: true //开启分页
+    , limit: 12
+    , method: 'get'  //提交方式
+    , toolbar: '#toolbar' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+    ,cols: [[ //表头
+      {type: 'checkbox', fixed: 'left'}
+      ,{field: 'music_id', title: '音乐ID', sort: true, fixed: 'left'}
+      ,{field: 'music_name', title: '音乐名称', }
+      ,{field: 'imgage_url', title: '音乐海报', templet: "#imgtmp"}
+      ,{field: 'user_id', title: '上传用户'}
+      , { field: 'upTime', title: '上传时间',sort: true, templet: '<div>{{createTime(d.upTime)}}</div>' }
+      ,{fixed: 'right',title:'操作', width: 250, align:'center', toolbar: '#barDemo'}
+    ]]
+  });
+    //回车查询
+  $('#search_id').keydown(function (e) {
+      if (e.keyCode == 13) {
+          $('#search').trigger("click");
+      }
+  });
+  //监听头工具栏事件
+  table.on('toolbar(tableData)', function(obj){
+    var checkStatus = table.checkStatus(obj.config.id)
+    ,data = checkStatus.data; //获取选中的数据
+    switch(obj.event){
+      case 'search':
+          layer.msg('查询结果');
+          var send_id = $('#search_id').val();
+          table.reload('tableData', {
+              method: 'get'
+              , url: '/Admin/SearchMusic'
+              , where: {
+                  search_id: send_id,
+              }
+              , page: {
+                  curr: 1
+              }
+          });
+      break;
+    };
+  });
+
+  //监听行工具事件
+  table.on('tool(tableData)', function(obj) {
+      var data = obj.data;
+      json = JSON.stringify(data);
+      switch(obj.event) {
+          case 'detail':
+              var index = layer.open({
+                  type: 2,
+                  title: "歌曲审核",
+                  area: ['35%', '80%'],
+                  fix: false,
+                  maxmin: true,
+                  shadeClose: true,
+                  shade: 0.4,
+                  skin: 'layui-layer-rim',
+                  content: ["/Admin/ScanCheckMusic/" + data.music_id],
+              });
+              break;
+          case 'agree':
+              var Index = layer.confirm('确认通过ID为: ' + data.music_id + " 的歌曲审核吗?(通过审核后该歌曲将从平台上架)", function (Index) {
+                  $.ajax({
+                      url: ["/Admin/AgreeCheck/" + data.music_id],
+                      type: "post",
+                      success: function (suc) {
+                          if (suc.code == 200) {
+                              obj.del();        //删除对应行（tr）的DOM结构，并更新缓存
+                              layer.close(delIndex);
+                              layer.msg("已通过", {
+                                  icon: 1
+                              });
+                              table.reload('tableData', {
+                                  method: 'post'
+                                  , url: '/Admin/CheckMusicsJson'
+                                  , page: {
+                                      curr: $(".layui-laypage-em").next().html() //重载当前页
+                                  }
+                              });
+                          } else {
+                              layer.msg("未通过", {
+                                  icon: 5
+                              });
+                          }
+                      }
+                  });
+                  layer.close(Index);
+              });
+              break;
+          case 'unagree': 
+              var delIndex = layer.confirm('确认ID为: ' + data.music_id + " 的歌曲审核未通过吗?(拒绝通过将从平台移除该用户的上传数据)", function (delIndex) {
+                  $.ajax({
+                      url: ["/Admin/UnAgreeCheck/" + data.music_id],
+                      type: "post",
+                      success: function(suc) {
+                          if(suc.code == 200) {
+                              obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                              layer.close(delIndex);
+                              layer.msg("驳回成功", {
+                                  icon: 1
+                              });
+                          } else {
+                              layer.msg("驳回失败", {
+                                  icon: 5
+                              });
+                          }
+                      }
+                  });
+                  layer.close(delIndex);
+              });
+              break;
+      }
+  });
+
+  //分页
+  laypage.render({
+    elem: 'pageDemo' //分页容器的id
+    ,count: 100 //总页数
+    ,skin: '#1E9FFF' //自定义选中色值
+    //,skip: true //开启跳页
+    ,jump: function(obj, first){
+      if(!first){
+        layer.msg('第'+ obj.curr +'页', {offset: 'b'});
+      }
+    }
+  });
+
+  //底部信息
+  var footerTpl = lay('#footer')[0].innerHTML;
+  lay('#footer').html(layui.laytpl(footerTpl).render({}))
+  .removeClass('layui-hide');
+});
+</script>

@@ -1,0 +1,103 @@
+﻿@model Models.Users
+@{
+    ViewBag.Title = "写信";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Css{
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <script src="~/Scripts/ckeditor/config.js"></script>
+}
+
+
+<div class="container">
+    <div class="row clearfix" style="min-height :200px; overflow-y:hidden;">
+        <div class="col-md-12 column">
+            @*顶部导航*@
+            <div class="row clearfix" style="height:90px;">
+                <div class="col-md-1 column">
+                    <img class="img-circle photo" alt="singer" src="@Model.photo" style="width:70px;" />
+                </div>
+                <div class="col-md-3 column">
+                    <p style="color :red">音悦网免费邮箱 </p>
+                    <small>
+                        @@@Model.userId .yinyue.com
+                        <br />
+                        @Model.name
+                    </small>
+                </div>
+                <div class="col-md-8 column">
+                    <ul class="nav nav-pills">
+                        <li>
+                            <a href="@Url.Action("Index", "Mail")"> 邮件</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Friends", "Mail")">  通讯录</a>
+                        </li>
+                        <li class="active">
+                            <a href="@Url.Action("Write", "Mail")"> 写信</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("ChatIndex", "Mail")">私信</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="height :50px;">
+                @using (Html.BeginForm("ChatSearch", "Mail", FormMethod.Get, new { id = "searchForm" }))
+            {
+                    <input type="text" class="form-control" style="margin-top :10px; width :220px; height :35px;" name="searchString" placeholder="忘记对方账号？搜索用户名..." />
+                }
+            </div>
+            @using (Html.BeginForm("Write", "Mail", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="row clearfix" style="min-height:50px;overflow-y:hidden; display:flex ;">
+                    <button type="submit" class="btn btn-default" style="background-color:green;color:white;height:40px;">
+                        <span class="glyphicon glyphicon-send"> &nbsp;发送  &nbsp; </span>
+                    </button>
+                
+                </div>
+                <div class="row clearfix" style="min-height:50px;overflow-y:hidden;">
+                    <div class="col-md-1 column">
+                        <h5><strong>收件人 :</strong> </h5>
+                    </div>
+                    <div class="col-md-11 column ">
+                        <div class="input-group">
+                            <span class="input-group-addon">@@</span>
+
+                            <input id="recip" name="recip" class="form-control" type="text">      @*收件人框*@
+                            <span class="input-group-addon">.yinyue.com</span>
+                        </div>
+                  
+                    </div>
+                    <br><br>
+                    <div class="col-md-1 column" style="margin-top :10px;">
+                        <h5 ><strong>主题 :</strong> </h5>
+                    </div>
+                    <div class="col-md-11 column">
+                        <div class="input-group" style="width :870px; margin-top :10px;">
+                            <input id="title" name="title" type="text" class="form-control">      @*主题框*@
+                        </div>
+                    </div>
+                </div>
+
+                @*输入框*@
+                <div class="row clearfix" style="min-height:120px;overflow-y:hidden; ">
+                    <div class="col-md-12  column">
+                        <input type="text" class="form-control"style="min-height :190px;"  id="content" name="content" placeholder="请输入邮件内容：">
+                        @*<textarea name="content" id="editor" required="required"></textarea>*@
+                     
+                    </div>
+                </div>
+
+            }
+
+
+           
+        </div>
+    </div>
+</div>

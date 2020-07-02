@@ -1,0 +1,150 @@
+
+.ulRec::after{
+    content:'';
+    display:block;
+    visibility:hidden;
+    clear:both;
+}
+.section {
+    width: 1100px;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+.section .section-top{
+    border-bottom: 1px solid #000;
+    padding-bottom: 20px;
+    margin-bottom: 15px;
+
+}
+.section .section-top a{
+    font-size: 18px;
+    font-weight: 600;
+}
+.section .section-top a:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+.section .section-top span{
+    font-size: 16px;
+    color: #999;
+    font-weight: 600;
+}
+.section .selector{
+    border: 1px solid #ddd;
+
+}
+.section .selector div{
+    padding:5px 10px;
+    height: 30px;
+    line-height: 30px;
+}
+.section .selector .selector-top{
+    border-bottom: 1px solid #ddd;
+}
+.section .selector div span{
+    float: left;
+    color: #999;
+    font-weight: 600;
+    font-size: 14px;
+}
+.section .selector div ul{
+    float: left;
+}
+.section .selector div li {
+        float: left;
+        margin: 0 10px;
+        font-size: 14px;
+        color: #333;
+    }
+/*加选择效果*/
+.select {
+    background-color: wheat;  
+    border-radius: 12px;
+}
+    }
+.section.selector div li a:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+.section .selector-nav{
+    margin-top: 10px;
+}
+.section .selector-nav a{
+    font-size: 16px;
+    font-weight: 700;
+    color:#888;
+}
+.section .selector-nav a:hover{
+    color:black;        
+    cursor: pointer;
+}
+.section .selector-nav .active{
+    color:black;
+}
+.section .selector-nav span{
+    position: relative;
+    top:14px;
+    margin: 0 5px;
+    font-size: 50px;
+    line-height: 20px;
+    font-weight: 700;
+    color:#888;
+}
+    
+.block {
+    width: 1100px;
+    margin: 0 auto;
+    margin-top: 50px;
+    min-height:270px;
+}
+.block .ulRec {
+    margin-top: 20px;
+}
+
+.block .ulRec .liRec {
+    float: left;
+    width: 259px;
+    height: 382px;
+    margin-right: 16px;
+}
+
+.block .ulRec .liRec .goodName {
+    margin-top: 10px;
+}
+
+.block .ulRec .liRec .goodName a {
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center
+}
+
+.block .ulRec .liRec .goodName a:hover {
+    text-decoration: underline;
+}
+
+.block .ulRec .liRec .goodName .price {
+    font-size: 16px;
+    color: #d33a31;
+    padding-top: 4px;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 1px
+}
+
+/* 清除浮动 */
+.block .ulRec .clear {
+    clear: both;
+    height: 0;
+    overflow: hidden;
+}
+
+
+.hot {
+color: red;
+border: 1px solid red;
+font-size: 12px !important;
+}
+.section .selector li.active a{
+background: #000;
+color: white;
+}

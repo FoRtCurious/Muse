@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SingMusicModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="carts">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="prod_id" Type="Int32" />
+    <NavigationProperty Name="products" Relationship="Self.FK__carts__prod_id__276EDEB3" FromRole="carts" ToRole="products" />
+  </EntityType>
+  <EntityType Name="musics">
+    <Key>
+      <PropertyRef Name="music_id" />
+    </Key>
+    <Property Name="music_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="music_name" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="singer_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="imgage_url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="music_url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="musicType_id" Type="Int32" />
+    <Property Name="music_like" Type="Int32" />
+    <Property Name="music_info" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="musicsType" Relationship="Self.FK__musics__musicTyp__1DE57479" FromRole="musics" ToRole="musicsType" />
+  </EntityType>
+  <EntityType Name="musicsType">
+    <Key>
+      <PropertyRef Name="typeId" />
+    </Key>
+    <Property Name="typeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="typeName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="musics" Relationship="Self.FK__musics__musicTyp__1DE57479" FromRole="musicsType" ToRole="musics" />
+  </EntityType>
+  <EntityType Name="orders">
+    <Key>
+      <PropertyRef Name="order_no" />
+    </Key>
+    <Property Name="order_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="prod_id" Type="Int32" Nullable="false" />
+    <Property Name="qty" Type="Int32" Nullable="false" />
+    <Property Name="unit_price" Type="Decimal" Precision="7" Scale="2" Nullable="false" />
+    <Property Name="order_date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="products" Relationship="Self.FK__orders__prod_id__2A4B4B5E" FromRole="orders" ToRole="products" />
+  </EntityType>
+  <EntityType Name="products">
+    <Key>
+      <PropertyRef Name="product_id" />
+    </Key>
+    <Property Name="product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="product_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="product_photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="product_price" Type="Decimal" Precision="7" Scale="2" />
+    <Property Name="product_number" Type="Int32" />
+    <Property Name="product_info" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="carts" Relationship="Self.FK__carts__prod_id__276EDEB3" FromRole="products" ToRole="carts" />
+    <NavigationProperty Name="orders" Relationship="Self.FK__orders__prod_id__2A4B4B5E" FromRole="products" ToRole="orders" />
+  </EntityType>
+  <EntityType Name="singers">
+    <Key>
+      <PropertyRef Name="singer_id" />
+    </Key>
+    <Property Name="singer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="singer_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="singer_photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="singer_sex" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="singer_like" Type="Int32" />
+  </EntityType>
+  <EntityType Name="user_friends">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="friend_id" Type="Int32" Nullable="false" />
+    <Property Name="add_date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="userinfo" Relationship="Self.FK__user_frie__frien__1920BF5C" FromRole="user_friends" ToRole="userinfo" />
+  </EntityType>
+  <EntityType Name="userAddress">
+    <Key>
+      <PropertyRef Name="useraddr_id" />
+    </Key>
+    <Property Name="useraddr_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="useraddr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="userinfo" Relationship="Self.FK__userinfo__userad__164452B1" FromRole="userAddress" ToRole="userinfo" />
+  </EntityType>
+  <EntityType Name="userinfo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="phone_num" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="photo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="birthday" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="user_sex" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+    <Property Name="register_time" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="userType_id" Type="Int32" Nullable="false" />
+    <Property Name="useraddr_id" Type="Int32" />
+    <NavigationProperty Name="user_friends" Relationship="Self.FK__user_frie__frien__1920BF5C" FromRole="userinfo" ToRole="user_friends" />
+    <NavigationProperty Name="userAddress" Relationship="Self.FK__userinfo__userad__164452B1" FromRole="userinfo" ToRole="userAddress" />
+    <NavigationProperty Name="userType" Relationship="Self.FK__userinfo__userTy__15502E78" FromRole="userinfo" ToRole="userType" />
+  </EntityType>
+  <EntityType Name="userType">
+    <Key>
+      <PropertyRef Name="userType_id" />
+    </Key>
+    <Property Name="userType_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userType_name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="userinfo" Relationship="Self.FK__userinfo__userTy__15502E78" FromRole="userType" ToRole="userinfo" />
+  </EntityType>
+  <EntityType Name="Videos">
+    <Key>
+      <PropertyRef Name="video_id" />
+    </Key>
+    <Property Name="video_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="video_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="video_url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="vodeo_like" Type="Int32" />
+  </EntityType>
+  <Association Name="FK__carts__prod_id__276EDEB3">
+    <End Role="products" Type="Self.products" Multiplicity="0..1" />
+    <End Role="carts" Type="Self.carts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="carts">
+        <PropertyRef Name="prod_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__musics__musicTyp__1DE57479">
+    <End Role="musicsType" Type="Self.musicsType" Multiplicity="0..1" />
+    <End Role="musics" Type="Self.musics" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="musicsType">
+        <PropertyRef Name="typeId" />
+      </Principal>
+      <Dependent Role="musics">
+        <PropertyRef Name="musicType_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__orders__prod_id__2A4B4B5E">
+    <End Role="products" Type="Self.products" Multiplicity="1" />
+    <End Role="orders" Type="Self.orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="orders">
+        <PropertyRef Name="prod_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__user_frie__frien__1920BF5C">
+    <End Role="userinfo" Type="Self.userinfo" Multiplicity="1" />
+    <End Role="user_friends" Type="Self.user_friends" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userinfo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_friends">
+        <PropertyRef Name="friend_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__userinfo__userad__164452B1">
+    <End Role="userAddress" Type="Self.userAddress" Multiplicity="0..1" />
+    <End Role="userinfo" Type="Self.userinfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userAddress">
+        <PropertyRef Name="useraddr_id" />
+      </Principal>
+      <Dependent Role="userinfo">
+        <PropertyRef Name="useraddr_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__userinfo__userTy__15502E78">
+    <End Role="userType" Type="Self.userType" Multiplicity="1" />
+    <End Role="userinfo" Type="Self.userinfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userType">
+        <PropertyRef Name="userType_id" />
+      </Principal>
+      <Dependent Role="userinfo">
+        <PropertyRef Name="userType_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SingMusicEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="carts" EntityType="Self.carts" />
+    <EntitySet Name="musics" EntityType="Self.musics" />
+    <EntitySet Name="musicsType" EntityType="Self.musicsType" />
+    <EntitySet Name="orders" EntityType="Self.orders" />
+    <EntitySet Name="products" EntityType="Self.products" />
+    <EntitySet Name="singers" EntityType="Self.singers" />
+    <EntitySet Name="user_friends" EntityType="Self.user_friends" />
+    <EntitySet Name="userAddress" EntityType="Self.userAddress" />
+    <EntitySet Name="userinfo" EntityType="Self.userinfo" />
+    <EntitySet Name="userType" EntityType="Self.userType" />
+    <EntitySet Name="Videos" EntityType="Self.Videos" />
+    <AssociationSet Name="FK__carts__prod_id__276EDEB3" Association="Self.FK__carts__prod_id__276EDEB3">
+      <End Role="products" EntitySet="products" />
+      <End Role="carts" EntitySet="carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__musics__musicTyp__1DE57479" Association="Self.FK__musics__musicTyp__1DE57479">
+      <End Role="musicsType" EntitySet="musicsType" />
+      <End Role="musics" EntitySet="musics" />
+    </AssociationSet>
+    <AssociationSet Name="FK__orders__prod_id__2A4B4B5E" Association="Self.FK__orders__prod_id__2A4B4B5E">
+      <End Role="products" EntitySet="products" />
+      <End Role="orders" EntitySet="orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__user_frie__frien__1920BF5C" Association="Self.FK__user_frie__frien__1920BF5C">
+      <End Role="userinfo" EntitySet="userinfo" />
+      <End Role="user_friends" EntitySet="user_friends" />
+    </AssociationSet>
+    <AssociationSet Name="FK__userinfo__userad__164452B1" Association="Self.FK__userinfo__userad__164452B1">
+      <End Role="userAddress" EntitySet="userAddress" />
+      <End Role="userinfo" EntitySet="userinfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__userinfo__userTy__15502E78" Association="Self.FK__userinfo__userTy__15502E78">
+      <End Role="userType" EntitySet="userType" />
+      <End Role="userinfo" EntitySet="userinfo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,17 @@
+﻿@model Models.UserLeave
+
+<div class="row clearfix" style="min-height:110px;">
+    <div class="col-md-2 column">
+        <img alt="photo" src="@Model.users.photo" style="width:40px;height:40px;border:1px solid grey;overflow:hidden" />
+    </div>
+    <div class="col-md-10 column">
+        <p>
+            @Model.Leave_content
+        </p>
+        <p style="color:green;">
+            <a href="@Url.Action("userSingerDetails", "Singers",new { id = Model.users.userId})" style="display:inline-block;">@@@Model.users.name</a>
+            <span style="display:inline-block;">留言于 @Model.Leave_time.ToString().Substring(0, Model.Leave_time.ToString().Length-3)</span>
+        </p>
+    </div>
+</div>
+

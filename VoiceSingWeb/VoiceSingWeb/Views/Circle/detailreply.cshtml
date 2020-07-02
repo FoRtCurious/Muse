@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Models.CircleUserReply>
+@{
+    Layout = null;
+}
+<style >
+        .reply {
+        width: 700px;      
+        margin-top: 10px;
+    }
+
+</style>
+
+@foreach (var item in Model)
+{
+<div class="tbox" style="margin-left :80px;">
+    <div class="row clearfix" style="overflow :hidden ; margin-top :20px;">
+        <div class="col-md-1 column">
+            <img alt="140x140" src="@item.Users.photo " class="img-circle" width="50" />     @*发布动态用户头像*@
+        </div>
+        <div class="col-md-10 column">
+            <div class="row clearfix">
+                <div class="col-md-12 column" style="min-height :50px; overflow:hidden ; ">
+                    <div>
+                        <a>@item.Users.name     </a>
+
+                    </div>
+                    <div style="margin-top:15px;">
+                        <small> @item.reply_time  &nbsp; @item.Users.user_info    </small>
+                    </div>
+                </div>
+            </div>
+            @*正文*@
+            <div style="margin-top :20px;text-indent:30px; ">
+                <p>@item.content </p>                   @*文本*@
+                
+      
+            </div>
+        </div>
+        <div class="col-md-1 column">
+        </div>
+    </div>
+</div>
+}

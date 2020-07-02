@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Models.Videos>
+@{
+    Layout = null;
+}
+<hr />
+<div style="margin:20px;">
+    @{
+        if (Model.Count() != 0)
+        {
+            <h4>搜索到<span style="color:red;display:inline-table">&nbsp;@Model.Count()&nbsp;</span>个相关视频</h4>
+            foreach (var item in Model)
+            {
+                <div class="v-item">
+                    <a href="@Url.Action("Details","Video",new { id = item.video_id})" class="cover">
+                        <div class="mask"></div>
+                        <img style="height:200px;width:290px;margin-right:20px;" src="@item.video_photo" />
+                    </a>
+                    <p style="color:green;">@item.video_name</p>
+                </div>
+            }
+        }
+        else
+        {
+            <h4>未搜索相关到视频</h4>
+        }
+    }
+</div>
+

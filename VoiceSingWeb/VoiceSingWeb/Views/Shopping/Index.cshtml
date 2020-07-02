@@ -1,0 +1,105 @@
+﻿@model VoiceSingWeb.Models.ShoppingHomeViewModel
+@{
+    ViewBag.Title = "悦享购";
+    Layout = "~/Views/Shared/_MarketLayout.cshtml";
+}
+<link rel="stylesheet" href="~/Content/css/shoppingindex.css">
+
+
+<!-- 轮播图 -->
+<div class="bannerBox">
+    <div class="banner">
+        <ul>
+            <li style="z-index: 6;"><img src="~/Content/images/shopping/home/0.png" alt=""></li>
+            <li style="z-index: 5;"><img src="~/Content/images/shopping/home/1.png" alt=""></li>
+            <li style="z-index: 4;"><img src="~/Content/images/shopping/home/2.png" alt=""></li>
+            <li style="z-index: 3;"><img src="~/Content/images/shopping/home/3.png" alt=""></li>
+            <li style="z-index: 2;"><img src="~/Content/images/shopping/home/4.png" alt=""></li>
+            <li style="z-index: 1;"><img src="~/Content/images/shopping/home/5.png" alt=""></li>
+        </ul>
+        <div class="dots" style="z-index: 7;">
+            <a class="active"></a>
+            <a></a>
+            <a></a>
+            <a></a>
+            <a></a>
+            <a></a>
+        </div>
+        <div class="iconfont goPre">&#xe648;</div>
+        <div class="iconfont goNext">&#xe646;</div>
+    </div>
+</div>
+<!-- tab -->
+<div class="hometab">
+    <ul>
+        <li><a href="@Url.Action("goodsList", "Shopping")"><span class="iconfont">&#xe608;</span>&nbsp;&nbsp;商品列表</a></li>
+        <li><a href="@Url.Action("goodsList", "Shopping")"><span class="iconfont">&#xe6d7;</span>&nbsp;&nbsp;IP周边</a></li>
+        <li><a href="@Url.Action("goodsList", "Shopping")"><span class="iconfont">&#xe641;</span>&nbsp;&nbsp;热销爆品</a></li>
+        <li><a href="@Url.Action("goodsList", "Shopping")"><span class="iconfont">&#xe60d;</span>&nbsp;&nbsp;商品列表</a></li>
+    </ul>
+</div>
+<!-- 两张图片 -->
+<div class="ad">
+    <a href="#" class="adLeft"><img src="~/Content/images/shopping/home/ad1.png" alt=""></a>
+    <a href="#" class="adRight"><img src="~/Content/images/shopping/home/ad2.png" alt=""></a>
+</div>
+<!-- 推荐 -->
+<div class="suggest">
+    <span class="size">良心推荐</span>
+    <ul class="ulRec">
+        @if (Model.typecount != 0)
+        {
+            foreach (var item in Model.Suggest_Goods)
+            {
+                <li class="liRec">
+                    <a href="@Url.Action("gooddetail", "Shopping",new { id = item.goodsid })" target="_blank" class="detailImg">
+                        <img src="@item.img" alt="" style="width:263px;height:290px;">
+                    </a>
+                    <div class="goodName">
+                        <span class="hot">热门</span>
+                        <a href="@Url.Action("gooddetail", "Shopping",new { id = item.goodsid })" target="_blank">@item.goodsname</a>
+                        <p class="price">￥@item.price</p>
+                    </div>
+                </li>
+            }
+        }
+        else
+        {
+            foreach (var item in Model.Suggestgoods)
+            {
+
+                <li class="liRec">                  
+                    <a href="@Url.Action("gooddetail", "Shopping",new { id = item.goodsid })" target="_blank" class="detailImg">
+                        <img src="@item.img" alt="" style="width:263px;height:290px;">
+                    </a>
+                    <div class="goodName">
+                        <span class="hot">热门</span>
+                        <a href="@Url.Action("gooddetail", "Shopping",new { id = item.goodsid })" target="_blank">@item.goodsname</a>
+                        <p class="price">￥@item.price</p>
+                    </div>
+                </li>
+            }
+        }
+    </ul>                        
+</div>
+<div class="recommended">
+    <span>热门商品</span>
+    <ul class="ulRec">      
+        @foreach (var item in Model.Allgoods)
+        {
+            <li class="liRec">
+                <a href="@Url.Action("gooddetail", "Shopping",new { id = item.goodsid })" target="_blank" class="detailImg">
+                    <img src="@item.img" alt="" style="width:263px;height:290px;">
+                </a>
+                <div class="goodName">
+                    <span class="hot">热门</span>
+                    <a href="@Url.Action("gooddetail", "Shopping",new { id = item.goodsid })" target="_blank">@item.goodsname</a>
+                    <p class="price">￥@item.price</p>
+                </div>
+            </li>
+        }
+    </ul>
+</div>
+
+
+

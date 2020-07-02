@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Models.Active>
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model)
+{
+    <div class="col-md-12 column">
+        <img alt="140x140" src="@item.image_url" width="680" />
+        <dl style="width:680px;">
+            <dt>
+                @Html.DisplayFor(modelItem => item.actname)
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelItem => item.actinfo)
+            </dd>
+            <dt>
+                <small>参与人数:@Html.DisplayFor(modelItem => item.Joinsum)  </small>
+            </dt>
+        </dl>
+
+        <div class="row clearfix" style="height:60px;">
+            <div class="col-md-10 column">
+            </div>
+            <div class="col-md-2 column">
+                <a class="btn btn-primary" href="@Url.Action("CampDetails","Camp",new { id =item.actno})">深入了解</a><br>
+            </div>
+        </div>
+
+    </div>
+}

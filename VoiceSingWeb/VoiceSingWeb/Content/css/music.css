@@ -1,0 +1,212 @@
+/* Music Page */
+
+.player-wrap {
+    padding: 0;
+    box-shadow: 0 3px 10px -3px rgba(0, 0, 0, .08);
+    overflow: hidden;
+    margin-top: 30px;
+    height: 66px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, .14);
+}
+
+.box {
+    margin-top: 24px;
+}
+
+#music-player {
+    margin: 0;
+    background-color: #fafafa;
+    background-image: -webkit-linear-gradient(top, #fff, #fafafa);
+    background-image: linear-gradient(180deg, #fff, #fafafa);
+    box-shadow: none;
+}
+    .singername {
+        color: #d3cece;
+    }
+    .singername:hover {
+        color: #B72712;
+    }
+
+/*点赞收藏*/
+    .like,.collect {
+        color: green;
+    }
+    .like:hover,.collect:hover {
+        color: #B72712;
+    }
+/*猜你喜欢，今日推荐*/
+    .artist-song:hover .artist-song h3{
+        color:#b80e0e;
+    }
+/*评论*/
+.comment{
+    width:74%;
+}
+.u-title-1 {
+    height: 33px;
+}
+.u-title {
+    height: 35px;
+    border-bottom: 2px solid #c20c0c;
+}
+.u-title-1 h3 {
+    font-size: 20px;
+    line-height: 28px;
+    line-height: 35px;
+}
+.u-title h3 {
+    float: left;
+    font-weight: normal;
+}
+.f-ff2 {
+    font-family: "Microsoft Yahei", Arial, Helvetica, sans-serif;
+    color:#000000;
+    font-weight:600;
+}
+.u-title-1 .sub {
+    margin: 9px 0 0 20px;
+}
+.u-title .sub {
+    float: left;
+    margin: 13px 0 0 10px;
+}
+.s-fc3, a.s-fc3:hover {
+    color: #666;
+}
+.m-cmmt {
+    margin-top: 20px;
+}
+.m-cmmt .iptarea {
+    margin-bottom: 20px;
+}
+.m-cmmt .head, .m-cmmt .head img {
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin-right: -100px;
+}
+.m-cmmt .iptarea .m-cmmtipt {
+    margin-left: 62px;
+}
+.f-pr {
+    position: relative;
+    zoom: 1;
+}
+div.holder-parent {
+    position: relative;
+    zoom: 1;
+}
+.u-txtwrap {
+    padding-right: 14px;
+}
+.m-cmmtipt .area {
+    height: 50px;
+    display: block;
+}
+textarea.u-txt, div.u-txt {
+    width: 100%;
+    margin-right: -20px;
+}
+.u-txt {
+    font-size: 12px;
+    height: 19px;
+    margin: 0;
+    padding: 5px 6px 6px;
+    border: 1px solid #cdcdcd;
+    border-radius: 2px;
+    line-height: 19px;
+    box-sizing: content-box;
+}
+textarea {
+    resize: none;
+    overflow: auto;
+}
+.m-cmmtipt .btns {
+    clear: both;
+    padding-top: 10px;
+}
+.m-cmmtipt .btns .icn {
+    float: left;
+    margin: 0px 10px 0 0;
+    cursor: pointer;
+}
+.u-icn-36 {
+    width: 18px;
+    height: 18px;
+    background-position: -40px -490px;
+}
+.m-cmmtipt .btns .btn {
+    float: right;
+    border:none;
+    border-radius:3px;
+    background-color:#118cd6;
+    cursor:pointer;
+}
+.btn:hover{
+    color:#fff;
+    opacity:0.8;
+}
+.u-btn-1 {
+    width: 46px;
+    height: 25px;
+    background-position: -84px -64px;
+    color: #fff;
+    text-align: center;
+    line-height: 25px;
+}
+.m-cmmtipt .btns .zs {
+    float: right;
+    margin-right: 10px;
+    line-height: 25px;
+    color:grey;
+}
+.m-cmmtipt .corr {
+    position: absolute;
+    top: 11px;
+    left: -7px;
+}
+.u-arr {
+    width: 13px;
+    height: 14px;
+    overflow: hidden;
+}
+.u-hd4 {
+    position: relative;
+    top: 1px;
+    height: 20px;
+    border-bottom: 1px solid #cfcfcf;
+    margin-bottom:0px;
+    color:#000;
+}
+.m-cmmt .cmmts .itm {
+    padding: 15px 0;
+    border-top: 1px dotted #ccc;
+}
+.m-cmmt .cmmts .cntwrap {
+    margin-left: 60px;
+}
+.m-cmmt .cmmts .cntwrap .f-brk, .m-cmmt .cmmts .cnt.f-brk {
+    word-break: break-word;
+}
+.m-cmmt .cmmts .cnt {
+    width: 100%;
+    overflow: hidden;
+    line-height: 20px;
+}
+.m-cmmt .cmmts .cntwrap .s-fc7 {
+    margin-right: 5px;
+}
+.m-cmmt .cmmts div.rp {
+    margin-top: 15px;
+    text-align: right;
+}
+#more-data{
+    display:none;
+}
+#more{
+    float:right;
+    color:green;
+    font-size:12px;
+    cursor:pointer;
+}

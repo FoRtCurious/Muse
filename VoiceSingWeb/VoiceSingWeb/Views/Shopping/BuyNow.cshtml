@@ -1,0 +1,73 @@
+﻿
+@model VoiceSingWeb.Models.PlaceOrder_AddressViewModel
+@{
+    ViewBag.Title = "CreateOrder";
+    Layout = "~/Views/Shared/_MarketLayout.cshtml";
+}
+@section Css{
+    <link rel="stylesheet" type="text/css" href="~/Content/css/carts.css" />
+}
+<div>
+    <div class="product">
+        @foreach (var item in Model.orderlist)
+        {
+            <span><img src="@item.Image" style="width: 100px; height: 100px" /></span>
+            <span>@item.Goodname</span>
+            <span class="price">@item.Price</span>
+            <span class="qty">@item.Qty</span>
+            <span class="total">@item.Tot_amt</span>
+            <input type="hidden" name="goodid" class="ID" value="@item.Goodid" />
+        }
+    </div>
+    <div class="Right-list" id="Right-list1">
+
+        <spadren style="display:block;">请选择您的地址！</spadren>
+        @foreach (var item in Model.MyAddr)
+        {
+            <div id="@item.addressid" class="address-H">
+                <span style="display:block; margin:5px 0 5px 10px;">收件人姓名：@item.name</span>
+
+                <span style="display:block; margin:5px 0 5px 10px;">收件人电话：@item.telephone</span>
+
+                <span style="display:block; margin:5px 0 5px 10px;">收件人地址：@item.address</span>
+            </div>
+        }
+
+        <button id="jsuan1" class="btn3" style="display:inline-block;  color: white; background-color: #DD3B44; height:30px;width:85px;margin-top:40px;margin-left:365px;">确认订单</button>
+        <button id="jsuan2" class="btn3" style="display:inline-block; height: 30px; width: 85px; color:black; ">取消订单</button>
+
+    </div>
+</div>
+
+<script>
+    $(".address-H").click(function () {
+        $('.address-H').removeClass('active');
+        $(this).addClass("active");
+    });
+    $(document).on('click', '#jsuan1', function () {
+        var sum = $(".product span").eq(4).text();
+        var qty = $(".product span").eq(3).text();
+        var goodid = $(".product input[name='goodid']").val();
+        var addrId = "";
+        var addLen = $('.address-H').length;
+        for (var j = 0; j < addLen; j++) {
+            if ($($('.address-H')[j]).hasClass('active')) {
+                addrId = $($('.address-H')[j]).attr("id");
+            }
+        }
+        $.ajax({
+            url: '../Shopping/Buy',
+            type: 'post',
+            data: {
+                addrId: addrId,
+                csum: sum,
+                Qty: qty,
+                Goodid: goodid
+            },
+            success: function (data) {
+                alert(data);
+                window.location.reload();
+            }
+        });
+    });
+</script>

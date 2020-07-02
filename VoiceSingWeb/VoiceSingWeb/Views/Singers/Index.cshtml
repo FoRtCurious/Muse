@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "音乐人";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Css{
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+}
+<style>
+    /*论坛连接部分*/
+    div.background {
+        width: 300px;
+        height: 100px;
+        background: url(http://5sing.kugou.com/resources/singer/images/con_bg.jpg) repeat;
+        border: 2px solid black;
+    }
+
+    div.transbox {
+        width: 275px;
+        height: 78px;
+        margin: 10px 10px;
+        background-color: #ffffff;
+        border: 1px solid black;
+        opacity: 0.6;
+        filter: alpha(opacity=60); /* IE8 及更早版本 */
+    }
+
+        div.transbox p {
+            margin: 10px 10px;
+            font-weight: bold;
+            color: #000000;
+        }
+</style>
+
+<div class="container">
+    @*精选音乐人*@
+    <div class="row clearfix" style="height:100px;overflow-y:hidden;">
+        <div class="col-md-1 column">
+            <img src="~/Content/images/load/02.png" alt="logo" style="height:95px;">
+        </div>
+        <div class="col-md-11 column" style="height:60px;">
+            <h3>
+                <strong>音乐人专辑</strong>
+            </h3>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12 column" style="min-height:400px; overflow-y :hidden ;">
+            <div class="row clearfix" style="min-height :200px; overflow-y:hidden;">
+                @Html.Action("Singer", "Singers")   @*跳往音乐人详情页*@
+            </div>
+        </div>
+    </div>
+</div>
+
+@*音悦人串联活动*@
+<div class="container">
+    <div class="row clearfix" style="min-height :400px;">
+        <div class="col-md-8 column">
+            <div class="row clearfix" style="height:100px;overflow-y:hidden;">
+                <div class="col-md-1 column">
+                    <img src="~/Content/images/load/02.png" alt="logo" style="height:95px;">
+                </div>
+                <div class="col-md-11 column" style="height :60px;">
+                    <h3>
+                        <strong>活动专辑</strong>
+                    </h3>
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-12 column" style="min-height:400px; overflow-y:hidden ; ">
+                    @Html.Action("SingerActivity", "Singers")        @*跳往活动详情页*@
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 column" style="height :900px;">
+            <div style="font-size :medium ;">
+                <a href="@Url.Action("UserCenter", "UserManage") ">申请音悦人 </a>
+                <br /><br />
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-md-12 column" style="height :190px;">
+                    <a href="@Url.Action("UserInfo", "UserManage") ">
+                        <img alt="140x140" src="~/Content/images/load/04.jpg" width="290" />
+                    </a>
+                </div>
+            </div>
+
+            @*音悦人串联论坛*@
+            <div style="font-size :medium ;">
+                <a href="@Url.Action("circle", "Circle")">音悦人圈子</a>
+                <br /><br />
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-12 column" style="min-height :200px; overflow-y :hidden ;">
+                    @Html.Action("Topic", "Singers")                   @*跳往圈子页面*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

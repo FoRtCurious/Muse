@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Models.Active>
+    @{ 
+        Layout = null;
+    }
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="small-4 small-centered columns" style="background-color:white ;height :235px;">
+            <button onclick="location.href='@Url.Action("CampAlbum", "Singers",new { id =item.actno} )'">
+                <img alt="140x140" src="@item.image_url" style="height:190px;width:640px;">
+            </button>
+        </div>
+    </div>
+}

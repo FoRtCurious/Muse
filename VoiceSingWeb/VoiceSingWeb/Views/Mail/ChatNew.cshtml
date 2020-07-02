@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Models.MailChat>
+@{
+    Layout = null;
+}
+<style>
+    .allbox {
+        height: 200px;
+    }
+</style>
+
+
+
+<div id="panel-element-472529" class="panel-collapse collapse">
+    <div class="panel-body" style="height :400px;  overflow-y:auto ;">
+
+        @foreach (var item in Model)
+        {
+            <a  class ="history"onclick="chat(@item.recipid,'@item.Users.name')">
+                <input id="recipid"  type="hidden" value="@item.recipid" />
+                <div class="col-md-4 column">
+                    <img alt="singer" src="@item.Users.photo" style="width:50px;text-align :left ;" />
+                </div>
+                <div class="col-md-8 column">
+                    <div class="card-body" >@item.Users.name &nbsp;</div>
+                    <small>  @item.create_time   </small>
+                    <div style="display :inline-block ;text-align:right ;   ">
+                        @*<small>04-01 </small>*@
+                    </div>
+                </div>
+            </a>
+        }
+
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.11.1.min.js"></script>
+<script>
+    function chat(id,name) {
+        $.ajax({
+            url: '/Mail/CreateChat',
+            type: 'post',
+            data: {
+                recipid: id
+            },
+            success: function (data) {
+                document.getElementById("message").innerHTML = data;
+                $('#recipidNum').val(id);
+                $('#getUser').html(name);
+            }
+        })
+    }
+
+</script>
+

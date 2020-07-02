@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Models.Users>
+@{
+    ViewBag.Title = "我的粉丝";
+    Layout = null;
+}
+<div class="u-title u-title-1 f-cb">
+    <h3><span class="f-ff2 s-fc3">粉丝（<span id="follow_count_down">@Model.Count()</span>）</span></h3>
+</div>
+@{
+    if (Model.Count() != 0)
+    {
+        <ul class="m-fans f-cb" id="main-box">
+            @foreach (var item in Model)
+            {
+                <li class="">
+                    <a href="@Url.Action("UserSingerInfo","Singers",new { id = item.userId })" class="ava f-pr" title="@item.name">
+                        <img src="@item.photo">
+                    </a>
+                    <div class="info">
+                        <p>
+                            <a href="@Url.Action("UserSingerInfo","Singers",new { id = item.userId })" class="s-fc7 f-fs1 nm f-thide" title="@item.name">@item.name</a>&nbsp;
+                            <sup class="u-icn u-icn-1 ">@item.UserType.userType_name</sup>
+                        </p>
+                        <p>
+                            <a>动态<em class="s-fc7">@item.Circle.Count()</em></a>
+                            <span class="line">|</span>
+                            <a>关注<em class="s-fc7">@item.user_add</em></a>
+                            <span class="line">|</span>
+                            <a>粉丝<em class="s-fc7">@item.user_fans</em></a>
+                        </p>
+                        <p class="s-fc3 f-thide">@item.user_info</p>
+                    </div>
+                    <div class="oper" id="oper_1452176465">
+                        <a class="u-btn u-btn-7 f-tdn" href="#" ><i class="fa fa-envelope-o"></i>发私信</a>
+                        <p class="s-fc4"><i class="u-icn u-icn-67"></i>已关注</p>
+                        <p class="s-fc4" style="display:none;"><i class="u-icn u-icn-66"></i> 相互关注</p>
+                        <a class="u-btn u-btn-8 f-tdn" href="#" style="display:none;">关 注</a>
+                    </div>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <div class="f-cb">
+            <img src="~/Content/images/load/nullfans.png" style="width:920px;" />
+        </div>
+    }
+}
+
+

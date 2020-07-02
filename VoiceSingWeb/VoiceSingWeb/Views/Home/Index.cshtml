@@ -1,0 +1,251 @@
+﻿@model VoiceSingWeb.Models.HomeIndexViewModels
+@{
+    ViewBag.Title = "爱音乐";
+}
+@section Css{
+    <link href="~/Content/css/homeIndex.css" rel="stylesheet" type="text/css" />
+}
+    <!-- 轮播图 -->
+    <div class="img">
+        <div class="whole">
+            <div class="roll-img">
+                <span class="last"><</span>
+                <ul id="ul">
+                    <li class="left"><img src="~/Content/images/slider/1.jpg" alt="img"><div></div></li>
+                    <li class="center"><img src="~/Content/images/slider/2.jpg" alt="img"><div></div></li>
+                    <li class="right"><img src="~/Content/images/slider/3.jpg" alt="img"><div></div></li>
+                    <li class="after1"><img src="~/Content/images/slider/4.jpg" alt="img"><div></div></li>
+                    <li class="after2"><img src="~/Content/images/slider/5.jpg" alt="img"><div></div></li>
+                    <li class="after3"><img src="~/Content/images/slider/6.jpg" alt="img"><div></div></li>
+                </ul>
+                <span class="next">></span>
+            </div>
+        </div>
+        <div class="list">
+            <a class="btn" href="#"></a>
+            <a class="btn" href="#" style="background: red;"></a>
+            <a class="btn" href="#"></a>
+            <a class="btn" href="#"></a>
+            <a class="btn" href="#"></a>
+            <a class="btn" href="#"></a>
+        </div>
+    </div>
+
+    <!-- 主内容区域 -->
+    <div class="container-sm box" style="margin-top:28px;">
+        <!-- 主内容 -->
+        <div class="main">
+            <div class="main-wrap">
+                <div class="content-box">
+                    <!-- 热门推荐 -->
+                    <div class="hot-recommand">
+                        <div class="content-header">
+                            <h2><i class="fa fa-music red"></i>歌单推荐</h2>  
+                            <div class="tab">
+                                <a>音乐来源于美丽的心灵</a>
+                            </div>                          
+                        </div>
+                        <ul class="music-list clearfix">
+                            @foreach (var item in Model.MusicRecommend)
+                            {
+                                <li>
+                                    <a class="recommend" title="@item.music_name" href="@Url.Action("Details","Music" ,new { id = @item.music_id})">
+                                        <div class="u-cover">
+                                            <img src="@item.imgage_url">
+                                            <div class="imgblock">
+                                                <span class="fa fa-headphones" style="float:left;line-height:30px;margin-left:10px;">@item.listen_times</span>
+                                                <span class="fa fa-heartbeat" style="float:left;line-height:30px;margin-left:20px;">@item.music_like</span>
+                                            </div>
+                                        </div>
+                                        <p class="dec">
+                                            <span>@item.music_name</span>
+                                        </p>
+                                    </a>
+                                    <div class="author"><a class="recommend" href="@Url.Action("UserSingerInfo", "Singers",new { id = item.user_id})" target="_blank">@item.Users.name</a></div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <!-- 分类榜单 -->
+                    <div class="category">
+                        <div class="content-header">
+                            <h2><i class="fa fa-music red"></i>分类榜单</h2>
+                            <div class="tab">
+                                <a>古风</a>
+                                <span class="line">|</span>
+                                <a>流行</a>
+                                <span class="line">|</span>
+                                <a>电子</a>
+                                <span class="line">|</span>
+                                <a>民谣</a>
+                            </div>
+                            <span class="more tab"><a href="@Url.Action("MoreMusicType","Music")">+更多&raquo;</a></span>
+                        </div>
+                        <div class="row">
+                            <div class="category-music-list">
+                                <div class="category-header">
+                                    🎸 古风
+                                </div>
+                                @{
+                                    int i = 1;
+                                }
+                                <ul>
+                                    @foreach (var item in Model.GuFenMusic)
+                                    {
+                                        <li class="music-list-item">
+                                            <a href="@Url.Action("Details","Music" ,new { id = @item.music_id})" title="@item.music_name">
+                                                <div class="title">
+                                                    <div class="title_wrap">
+                                                        <span class="rank">@(i++)</span>
+                                                        <span>@Html.DisplayFor(modelItem => item.music_name)</span>
+                                                    </div>
+                                                </div>
+                                                <div class="info">
+                                                    <span class="date">@item.upTime.ToString().Substring(5, 2)-@item.upTime.ToString().Substring(8, 2)</span>
+                                                    <span class="avatar">
+                                                        <img src="@item.Users.photo">
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="category-music-list">
+                                <div class="category-header">
+                                    🎹 流行
+                                </div>
+                                @{
+                                    int j = 1;
+                                }
+                                <ul>
+                                    @foreach (var item in Model.LiuXingMusic)
+                                    {
+                                        <li class="music-list-item">
+                                            <a href="@Url.Action("Details","Music" ,new { id = @item.music_id})" title="@item.music_name">
+                                                <div class="title">
+                                                    <div class="title_wrap">
+                                                        <span class="rank">@(j++)</span>
+                                                        <span>@Html.DisplayFor(modelItem => item.music_name)</span>
+                                                    </div>
+                                                </div>
+                                                <div class="info">
+                                                    <span class="date">@item.upTime.ToString().Substring(5, 2)-@item.upTime.ToString().Substring(8, 2)</span>
+                                                    <span class="avatar">
+                                                        <img src="@item.Users.photo">
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="category-music-list">
+                                <div class="category-header">
+                                    ⚡️ 电子
+                                </div>
+                                @{
+                                    int m = 1;
+                                }
+                                <ul>
+                                    @foreach (var item in Model.DianZiMusic)
+                                    {
+                                        <li class="music-list-item">
+                                            <a href="@Url.Action("Details","Music" ,new { id = @item.music_id})" title="@item.music_name">
+                                                <div class="title">
+                                                    <div class="title_wrap">
+                                                        <span class="rank">@(m++)</span>
+                                                        <span>@Html.DisplayFor(modelItem => item.music_name)</span>
+                                                    </div>
+                                                </div>
+                                                <div class="info">
+                                                    <span class="date">@item.upTime.ToString().Substring(5, 2)-@item.upTime.ToString().Substring(8, 2)</span>
+                                                    <span class="avatar">
+                                                        <img src="@item.Users.photo">
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="category-music-list">
+                                <div class="category-header">
+                                    🍡 民谣
+                                </div>
+                                @{
+                                    int n = 1;
+                                }
+                                <ul>
+                                    @foreach (var item in Model.MinYaoMusic)
+                                    {
+                                        <li class="music-list-item">
+                                            <a href="@Url.Action("Details","Music" ,new { id = @item.music_id})" title="@item.music_name">
+                                                <div class="title">
+                                                    <div class="title_wrap">
+                                                        <span class="rank">@(n++)</span>
+                                                        <span>@Html.DisplayFor(modelItem => item.music_name)</span>
+                                                    </div>
+                                                </div>
+                                                <div class="info">
+                                                    <span class="date">@item.upTime.ToString().Substring(5, 2)-@item.upTime.ToString().Substring(8, 2)</span>
+                                                    <span class="avatar">
+                                                        <img src="@item.Users.photo">
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 侧边栏 -->
+        <div class="sidebar" style="min-height: 1094px;">
+            <div class="right-module">
+                <h4>最新单曲</h4>
+                <ul class="new-artist-songs">
+                    @foreach (var item in Model.NewMusic)
+                    {
+                        <li class="artist-song">
+                            <div class="avatar">
+                                <img src="@item.imgage_url">
+                            </div>
+                            <div class="info">
+                                <h3 class="h">@item.music_name</h3>
+                                <p>@item.Users.name / 更新于<span>@item.upTime.ToString().Substring(5, 2)-@item.upTime.ToString().Substring(8, 2)</span></p>
+                            </div>
+                            <a href="@Url.Action("Details","Music",new { id = @item.music_id})" title="@item.music_name" class="cover-link"></a>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="right-module">
+                <h4>热门单曲</h4>
+                <ul class="new-artist-songs">
+                    @foreach (var item in Model.HotMusic)
+                    {
+                        <li class="artist-song">
+                            <div class="avatar">
+                                <img src="@item.imgage_url">
+                            </div>
+                            <div class="info">
+                                <h3 class="h">@item.music_name</h3>
+                                <p>@item.Users.name / <span>@item.listen_times</span>次播放</p>
+                            </div>
+                            <a href="@Url.Action("Details","Music" ,new { id = @item.music_id})" title="@item.music_name" class="cover-link"></a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+<!-- JS 脚本 -->
+<script src="~/Scripts/jquery-1.11.1.min.js"></script>
+<script src="~/Content/js/slider.js"></script>
+

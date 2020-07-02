@@ -1,0 +1,125 @@
+﻿.search-Box{
+    margin:10px 5px;
+}    
+.search-Box input{
+    height:30px;
+    width:200px;
+    border:1px solid #d7d4d4;
+    border-radius:3px;
+    padding: 5px;
+    float: left;
+}
+.search-Box .btn-search{
+    border: 1px solid gray;
+    width: 40px;
+    border-radius: 2px;
+    margin-left: 5px;
+    height: 30px;
+    display: inline-block;
+    float: left;
+}
+
+.info a {
+    margin: 0 5px 5px 5px;
+    padding: 3px 10px;
+    color: #555;
+    float: left;
+    font-size: 16px;
+    text-decoration:none;
+    outline:none;
+    }
+    .on{
+        background:rgba(17, 155, 223, 0.70);
+        border-radius:2px;
+    }
+    .mask{
+		width: 290px;
+		height: 200px;
+		position:absolute;
+		background: rgba(0,0,0,.5) url(../../Content/images/videos/load/播放.png) no-repeat center;
+	    display: none;
+		bottom: 0;
+	}
+    .cover{
+        position:relative;
+        display:inline-block;
+    }
+	.cover:hover .mask{
+		display: block;
+	}
+    .v-item{
+        display:inline-block;
+    }
+    .v-item p{
+        position:relative;
+        text-align:center;
+    }
+    .video-nav {
+        position: absolute;
+        height: 370px;
+        width: 982px;
+        /*加滤镜*/
+        /*filter: blur(1px);*/ /*//背景模糊设置*/
+        /*-webkit-filter: grayscale(100%);*/
+        /*filter:grayscale(100%); /*背景灰度设置*/
+        z-index: -999;
+        border: 1px solid grey;
+        border-radius: 5px;
+    }
+
+    .video-navbar {
+        width: 990px;
+        height: auto;
+        margin: 0 auto;
+    }
+
+    .video-text1 {
+        text-align: center;
+        line-height: 350px;
+        color: white;
+        font-family: "STXingkai"；;
+    }
+
+    .video-text2 {
+        text-align: center;
+        color: #00ffff;
+        font-size: 30px;
+        font-weight: 400;
+        font-family: "楷体"；;
+    }
+
+    .text-center{text-align:center;}
+    .teaching-video{background-color:#ffffff;padding-bottom:10px;}
+    .teaching-video  .tea-video-title{margin:20px auto 20px;}
+    .teaching-video .tea-video-title{font-size:30px;color:#ef7700;height:50px;line-height:50px;}
+    .teaching-video .tea-video-title{	font-size:16px;	color:#666666;}
+    .tea-video-h1{ font-weight:600; color: #bb0606;font-size:25px;}
+    .teaching-video li{list-style: none;}
+    .video{width:1200px;margin:0 auto;overflow: hidden;zoom:1;background: #ffffff;}
+    .video>div{float: left;height: 400px;}
+    .video>div:first-child {width: 5%;}
+    .video>div:last-child {width: 5%;}
+    .video>div:first-child img:hover, .video>div:last-child img:hover {cursor:pointer;}
+    .video>div:nth-of-type(2){width: 90%;}
+    .video ul{position: relative;}
+    .video div ul li{transition: all .6s; position: absolute;background: url(~/Content/images/slider/1.jpg) center center no-repeat;background-size: 100% 100%;}
+    .video li video{width:100%;height:100%;}
+    .video li h3{text-align: center;margin-top: 2px;color: #1766d7;}
+    .video1{width: 200px;height: 100px; top: 143px;left: 0px; z-index: 1;}/*创建5个播放框初始位置类，可自行更改*/
+    .video2{width: 400px;height: 200px; top: 86px;left: 90px; z-index: 2;}
+    .video3{width: 700px;height: 350px; top: 0px;left: 190px; z-index: 3;}
+    .video4{width: 400px;height: 200px; top: 86px;left: 590px; z-index:2;}
+    .video5{width: 200px;height: 100px; top: 143px;left: 880px; z-index: 1;}
+    .pagination {
+        float: right;
+        margin-right:35px;
+    }
+    .pagination > li{
+        float:left;
+    }
+    .page-list{
+        float:right;
+    }
+    .page > li{
+        float:left;
+    }

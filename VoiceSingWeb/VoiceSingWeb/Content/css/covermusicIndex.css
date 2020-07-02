@@ -1,0 +1,118 @@
+﻿/*优质翻唱*/
+.musicName{
+    font-size:15px;
+    color:green;
+}
+.musicName:hover{
+    color: #B72712;
+}
+a:hover {
+    color: #B72712;
+}
+
+.img:hover {
+    transform: scale(1.1); /*鼠标经过放大1.1倍*/
+}
+
+/*最新视频*/
+.Name{
+    color: green;
+}
+
+.Name:hover {
+    color: #B72712;
+}
+.mask{
+	width: 150px;
+	height: 200px;
+	position:absolute;
+	background: rgba(0,0,0,.5) url(../../Content/images/videos/load/播放.png) no-repeat center;
+	display: none;
+	bottom: 0;
+    z-index:3;
+}
+.cover{
+    position:relative;
+    display:inline-block;
+}
+.cover:hover .mask{
+	display: block;
+}
+.imgblock{
+    position:absolute;
+    z-index:4;
+    background-color:rgba(8, 122, 8, 0.80);
+    bottom:0px;
+    height:30px;
+    width:150px;
+    text-align:center;
+    color:rgba(255, 255, 255, 0.80);
+}
+.cover:hover .imgblock{
+    color:black;
+}
+
+/*24小时推荐*/
+/*ul,ol,li,dl,dt,dd{text-decoration: none;list-style: none}
+.lf{float: left}
+.rt{float: right}
+.clear{clear:both}
+.ovh{overflow: hidden}
+a:hover{  text-decoration:none;  }
+input{border:none;outline:none;}
+img{border:none}*/
+
+/*轮播*/
+.lb_gl{
+	height:100%;
+    margin-left:60px;
+}
+.pictureSlider{
+    height: 100%;
+    transform: rotate(90deg)  translateY(25%) translateX(-25%);
+}
+.poster-list{
+	width: 100%;
+	height: 345px;
+}
+.on1{
+    color:green;
+}
+.on2{
+    color:#12b3d7;
+}
+.on1:hover.on2:hover{
+    color:red;
+    text-decoration:none;
+}
+.poster-item{
+    background-color: #e6e4ca;
+    height: 85%;
+    width:90%;
+    padding:5px 20px;
+    border:1px solid grey;
+    border-radius:8px;
+	transition: all 0.5s;
+    cursor: pointer;
+	-moz-transition: all 0.5s;
+    cursor: pointer;
+	-webkit-transition: all 0.5s;
+    cursor: pointer;
+	-o-transition: all 0.5s;
+    cursor: pointer;
+	transform: rotate(-90deg);
+	overflow: hidden;
+}
+.turn_3d{text-align: center;color: #fff;font-weight: 400;font-size: 36px;padding: 28px 0;}
+.xxgy{font-size: 18px;font-weight: 900;text-align: center;color:white;}
+.poster-item .say{font-size: 14px;margin-bottom: 5px;text-align: center;color:white;}
+.students_star{padding:10px 10px 0 10px ;}
+.cell_list{margin-bottom: 20px;color:#999;font-size: 18px;overflow: hidden;}
+.darks{color: #000;padding-left: 10px;}
+.zwjs{border-top:1px solid #d0cddb;line-height: 26px;padding-top: 5px;color: #999;font-size: 12px;max-height: 84px;overflow: hidden;}
+.for_btn{position: relative;height:250px;overflow:hidden}
+.in_page{position: absolute;left: 50%;top:50%;width:40px;height: 40px;margin-left: -20px;margin-top: -20px;}
+.in_page>img{width: 40px;height: 40px;}
+
+.check_more{width: 180px;height: 50px;line-height: 50px;text-align: center;color:#fff;background: #bc241d;margin:0 auto;display: block;}
+

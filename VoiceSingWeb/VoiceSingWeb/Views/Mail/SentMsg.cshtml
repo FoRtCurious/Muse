@@ -1,0 +1,18 @@
+﻿@model Models.MailChatRecords
+
+@{
+    ViewBag.Title = "SentMsg";
+    Layout = null;
+}
+
+<div style="display :flex ;">
+    <img class="img-circle photo" alt="singer" src="@Model.Users.photo  " style="width:40px;height :40px; margin-top :15px;" />
+    <div>
+        <div style="display :flex ;">
+            <p style="margin-left :15px; margin-top :10px; color :#808080 ; font-size :13px;">发给 @Model.Users1.name 的消息：   </p>
+            <p style="margin-left :20px; margin-top :10px; color:#808080 ;font-size :10px;">  ( @Model.sent_time ) </p>
+        </div>
+        <p style="margin-top :10px; margin-left :20px;font-size:14px;"> @Model.content   </p>
+    </div>
+</div>
+

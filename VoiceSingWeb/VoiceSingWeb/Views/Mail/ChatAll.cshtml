@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Models.Users>
+@{
+    Layout = null;
+}
+<style>
+    .allbox {
+        height: 90px;
+    }
+</style>
+
+
+
+
+<div id="panel-element-864834" class="panel-collapse in">
+    <div class="panel-body" style="height :400px;  overflow-y:auto ;">
+        @foreach (var item in Model)
+            {
+            <div style="margin-top:7px;" >
+                <a href="@Url.Action("AddChat", "Mail", new { recipid = item.userId })">
+                    <div class="col-md-4 column">
+                        <img alt="singer" src="@item.photo" style="width:50px;text-align :left ;" />
+                    </div>
+                    <div class="col-md-8 column">
+                        <div class="card-body">@item.name &nbsp;</div>
+                        <small> @item.area  </small>
+                    </div>
+                </a>
+            </div>
+
+        }
+
+    </div>
+</div>
+
+

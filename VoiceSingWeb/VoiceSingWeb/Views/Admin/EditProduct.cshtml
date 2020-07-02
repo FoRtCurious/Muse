@@ -1,0 +1,160 @@
+﻿@model Models.Goods
+<style>
+    .formcontent {
+        border: 2px solid grey;
+        width: 520px;
+        padding-top: 8px;
+        border-radius: 2px;
+    }
+</style>
+<div>
+    <div style="padding-top:5px;padding-bottom:10px;">
+        <label style="width:200px;font-size:15px;font-weight:600">商城管理&nbsp;&rang;&nbsp;编辑商品</label>
+    </div>
+    @using (Ajax.BeginForm("SubmitEdit", "Admin", new AjaxOptions() { HttpMethod = "post", OnSuccess = "EditSuc" }, new { enctype = "multipart/form-data", @class = "layui-form formcontent" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div class="layui-form-item">
+            <label class="layui-form-label">当前商品为</label>
+            <div class="layui-input-block">
+                @{
+                    if (Model.good_state == 0)
+                    {
+                        <label id="goodstate" class="layui-form-label" style="color:red;font-size:18px;">下架商品</label><label class="layui-form-label">编号:@Model.goodsid</label>
+                    }
+                    else if (Model.good_state == 1)
+                    {
+                        <label id="goodstate" class="layui-form-label" style="color:dodgerblue;font-size:18px;">在售商品</label><label class="layui-form-label">编号:@Model.goodsid</label>
+                    }
+                }
+                <input type="hidden" name="goodid" value="@Model.goodsid" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">商品标题</label>
+            <div class="layui-input-block">
+                <input type="text" name="name" required lay-verify="required" value="@Model.goodsname" autocomplete="off" class="layui-input" style="width:320px;">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">商品分类</label>
+            <div class="layui-input-block" style="width:320px;">
+                @Html.DropDownList("goodType", null, htmlAttributes: new { })
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">商品价格</label>
+            <div class="layui-input-inline">
+                <input lay-verify="number" min="0" name="price" required  value="@Model.price" autocomplete="off" class="layui-input" style="width:100px;" onblur="if (!/^\d+(\.\d+)?$/.test(this.value)){this.value='';}" step="0.01">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">商品库存</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="number" name="store" value="@Model.good_store" placeholder="数量" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">商品评论</label>
+            <div class="layui-input-block">
+                @{
+                    if (Model.comment_state == 1)
+                    {
+                        <input type="checkbox" name="comment" lay-skin="switch" checked lay-text="开|关">
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="comment" lay-skin="switch" lay-text="开|关">
+                    }
+                }                
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">商品状态</label>
+            <div class="layui-input-block">
+                <input type="radio" name="state" value="1" title="上架" checked>
+                <input type="radio" name="state" value="0" title="下架">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">商品图片</label>
+            <div class="layui-input-inline uploadHeadImage">
+                <div class="layui-upload-drag" id="headImg">
+                    <i class="layui-icon upload-pic"></i>
+                    <p>点击修改图片，或将图片拖拽到此处</p>
+                </div>
+            </div>
+            <div class="layui-input-inline">
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img headImage" src="@Model.img" id="upimg" style="width:140px;height:140px;">
+                    <p id="demoText"></p>
+                    <input id="imgsrc" type="hidden" name="img" value="@Model.img"/>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" lay-filter="formDemo">提交修改</button>
+                <button type="reset" class="layui-btn layui-btn-primary">取消修改</button>
+            </div>
+        </div>
+      }
+</div>
+
+<script type="text/javascript" src="~/Content/layui-v2.5.6/layui/layui.all.js"></script>
+<script type="text/javascript">
+    function EditSuc(data) {
+        if (data == "suc"){
+            layui.layer.msg("修改成功", {
+                icon: 1               
+            });           
+        }
+        else {
+            layui.layer.msg("修改失败", {
+                icon: 5
+            });
+        }
+    }
+    layui.use(["jquery", "upload", "form", "layer", "element"], function () {
+        var $ = layui.$,
+            element = layui.element,
+            layer = layui.layer,
+            upload = layui.upload,
+            form = layui.form;
+
+        //拖拽上传
+        var uploadInst = upload.render({
+            elem: '#headImg'
+            , url: '/Admin/UpGoodImg'
+            , size: 500
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#upimg').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                //如果上传失败
+                if (res.code == 500) {
+                    return layer.msg('上传失败');
+                }
+                //上传成功
+                //打印后台传回的地址: 把地址放入一个隐藏的input中, 和表单一起提交到后台, 此处略..
+                var demoText = $('#demoText');
+                demoText.html('<span style="color:green;">修改成功!</span>');
+                var img = document.getElementById("imgsrc");
+                    img.value = res.url;
+            }
+            , error: function () {
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    uploadInst.upload();
+                });
+            }
+        });
+    });
+</script>
+

@@ -1,0 +1,372 @@
+﻿
+@model VoiceSingWeb.Models.ShopCenterViewModel
+
+@{
+    ViewBag.Title = "商城个人中心";
+    Layout = "~/Views/Shared/_MarketLayout.cshtml";
+}
+
+@section Css{
+    <link rel="stylesheet" type="text/css" href="~/Content/css/Shop_Center.css" />
+}
+
+    <div class="C-body">
+        <div class="C-head">
+            <div class="block">
+                <span>
+                    <a href="@Url.Action("Index", "Shopping")">首页</a>
+                </span>
+                <span class="pointer">
+                    <i></i>
+                    个人中心
+                </span>
+            </div>
+        </div>
+        @* 左边导航 *@
+        <div class="Left-list">
+            <ul class="m-Order">
+                <li class=" z-sel"><a id="myorder" style="cursor:pointer;"><i></i><span>我的订单</span></a></li>
+                <li class=" z-sel"><a id="mycollect" style="cursor:pointer;"><i></i><span>我的收藏</span></a></li>
+                <li class=" z-sel">@Html.Action("Commentnumber", "Shopping")</li>
+                <li class=" z-sel"><a id="addcomment" style="cursor:pointer;"><i></i><span>我的评论</span></a></li>
+                <li class=" z-sel"><a id="myAd" style="cursor:pointer;"><i></i><span>我的收货地址</span></a></li>
+            </ul>
+        </div>
+        @* 我的订单 *@
+        <div class="Right-list" id="Right-list2" style="display:none;">
+            <div class="order-list">
+                @foreach (var item in Model.MyOrder)
+                {
+                    <ul class="order-ul">
+                        <li class="spend">花费:@item.Tot_amt ￥</li>
+                        <li class="data">日期:@item.ordertime </li>
+                        <li id="check-detail" class="check">
+                            @Ajax.ActionLink("查看详情", "Myorder_details", new { detailId = item.orderid }, new AjaxOptions { HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "order-show" })
+                        </li>
+                    </ul>
+                }
+            </div>
+            <div class="order-show" id="order-show">
+            </div>
+        </div>
+        @* 我的收藏 *@
+        <div class="Right-list" id="Right-list3" style="display:none;">
+            <div class="collection-list">
+                <span class="size">我的收藏</span>
+                @if (Model.MyCollect != null && Model.MyCollect.Count() != 0)
+                {
+                    <table class="table">
+                        <tr style="text-align: center;">
+                            <th style="width: 20%; margin: 0 auto; text-align: center;">
+                                <label>商品图片</label>
+                            </th>
+                            <th style="width: 20%; margin: 0 auto; text-align: center;">
+                                @Html.DisplayName("商品名称")
+                            </th>
+                            <th style="width: 20%; margin: 0 auto; text-align: center;">
+                                @Html.DisplayName("商品类别")
+                            </th>
+                            <th style="width: 10%; margin: 0 auto; text-align: center;">
+                                @Html.DisplayName("商品单价")
+                            </th>
+                            <th style="width: 15%; margin: 0 auto; text-align: center;">
+                                @Html.DisplayName("编辑")
+                            </th>
+                            @foreach (var item in Model.MyCollect)
+                            {
+                            <tr>
+                                <td style="width: 20%; margin: 0 auto; line-height: 100px;">
+                                    <input id="@item.collectid" type="hidden" name="collectid" />
+                                    <a href="@Url.Action("gooddetail", "Shopping", new { id = @item.goodsid })"><img src="@item.Goods.img" style="width: 100px; height: 100px" /></a>
+                                </td>
+                                <td style="width: 20%; margin: 0 auto; line-height: 100px;">
+                                    @item.Goods.goodsname
+                                </td>
+                                <td style="width: 20%; margin: 0 auto; line-height: 100px;">
+                                    @item.Goods.GoodsType.typename
+                                </td>
+                                <td style="width: 10%; margin: 0 auto; line-height: 100px;">
+                                    ￥@item.Goods.price
+                                </td>
+                                <td style="width: 15%; margin: 0 auto; line-height: 100px;">
+                                    <span class="edit" style="cursor: pointer;"></span>
+                                    @Ajax.ActionLink("删除", "Delect_collect", new { id = item.collectid }, new AjaxOptions { HttpMethod = "post", OnSuccess = "DelSuc" })
+                                </td>
+                            </tr>
+                        }
+                        </table>
+                    }
+                    else
+                    {
+                        <div class="empty">
+                            <i class="icno"></i>
+                            <span class="f-fs3" style="margin-left:-10px;">
+                                <span class="s-fc3">您还没有收藏任何东西哦，</span>
+                                <a href="@Url.Action("goodsList", "Shopping")" class="s-fcLink">去逛逛吧！></a>
+                            </span>
+                        </div>
+                    }
+            </div>
+        </div>
+        @* 我的待评论 *@
+        <div class="Right-list" id="Right-list4" style="display:none;">
+            <div class="collection-list">
+                @if (Model.MyComment != null && Model.MyComment.Count() != 0)
+                {
+                    <table class="table" >
+                        <tr style="text-align: center;">
+                            <th style="width: 20%; margin: 0 auto; text-align: center;">
+                               <label>商品图片</label>
+                            </th>
+                            <th style="width: 20%; margin: 0 auto; text-align: center;">
+                                @Html.DisplayName("商品名称")
+                            </th>
+                            <th style="width: 10%; margin: 0 auto; text-align: center;">
+                                @Html.DisplayName("商品单价")
+                            </th>
+                            <th style="width: 20%; margin: 0 auto; text-align: center;">
+                                @Html.DisplayName("购买数量")
+                            </th>
+
+                            @foreach (var item in Model.MyComment)
+                            {
+                            <th>
+                                <span>
+                                    <input id="@item.userId" type="hidden" />
+                                    <input id="@item.orderdetailsid" type="hidden" />
+                                </span>
+                            </th>
+                             
+                            <tr>
+                                <td style="width: 20%; margin: 0 auto; line-height: 100px;">                                    
+                                    <img src="@item.img" style="width: 100px; height: 100px" />
+                                </td>
+                                <td style="width: 20%; margin: 0 auto; line-height: 100px;">
+                                    @item.goodsname
+                                </td>
+                                <td style="width: 20%; margin: 0 auto; line-height: 100px;">
+                                    @item.price
+                                </td>
+                                <td style="width: 10%; margin: 0 auto; line-height: 100px;">
+                                    @item.qty
+                                </td>
+                                <td class="commentbut">
+                                    <span id="update">
+                                        <a href="@Url.Action("AddComment", "Shopping",new { id = item.orderdetailsid })" target="_blank">去评论</a>
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                        </table>
+
+                    }
+                    else
+                    {
+                        <div class="empty">
+                            <i class="icno"></i>
+                            <span class="f-fs3" style="margin-left:-10px;">
+                                <span class="s-fc3">您还没有需要评论的商品哦，</span>
+                                <a href="@Url.Action("goodsList", "Shopping")" class="s-fcLink">去逛逛吧！></a>
+                            </span>
+                        </div>
+                    }
+            </div>
+        </div>
+        @* 我的评论 *@
+        <div class="Right-list" id="Right-list5" style="display:none;">
+            <div class="comment-list">
+                @if (Model.Comments != null && Model.Comments.Count() != 0)
+                {
+                    <table class="table" >
+                        <tr style="text-align: center;">
+                            <th style="width: 20%; margin: 0 auto; text-align: center;">
+                                @Html.DisplayName("评论时间")
+                            </th>
+                            <th style="width: 20%; margin: 0 auto; text-align: center;">
+                                <label>商品图片</label>
+                            </th>
+                            <th style="width: 20%; margin: 0 auto; text-align: center;">
+                                @Html.DisplayName("商品名称")
+                            </th>
+
+                            <th style="width: 20%; margin: 0 auto; text-align: center;">
+                                @Html.DisplayName("评论内容")
+                            </th>
+                            <th style="width: 15%; margin: 0 auto; text-align: center;">
+                                @Html.DisplayName("编辑")
+                            </th>
+                            @foreach (var item in Model.Comments)
+                            {                                
+                            <tr>
+                                <td style="width: 20%; margin: 0 auto; line-height: 100px;">
+                                    @item.commmenttime
+                                </td>
+                                <td style="width: 20%; margin: 0 auto; line-height: 100px;">
+                                    <a href="@Url.Action("gooddetail", "Shopping", new { id = @item.goodsid })"><img src="@item.Goods.img" style="width: 100px; height: 100px" /></a>
+                                </td>
+                                <td style="width: 20%; margin: 0 auto; line-height: 100px;">
+                                    <span> @item.Goods.goodsname</span>
+                                </td>
+                                <td class="content" >
+                                    <span class="con"> @Html.Raw(item.content)</span>
+                                </td>
+                                <td style="width: 15%; margin: 0 auto; line-height: 100px;">
+                                    <span class="edit" style="cursor: pointer;"></span>
+                                    <span id="update">
+                                        <a href="@Url.Action("PlusComment", "Shopping",new { id = item.goodscommentid })" target="_blank">去追评</a>
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                        </table>
+                    }
+                    else
+                    {
+                        <div class="empty">
+                            <i class="icno"></i>
+                            <span class="f-fs3" style="margin-left:-10px;">
+                                <span class="s-fc3">您还没有评论任何东西哦，</span>
+                                <a href="@Url.Action("goodsList", "Shopping")" class="s-fcLink">去逛逛吧！></a>
+                            </span>
+                        </div>
+                    }
+            </div>
+        </div>
+        @* 我的收货地址 *@
+        <div class="Right-list" id="Right-list1">
+            <div class="add">
+                <a id="add-myAd" href="@Url.Action("MyAddress","Shopping")"><span class="add-block1" style="display:block;text-align:center;line-height:100px;">添加收货地址+</span>  </a>
+            </div>
+            @foreach (var item in Model.MyAddr)
+            {
+                <div class="address-H">
+                    <div class="juti">
+                        <span style="display:block; margin:5px 0 5px 10px;">收件人姓名：@item.name</span>
+
+                        <span style="display:block; margin:5px 0 5px 10px;">收件人电话：@item.telephone</span>
+
+                        <span style="display:block; margin:5px 0 5px 10px;">收件人地址：@item.address</span>
+                    </div>
+                    <div class="chaozhuo">
+                        <span id="delect">
+                            @Ajax.ActionLink("删除地址", "Delect_address", new { id = item.addressid }, new AjaxOptions { HttpMethod = "post", OnSuccess = "DelSuc" })
+                        </span>
+                        <span id="update">
+                            <a href="@Url.Action("UpdateAddressView", "Shopping",new { addressid=item.addressid })" target="_blank">修改地址</a>
+                        </span>
+                    </div>
+                </div>
+            }
+        </div>
+        @* 添加收货地址分布视图 *@
+        @*@{Html.RenderAction("MyAddress", "Shopping");}*@
+    </div>
+
+        <script>
+            //我的评论
+            $("#addcomment").click(function () {
+                console.log(15);
+                if ($("#Right-list5").css("display") == "none") {
+                    $("#Right-list5").show(100);
+
+                    $("#Right-list1").hide(100);
+                    $("#Right-list2").hide(100);
+                    $("#Right-list3").hide(100);
+                    $("#Right-list4").hide(100);  
+                    $("#Add-address").hide(100);
+                } else {
+                    $("#Right-list5").hide(100);
+                }
+            });
+            //我的待评论
+            $("#mycomment").click(function () {
+                console.log(15);
+                if ($("#Right-list4").css("display") == "none") {
+                    $("#Right-list4").show(100);
+
+                    $("#Right-list1").hide(100);
+                    $("#Right-list2").hide(100);
+                    $("#Right-list3").hide(100);
+                    $("#Add-address").hide(100);
+                    $("#Right-list5").hide(100);
+                } else {
+                    $("#Right-list4").hide(100);  
+                }
+            });
+            //我的收货地址
+            $("#myAd").click(function () {
+                console.log(15);
+                if ($("#Right-list1").css("display") == "none") {
+                    $("#Right-list1").show(100);
+
+                    $("#Right-list2").hide(100);
+                    $("#Right-list3").hide(100);
+                    $("#Right-list4").hide(100); 
+                    $("#Right-list5").hide(100);
+                    $("#Add-address").hide(100);
+                } else {
+                    $("#Right-list1").hide(100);
+                    $("#Add-address").hide(100);
+                }
+            });
+            //我的收藏
+            $("#mycollect").click(function () {
+                console.log(15)
+                if ($("#Right-list3").css("display") == "none") {
+                    $("#Right-list3").show(100);
+
+                    $("#Right-list1").hide(100);
+                    $("#Right-list2").hide(100);
+                    $("#Right-list4").hide(100);  
+                    $("#Add-address").hide(100);
+                    $("#Right-list5").hide(100);
+                } else {
+                    $("#Right-list3").hide(100);                  
+                }
+            });
+            //我的订单
+            $("#myorder").click(function () {
+                console.log(15);
+                if ($("#Right-list2").css("display") == "none") {
+                    $("#Right-list2").show(100);
+
+                    $("#Right-list1").hide(100);
+                    $("#Right-list3").hide(100);
+                    $("#Right-list4").hide(100);  
+                    $("#Add-address").hide(100);
+                    $("#Right-list5").hide(100);
+                } else {
+                    $("#Right-list2").hide(100);
+                }
+            });
+            //跳转填写收货地址
+            $("#add-myAd").click(function () {
+                if ($("#Add-address").css("display") == "none") {
+                    $("#Add-address").show(100);
+                } else {
+                    $("#Add-address").hide(100);
+                }
+            });
+
+            //$("#pdh-hide").click(function () {
+            //    if ($("#Add-address").css("display") != "none") {
+            //        $("#Add-address").hide(100);
+            //    } else {
+            //    }
+            //}
+            //);
+            //$("#update").click(function () {
+            //    console.log(100);
+            //    if ($("#myaddress").css("display") == "none") {
+            //        $("#myaddress").show(100);
+            //    } else {
+            //        $("#myaddress").hide(100);
+            //    }
+            //});
+       
+            function DelSuc(data) {
+                alert(data);
+                window.location.reload();
+            }
+        </script>
+     

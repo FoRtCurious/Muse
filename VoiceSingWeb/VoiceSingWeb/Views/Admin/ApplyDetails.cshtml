@@ -1,0 +1,88 @@
+﻿@model VoiceSingWeb.Models.UserSingerInfoViewModels
+@{
+    Layout = null;
+}
+
+<div>
+    <div class="">
+        <div class="">
+            <div class="" style="float:left;">
+                <img style="height:180px;width:180px;" alt="singer" src="@Model.user.photo" />
+            </div>
+            <div class="" style="float:left;">
+                <p class="infor">
+                    ID : @Model.user.userId <span><a href="#"  style="color:#3ac0fb;">实名详情</a></span>
+                </p>
+                <p class="infor">
+                    性别 : &nbsp;
+                    @{
+                        if (Model.user.user_sex == "男")
+                        {
+                            <img src="~/Content/images/load/sex-boy.jpg" alt="sex" style="width:15px;height:15px;display:inline-block;" />
+                        }
+                        else if (Model.user.user_sex == "女")
+                        {
+                            <img src="~/Content/images/load/sex-girl.jpg" alt="sex" style="width:15px;height:15px;display:inline-block;" />
+                        }
+                    }
+                </p>
+                <p class="infor">
+                    出生日期 : @Model.user.birthday.ToString().Substring(0, Model.user.birthday.ToString().Length - 7)
+                </p>
+                <p class="infor">
+                    注册时间 : @Model.user.register_time.ToString().Substring(0, Model.user.register_time.ToString().Length - 7)
+                </p>
+                <p>粉丝: <span style="color:red;">@Model.user.user_fans</span>
+                @{ 
+                    if (Model.user.user_fans < 1000)
+                    {
+                        <span style="color:red;font-size:15px;font-weight:200;">(粉丝量应大于1000，该项未通过)</span>
+                    }
+                    else
+                    {
+                        <span style="color:green;font-size:15px;font-weight:200;">(粉丝量大于1000，该项通过)</span>
+                    }
+                }
+                </p>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both;">
+        @{
+            if (Model.user.photo != "../../Content/images/user_photo/default.jpg")
+            {
+                <span style="color:green;font-size:15px;font-weight:200;">(形象照有，该项通过)</span>
+            }
+            else
+            {
+                <span style="color:red;font-size:15px;font-weight:200;">(形象照无，该项不通过)</span>
+            }
+        }
+    </div>
+    <div style="margin-top:10px;clear:both;">
+        <h3>@(Model.user.name)的歌曲
+        @{ 
+            if (Model.musics.Count() >= 2)
+            {
+                <span style="color:green;font-size:15px;font-weight:200;">(歌曲数量 @Model.musics.Count()，该项通过)</span>
+            }
+            else
+            {
+                <span style="color:red;font-size:15px;font-weight:200;">(歌曲数量小于2，该项不通过)</span>
+            }
+        }
+        </h3>
+        <hr color="#a40909" style="height:2px;" />
+        <div>
+            @{
+                foreach (var item in Model.musics)
+                {
+                    <div style="width:120px;height:auto;float:left;margin-right:20px;">
+                        <a href="@Url.Action("Index","MusicDetails" ,new { id = @item.music_id})"><img src="@item.imgage_url" height="120" width="120" /></a>
+                        <p style="text-align:center;">@item.music_name</p>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

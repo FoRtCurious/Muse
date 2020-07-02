@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Models.Mails>
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model)
+{
+    <div class="card bg-info text-white">
+        @*邮件展示开始*@
+        <div class="card-body">发给“@item.recip_user”的邮件：</div>
+        <strong>
+            主题： @item.title
+        </strong>
+        <p>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @item.mail ;
+        </p>
+        <div style="text-align:right;">
+            <small style="color :grey">
+                2020/3/27
+            </small>
+            <p>
+                <a class="btn" href="@Url.Action("delete", "Mail",new{ id = @item.id })">删除</a>    
+                <a class="btn" href="@Url.Action("Write","Mail" ,new { id = Session["UserId"]})">再来一封</a>
+            </p>
+        </div>
+    </div>                                  @*邮件展示结束*@
+
+}

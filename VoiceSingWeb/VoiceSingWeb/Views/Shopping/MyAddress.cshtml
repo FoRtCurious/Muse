@@ -1,0 +1,68 @@
+﻿@model VoiceSingWeb.Models.ShopCenterViewModel
+
+@{
+    ViewBag.Title = "MyAddress";
+    Layout = "~/Views/Shared/_MarketLayout.cshtml";
+}
+
+<link href="~/Content/css/Address.css" rel="stylesheet" />
+<div class="all">
+    <div class="C-head">
+        <div class="block">
+            <span>
+                <a href="@Url.Action("shop_Center", "Shopping")">个人中心</a>
+            </span>
+            <span class="pointer">
+                <i></i>
+                添加地址
+            </span>
+        </div>
+    </div>
+    <div class="address-gray">
+        <div class="form-box">
+            <span class="box-title">- 添加地址 -</span>
+            @using (Ajax.BeginForm("Add_address", "Shopping", new AjaxOptions { HttpMethod = "Post", OnSuccess = "success" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <div class="row">
+                    <label class="txt-title"><span>*</span>收货人</label>
+                    <input name="name" type="text" placeholder="请填写真实姓名" value="">
+                </div>
+                <div class="row">
+                    <label class="txt-title"><span>*</span>手机号码</label>
+                    <input name="telephone" type="text" value="">
+                </div>
+
+                <div class="row">
+                    <label class="txt-title"><span>*</span>收货地址</label>
+                    <input name="address" type="text" value="">
+                </div>
+                <div class="btn">
+                    <input type="button" value="取消" />
+                    <input type="submit" value="保存" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.address-gray #Adressnee').blur(function () {
+        if ($(this).val().length == 0) {
+            $(this).addClass('err');
+            $(this).val('*收件人请不要为空');
+        }
+    })
+
+    function success(data) {
+        if (data == "success") {
+            alert('添加成功！');
+            window.location = '../../Shopping/Shop_Center';
+        }
+        else {
+            alert('您还没有登入哦！');
+        }
+    }
+</script>

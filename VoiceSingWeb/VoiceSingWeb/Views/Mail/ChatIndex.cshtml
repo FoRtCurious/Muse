@@ -1,0 +1,159 @@
+﻿@model Models.Users
+@{
+    ViewBag.Title = "私信";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Css{
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+}
+<style>
+    .box {
+        border: 1px solid #a1a1a1;
+        padding: 10px 2px;
+        background: white;
+        width: 1000px;
+        height: 580px;
+        border-radius: 12px;
+    }
+
+    .Input {
+        overflow: auto;
+        line-height: 24px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1;
+        flex: 1 1;
+        padding: 0;
+        /*overflow: hidden;*/
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        background: transparent;
+        border: none;
+        resize: none;
+        width: 690px;
+        height: 63px;
+    }
+</style>
+
+
+<div class="container">
+    <div class="row clearfix" style="min-height :580px;">
+        <div class="col-md-12 column">
+            <div class="row clearfix" style="height:90px;">
+                <div class="col-md-1 column">
+                    <img class="img-circle photo" alt="singer" src="@Model.photo" style="width:70px;" />
+                </div>
+                <div class="col-md-3 column">
+                    <p style="color :red">音悦网免费邮箱 </p>
+                    <small>
+                        @@ @Model.userId .yinyue.com
+                        <br />
+                        @Model.name
+                    </small>
+                </div>
+                <div class="col-md-8 column">
+                    <ul class="nav nav-pills">
+                        <li>
+                            <a href="@Url.Action("Index", "Mail")">  邮件</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Friends", "Mail")"> 通讯录</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Write", "Mail")"> 写信</a>
+                        </li>
+                        <li class="active">
+                            <a href="@Url.Action("ChatIndex", "Mail")">私信</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="box ">
+            @*互相关注允许实时聊天用户列表*@
+            <div class="col-md-3 column" >
+                <nav class="navbar navbar-default" role="navigation" style="height :560px; width :230px;">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <div class="form-group">
+
+                            @using (Html.BeginForm("ChatSearch", "Mail", FormMethod.Get, new { id = "searchForm" }))
+                            {                                                                    
+                                        <input type="text"  class="form-control" style="margin-top :10px;" name="searchString" placeholder="搜索用户" />                              
+                            }
+                            @*<input type="text" class="form-control" style="margin-top :10px;"  id="chat" name="chat"  placeholder="搜索"/>*@      @*搜索框*@
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card bg-light text-dark">
+
+                        <div class="panel-group" id="panel-159725">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-159725" href="#panel-element-472529"> 最近联系： </a>
+                                </div>                                                                  
+                                      @Html.Action("ChatNew", "Mail")       @*最近聊天用户*@
+                                                                                            
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <a class="panel-title" data-toggle="collapse" data-parent="#panel-159725" href="#panel-element-864834"> 所有用户：   </a>
+                                </div>                                                               
+                                      @Html.Action("ChatAll", "Mail")         @*所有用户*@                             
+                            </div>
+                        </div>
+
+                    </div>
+                </nav>
+            </div>
+
+            <div class="col-md-9 column" id="myDiv">
+                @*聊天框占9部分*@
+                <div id="message">
+                    @Html.Action("ChatHistory", "Mail")
+                </div>
+                @*输入框*@
+                <div>
+
+                    @*@using (Html.BeginForm("SentMsg", "Mail", FormMethod.Post, new { enctype = "multipart/form-data" }))*@
+                    @using (Ajax.BeginForm("SentMsg", "Mail", new AjaxOptions() { HttpMethod = "post", OnSuccess = "senterload" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <textarea class="Input" name="content" id="content"></textarea>
+                        <input type="hidden" id="recipidNum" name="recipid" value="20191053" />
+                        <input type="hidden" id="recordidNum" name="recordid" value="@Session["UserId"]" />
+                        <div class="InputBox-footer">
+                            <div style="text-align :right; padding:1px 7px; ">
+                                <button type="submit" class="btn btn-info btn-sm" style="width :70px; font-size :small ;">发送</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script >
+    function senterload(data) {
+        if (data == "fail") {
+            alert('发送失败！请尝试重新登录');
+        }
+        else {
+            console.log(data);
+            $('#MsgList').append(data);
+            $('#content').val('');
+        }
+                  
+    }
+
+</script>

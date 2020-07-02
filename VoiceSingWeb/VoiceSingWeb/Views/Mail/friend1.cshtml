@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Models.User_friends>
+@{ 
+    Layout = null;
+}
+@foreach (var item in Model)
+{
+    <div class="col-md-3">
+        <div class="thumbnail">
+            <img alt="300x200" src="@item.Users.photo" style="width:150px;" class="img-thumbnail" />
+            <div class="caption">
+                <h3>
+                    @item.Users.name
+                </h3>
+                <p>
+                    邮箱:@@@item.Users.userId .yinyue.com
+                </p>
+                <p>
+                    关注时间：@item.add_date
+                </p>
+                <p>
+                    @item.Users.user_info
+                </p>
+                <p>                   
+                    <a class="btn btn-primary" href="@Url.Action("Write","Mail" ,new { id = item.adduserId})">写信给ta</a> 
+                    <a class="btn" href="@Url.Action("Dislike","Mail",new { id = item.adduserId})">取消关注</a>
+                </p>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,39 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<Models.UserMusics>
+@{
+    Layout = null;
+}
+
+<div class="content" >
+    <div class="rg-board collection-section one-section white section">
+        <div class="rg-board-body">
+            <div class="collection-list clearfix col-group" style="height:580px;">
+                @foreach (var item in Model)
+                {
+                    <div class="col-2 col-mb-6">
+                        <div class="collection-item" style="height:160px;">
+                            <a href="@Url.Action("Details", "Music", new {id = item.music_id})" class="collection-cover image" data-title="@item.music_name">
+                                <img src='@item.imgage_url' class="cover" style="display: inline;height:140px;width:150px;" />
+                                <p class="title one-line">
+                                    <a href="@Url.Action("Details", "Music", new {id = item.music_id})">@item.music_name</a>
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-list">
+    @Html.PagedListPager(Model, page => Url.Action("MusicTypePageShow", "Music", new { page, currentFilter = ViewBag.CurrentFilter }),
+       PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+             new AjaxOptions
+             {
+                 HttpMethod = "GET",
+                 InsertionMode = InsertionMode.Replace,
+                 UpdateTargetId = "Div1"
+             }))
+</div>
+
+

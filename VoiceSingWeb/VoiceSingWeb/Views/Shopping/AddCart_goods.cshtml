@@ -1,0 +1,197 @@
+﻿
+@model IEnumerable<Models.Cart>
+@{
+    Layout = "~/Views/Shared/_MarketLayout.cshtml";
+    ViewBag.Title = "我的购物车";
+}
+@section Css{
+    <link rel="stylesheet" type="text/css" href="~/Content/css/carts.css" />
+}
+<div class="heading">
+    <div class="m-bread">
+        <div class="block">
+            <span>购物车</span>
+        </div>
+    </div>
+</div>
+<div id="g-main" class="ma">
+    <div class="n-cart">
+        @if (Model != null && Model.Count() != 0)
+        {
+            <table class="table" style="width: 71%; margin: 0 auto; text-align: center;">
+                <tr style="text-align: center;">
+                    <th style="width: 10%; margin: 0 auto; text-align: center;">
+                        <input type="checkbox" id="quanxuan" style="width: 30px; margin: 0 auto;" />全选
+                    </th>
+                    <th style="width: 20%; margin: 0 auto; text-align: center;">
+                       <label>商品图片</label>
+                    </th>
+                    <th style="width: 20%; margin: 0 auto; text-align: center;">
+                        @Html.DisplayName("商品名称")
+                    </th>
+                    <th style="width: 10%; margin: 0 auto; text-align: center;">
+                        @Html.DisplayName("商品单价")
+                    </th>
+                    <th style="width: 15%; margin: 0 auto; text-align: center;">
+                        @Html.DisplayName("购买数量")
+                    </th>
+                    <th style="width: 10%; margin: 0 auto; text-align: center;">
+                        @Html.DisplayName("小计")
+                    </th>
+                    <th style="width: 15%; margin: 0 auto; text-align: center;">
+                        @Html.DisplayName("编辑")
+                    </th>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td style="width: 10%; margin: 0 auto; line-height: 100px;">
+                            <input id="@item.cartkid" type="checkbox" name="subBox" class="subBox" style="width: 30px; margin: 0 auto;" />
+                        </td>
+                        <td style="width: 20%; margin: 0 auto; line-height: 100px;">
+                            <a href="@Url.Action("gooddetail", "Shopping", new { id = @item.goodsid })"><img src="@item.Goods.img" style="width: 100px; height: 100px" /></a>
+                        </td>
+                        <td style="width: 20%; margin: 0 auto; line-height: 100px;">
+                            @item.Goods.goodsname
+                        </td>
+                        <td style="width: 10%; margin: 0 auto; line-height: 100px;">
+                            ￥@item.Goods.price
+                        </td>
+                        <td style="width: 15%; margin: 0 auto; line-height: 100px; ">
+                            @Html.TextBoxFor(modelItem => item.qty, new { @class = "txtbox", @readonly = "readonly", style = "border: none;font-size: 20px; background - color: beige;display: inline-block;width:30px;" })
+                        </td>
+                        <td class="sum-price" style="width: 10%; margin: 0 auto; line-height: 100px;">
+                            @item.price
+                        </td>
+                        <td style="width: 15%; margin: 0 auto; line-height: 100px;">
+                            <span class="edit" style="cursor: pointer;">编辑</span>
+                            <a id="@item.goodsid" class="update" style="display: none; cursor: pointer;">更新</a>|
+                            @Ajax.ActionLink("删除", "Delect_cart", new { id = item.cartkid }, new AjaxOptions { HttpMethod = "post", OnSuccess = "DelSuc" })
+                        </td>
+                    </tr>
+                }
+                </table>
+                <div class="showprice">
+                    <label id="lbl2">合计：</label>
+                    <label id="lbltotprice">0.00</label><label>&nbsp;元&nbsp;</label>
+                    <div class="gwcbutton">
+                        <button id="jsuan" class="btn2" type="submit" style="display:inline-block; height: 30px; width: 85px; color: white; background-color: #DD3B44;">结算</button>
+                    </div>
+                </div>
+                @Html.Action("MyOrderaddress", "Shopping")
+            }
+            else
+            {
+                <div class="empty">
+                    <i class="icno"></i>
+                    <span class="f-fs3" style="margin-left:-10px;">
+                        <span class="s-fc3">购物还是空的，</span>
+                        <a href="@Url.Action("goodsList", "Shopping")" class="s-fcLink">去逛逛 ></a>
+                    </span>
+                </div>
+            }
+    </div>
+    <div class="mid-border">
+        <div class="mid-txt1">
+            <span class="mid-txt2">热门推荐</span>
+        </div>
+    </div>
+    <div class="m-product">
+        @Html.Action("Carts_hot_Product", "Shopping")
+    </div>
+</div>
+
+
+
+<script>
+    $(".edit").click(function () {
+        $(this).hide(100);
+        $(this).parent().prev().prev().children().removeAttr("readonly");
+        $(this).parent().prev().prev().children().css("border", "1px solid #999");
+        $(this).next().show(100);
+    });
+    $(".update").click(function () {
+        $(this).hide(100);
+        $(this).parent().prev().prev().children().attr("readonly", "readonly");
+        $(this).parent().prev().prev().children().css("border", "none");
+        $(this).prev().show(100);
+        $.ajax({
+            url: "/Shopping/Update",
+            type: "post",
+            async: false,
+            data: {
+                id: $(this).attr("id"),
+                count: $(this).parent().prev().prev().children().val()
+            },
+            success: function (data) {
+                alert(data);
+                window.location.reload();
+            }
+        });
+    });
+    $('#quanxuan').click(function () {
+        if (!$('#quanxuan').prop("checked")) {
+            $('input:checkbox').not('#quanxuan').removeAttr("checked");
+
+        } else {
+            $('input:checkbox').not('#quanxuan').prop("checked", "true");
+        }
+    });
+    $('.subBox').add('#quanxuan').change(function () {
+        var csum = 0;
+        var len = $('td input:checkbox').length;
+        for (var i = 0; i < len; i++) {
+            if ($($('td input:checkbox')[i]).prop("checked") == true) {
+                csum += parseInt($($('td input:checkbox')[i]).parent().siblings('.sum-price').html());
+            }
+        }
+        $('#lbltotprice').html(csum);
+
+    });
+
+    $("#Right-list1").hide(0);
+    $("#jsuan").click(function () {
+        console.log(15);
+        if ($("#Right-list1").css("display") == "none") {
+            $("#Right-list1").show(100);
+        } else {
+            $("#Right-list1").hide(100);
+            //$("#Add-address").hide(100);
+        }
+    });
+
+    $(document).on('click', '#jsuan1', function () {
+        var len = $('td input:checkbox').length;
+        var cartsId = "", addrId = "";
+        for (var i = 0; i < len; i++) {
+            if ($($('td input:checkbox')[i]).prop("checked") == true) {
+                cartsId += $($('td input:checkbox')[i]).attr("id") + ",";
+            }
+        }
+        var addLen = $('.address-H').length;
+        for (var j = 0; j < addLen; j++) {
+            if ($($('.address-H')[j]).hasClass('active')) {
+                addrId = $($('.address-H')[j]).attr("id");
+            }
+        }
+        $.ajax({
+            url: '../Shopping/CreateOrder',
+            type: 'post',
+            data: {
+                cartsId: cartsId,
+                addrId: addrId,
+                csum: $('#lbltotprice').html()
+            },
+            success: function (data) {
+                alert(data);
+                window.location.reload();
+            }
+        });
+    });
+
+    function DelSuc(data) {
+        alert(data);
+        window.location.reload();
+    }
+
+</script>
+@*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@

@@ -1,0 +1,59 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<Models.UserMusics>
+@section Css{
+    <link href="~/Content/css/PagedList.css" rel="stylesheet" />
+    }
+<style>
+    .imgblock{
+        position:absolute;
+        z-index:2;
+        background-color:black;
+        background-color:rgba(0,0,1,0.7);
+        bottom:0px;
+        left:10px;
+        height:30px;
+        width:120px;
+        line-height:30px;
+        text-align:center;
+        color:limegreen;
+    }
+     .imgblock:hover {
+        color: red;
+    }
+     a:hover .imgblock{
+         color:red;
+     }
+    .pagination {
+        float: right;
+        margin-right:35px;
+    }
+    .pagination > li{
+        float:left;
+    }
+    .page-list{
+        float:right;
+    }
+    .page > li{
+        float:left;
+    }
+</style>
+
+@foreach (var item in Model)
+{
+    <div class="col-md-3 column" style="width:130px;margin-right:10px;margin-bottom:20px;padding-left:10px;position:relative;">
+        <a href="@Url.Action("Details","Music" ,new { id = @item.music_id})">
+            <img alt="100x100" src="@item.imgage_url" style="width:120px;height:120px;"/>
+            <div class="imgblock">@item.music_name</div>
+        </a>
+    </div>
+}
+<div class="page-list">
+    @Html.PagedListPager(Model, page => Url.Action("OriginOptionMusic", "Music", new { page }),
+       PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+             new AjaxOptions
+             {
+                 HttpMethod = "GET",
+                 InsertionMode = InsertionMode.Replace,
+                 UpdateTargetId = "option"
+             }))
+</div>

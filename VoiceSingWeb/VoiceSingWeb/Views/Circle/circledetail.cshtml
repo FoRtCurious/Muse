@@ -1,0 +1,155 @@
+﻿@model Models.Circle
+@{
+    ViewBag.Title = "详情";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .box {
+        min-width : 100px;
+        min-height : 100px;
+        background-color: #d5f2f6;
+        box-shadow: 5px 5px 25px #dadedd;
+        text-indent:30px;
+    }
+    .tbox{
+         min-width : 100px;
+        min-height : 100px;
+              
+    }
+    .reply {
+        width: 700px;      
+        margin-top: 10px;
+    }
+    .pull-center{
+        text-align :center ;
+        align-content :center ;
+        display:inline-block ;
+        margin-left :60px;
+
+    }
+    .replybox{
+        margin-left :75px;
+        width :850px;
+        height :80px;
+    }
+</style>
+
+
+@section Css{
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <script src="~/Scripts/ckeditor/config.js"></script>
+}
+
+<div class="container">
+    <div class="row clearfix" style="overflow :hidden ; background-color :#f2f5f1; min-height :500px;" >
+        <div class="col-md-12 column">
+            <div>
+            <div class="col-md-2 column">
+                <a href="@Url.Action("circle", "Circle")" style="font-size:large ; color :black;">
+                    <span class="glyphicon glyphicon-chevron-left" style="display :inline ;"> 返回主页  </span>
+                </a>
+            </div>
+            <div class="col-md-7 column">
+                <p class="serif" style="font-size :x-large; text-align:center ;margin-left :30px; "> 动态正文  </p>
+            </div>
+            <div class="col-md-3 column">
+                <a href="@Url.Action("CircleComplain", "Circle", new { id = Model.cno})" style="font-size:large ; color :black; margin-left :130px ;">
+                    投诉 <span class="glyphicon glyphicon-chevron-right" style="display :inline ;">   </span>
+                </a>
+            </div>
+            </div>
+          @*动态详情*@      
+            <div class="row clearfix" style="overflow :hidden ; margin-top :20px;">
+                <div class="col-md-1 column">                   
+                    <img alt="140x140" src="@Model.Users.photo " class="img-circle" width="70" onclick="location.href='@Url.Action("Zone", "Circle",new { id =Model.Users.userId} )'"/>     @*发布动态用户头像*@                  
+                </div>
+                <div class="col-md-10 column">
+                    <div class="row clearfix">
+                        <div class="col-md-12 column" style="min-height :50px; overflow:hidden ; ">
+                            <div >
+                                <h4>@Model.Users.name     </h4>
+                                <small > @Model.uptime   &nbsp; @Model.Users.user_info   </small>
+                            </div>
+                                                      
+                        </div>
+                    </div>
+                    @*正文*@ 
+                    <div class="box">
+                        <p> @Html.Raw(Model.content) </p>
+                    </div>
+                </div>
+                <div class="col-md-1 column">
+                </div>
+            </div>
+            <hr>
+            <div id="r-otherlogin" >
+                @*<span  style="font-size:15px;display :inline-block ; ">分享：</span>*@
+                <ul class="pull-center">
+                    <li class="pull-center "><p style="font-size :large ;"> 分享: </p>  </li>
+                    <li class="pull-center"><a href="#"><img src="~/Content/images/load/网易云.jpg" alt="网易云" /></a></li>
+                    <li class="pull-center"><a href="#"><img src="~/Content/images/load/微博.jpg" alt="微博" /></a></li>
+                    <li class="pull-center"><a href="#"><img src="~/Content/images/load/微信.jpg" alt="微信" /></a></li>
+                    <li class="pull-center"><a href="#"><img src="~/Content/images/load/QQ.jpg" alt="qq" /></a></li>
+                </ul>
+            </div>
+            <ul class="nav nav-pills">
+                <li >
+                    <a href="#" style="margin-left :60px ; font-size:15px ;">  转发</a>
+                </li>
+                <li class="active">
+                    <a href="#" style="margin-left :20px ; font-size:15px ;"> 评论</a>
+                </li>
+                <li >
+                    <a href="#" style="margin-left :660px ; font-size:15px ;"> 赞 <span class="badge pull-right">12</span> </a>
+                </li>
+               
+            </ul>
+            <hr>
+
+            @*添加发送评论入口*@
+            @using (Ajax.BeginForm("AddReply", "Circle", new AjaxOptions { HttpMethod = "post", OnSuccess = "addreply" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="row clearfix">
+                    <textarea class="replybox" name="content" id="content" placeholder="发表评论..."></textarea>
+                    <input type="hidden"  class="form-control" value="@Model.cno" id="cno" name="cno">
+                </div>
+                <div style="text-align :right; padding:1px 7px; margin-right :53px; margin-top: 5px;">
+                    <button type="submit" class="btn btn-info btn-sm" style="width :70px; font-size :small ;">发送</button>
+                </div>
+            }
+
+
+
+            @*回复内容*@ 
+        <div class="tbox">   @*调试后期删除*@      @*开始 遍历圈子回复表*@ 
+
+              @Html.Action("AllReply", "Circle" , new {cno = Model.cno  }) 
+            
+        </div>     @*结束遍历*@
+          <hr>
+            <div style="text-align:center ; margin :10px;">
+                <small> 我是有底线的  </small>
+            </div>
+        </div>
+    </div>
+</div>
+<script language="javascript">
+
+
+function addreply(data) {
+    if (data == "success") {
+        alert("回复成功");
+        window.location.reload();
+       
+    }
+    else {
+        alert('回复失败！');
+    }
+}
+
+
+</script>

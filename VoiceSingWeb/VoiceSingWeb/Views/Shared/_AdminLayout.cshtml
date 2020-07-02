@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>音悦网后台管理</title>   
+    <link rel="stylesheet" type="text/css" href="~/Content/css/admin.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/adiconfont.css">
+    <link rel="stylesheet" href="~/Content/layui-v2.5.6/layui/css/layui.css" media="all">
+    <script type="text/javascript" src="~/Content/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/Admin.js"></script>
+    @RenderSection("Script", required: false)
+</head>        
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo" style="font-size:20px;">音悦网，悦心动</div>
+            <!-- 头部区域（可配合layui已有的水平导航） -->
+            <ul class="layui-nav layui-layout-left">
+                <li class="layui-nav-item"><a href="#">控制台</a></li>
+                <li class="layui-nav-item"><a href="#">管理员登录记录</a>
+                </li>
+            </ul>
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">
+                        <img src="~/Content/images/admin/admin.png" class="layui-nav-img">
+                        @Session["admin_id"]
+                        <span class="layui-nav-more"></span>
+                    </a>
+                    <dl class="layui-nav-child" style="margin-top:-5px;">
+                        <dd><a href="#">基本资料</a></dd>
+                        <dd><a href="#">安全设置</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="@Url.Action("Loginout","Admin")"><i class="iconfont icon-icon_logout nav-icon"></i><span>注销</span></a></li>
+            </ul>
+        </div>
+
+        <div class="layui-side layui-bg-black">
+            <div class="">
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <div class="nav">
+                    <div class="nav-top">
+                        <div id="mini">
+                            <img src="~/Content/images/admin/mini.png">
+                        </div>
+                    </div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="javascript:;"><i class="iconfont icon-touxiang nav-icon"></i><span>用户管理</span><i class="iconfont icon-youjiantou nav-more"></i></a>
+                            <ul>
+                                <li>@Ajax.ActionLink("注册用户库", "Users", "Admin", null, new AjaxOptions { UpdateTargetId = "body-content" }, new { @class= "margin-left" })</li>
+                                <li>@Ajax.ActionLink("音悦人申请", "UserSingerApply", "Admin", null, new AjaxOptions { UpdateTargetId = "body-content" }, new { @class = "margin-left" })</li>
+                                <li>@Ajax.ActionLink("被举报用户", "AccusedUsers", "Admin", null, new AjaxOptions { UpdateTargetId = "body-content" }, new { @class = "margin-left" })</li>
+                                <li>@Ajax.ActionLink("已冻结用户", "BeCloseDownUser", "Admin", null, new AjaxOptions { UpdateTargetId = "body-content" }, new { @class = "margin-left" })</li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="javascript:;"><i class="iconfont icon-yinle nav-icon"></i><span>音乐管理</span><i class="iconfont icon-youjiantou nav-more"></i></a>
+                            <ul>
+                                <li>@Ajax.ActionLink("系统音乐库", "Musics", "Admin", null, new AjaxOptions { UpdateTargetId = "body-content" }, new { @class = "margin-left" })</li>
+                                <li>@Ajax.ActionLink("待审核音乐", "CheckMusics", "Admin", null, new AjaxOptions { UpdateTargetId = "body-content" }, new { @class = "margin-left" })</li>
+                                <li>@Ajax.ActionLink("已下架音乐", "DownMusics", "Admin", null, new AjaxOptions { UpdateTargetId = "body-content" }, new { @class = "margin-left" })</li>
+                                <li>@Ajax.ActionLink("发布官方音乐", "PublishMusic", "Admin", null, new AjaxOptions { UpdateTargetId = "body-content" }, new { @class = "margin-left" })</li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="javascript:;"><i class="iconfont icon-icon-video nav-icon"></i><span>视频管理</span><i class="iconfont icon-youjiantou nav-more"></i></a>
+                            <ul>
+                                <li>@Ajax.ActionLink("系统视频库", "Videos", "Admin", null, new AjaxOptions { UpdateTargetId = "body-content" }, new { @class = "margin-left" })</li>
+                                <li>@Ajax.ActionLink("待审核视频", "CheckVideos", "Admin", null, new AjaxOptions { UpdateTargetId = "body-content" }, new { @class = "margin-left" })</li>
+                                <li>@Ajax.ActionLink("已下架视频", "DownVideos", "Admin", null, new AjaxOptions { UpdateTargetId = "body-content" }, new { @class = "margin-left" })</li>
+                                <li>@Ajax.ActionLink("发布官方视频", "PublishVideo", "Admin", null, new AjaxOptions { UpdateTargetId = "body-content" }, new { @class = "margin-left" })</li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="javascript:;"><i class="iconfont icon-huodong nav-icon"></i><span>活动管理</span><i class="iconfont icon-youjiantou nav-more"></i></a>
+                            <ul>
+                                <li><a href="javascript:;"><span>用户发起活动</span></a></li>
+                                <li><a href="javascript:;"><span>用户举报活动</span></a></li>
+                                <li><a href="javascript:;"><span>已过期的活动</span></a></li>
+                                <li><a href="javascript:;"><span>发布官方活动</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="javascript:;"><i class="iconfont icon-quanziguanli nav-icon"></i><span>圈子管理</span><i class="iconfont icon-youjiantou nav-more"></i></a>
+                            <ul>
+                                <li><a href="javascript:;"><span>用户举报动态</span></a></li>
+                                <li><a href="javascript:;"><span>已查封的动态</span></a></li>
+                                <li><a href="javascript:;"><span>系统置顶动态</span></a></li>
+                                <li><a href="javascript:;"><span>发布官方动态</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="javascript:;"><i class="iconfont icon-icon-cart nav-icon"></i><span>商城管理</span><i class="iconfont icon-youjiantou nav-more"></i></a>
+                            <ul>
+                                <li>@Ajax.ActionLink("已上架的商品", "Products", "Admin", null, new AjaxOptions { UpdateTargetId = "body-content" }, new { @class = "margin-left" })</li>
+                                <li>@Ajax.ActionLink("已下架的商品", "DownProducts", "Admin", null, new AjaxOptions { UpdateTargetId = "body-content" }, new { @class = "margin-left" })</li>
+                                <li>@Ajax.ActionLink("新增上架商品", "UpNewProduct", "Admin", null, new AjaxOptions { UpdateTargetId = "body-content" }, new { @class = "margin-left" })</li>
+                                <li>@Ajax.ActionLink("用户订单信息", "UserOrders", "Admin", null, new AjaxOptions { UpdateTargetId = "body-content" }, new { @class = "margin-left" })</li>
+                                <li>@Ajax.ActionLink("商城销售记录", "MarketSaleData", "Admin", null, new AjaxOptions { UpdateTargetId = "body-content" }, new { @class = "margin-left" })</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="body-content" class="layui-body" style="padding:0px 10px;background-color:white;">
+            <!-- 内容主体区域 -->
+            @RenderBody()
+        </div>
+
+        <div class="layui-footer" style="text-align:center;">
+            <!-- 底部固定区域 -->
+            2019 © 音悦网 - 后台管理系统
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>

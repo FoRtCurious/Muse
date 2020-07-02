@@ -1,0 +1,267 @@
+﻿@model VoiceSingWeb.Models.MusicDetailIndexViewModels
+@{
+    ViewBag.Title = "（歌曲）-" + Model.music.music_name;    
+}
+@section Css{
+    <link href="~/Content/css/music.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/category.css" rel="stylesheet" type="text/css" />
+}
+
+@*头部类型图*@
+<div class="container-sm category-header-wrap">
+    <div class="category-header-banner">
+        <div class="img" style="background-image: url(../../Content/images/load/1.jpg)">
+            <div class="content">
+                <h2>&nbsp;&nbsp;@Model.music.MusicType.typeName</h2>
+                <p>音乐类型/@Model.music.UpType.typeName</p>
+                <p style="line-height:25px;">&nbsp;&nbsp;&nbsp;<a href="@Url.Action("UserSingerInfo","Singers" ,new { id = Model.music.user_id})" class="singername">@Model.music.Users.name</a></p>
+            </div>
+            <div class="mask"></div>
+        </div>
+    </div>
+</div>
+
+@*音乐播放器*@
+<div class="container-sm player-wrap">
+    <div id="music-player" class="aplayer"></div>
+</div>
+
+@*歌曲信息*@
+<div class="container-sm box">
+    <div class="main">
+        <div class="main-wrap">
+            <div class="content-box article">
+                <div class="title">
+                    <div style="width:625px;">
+                        <h2 style="display:inline-block;">@Model.music.music_name</h2>
+                        <div style="display:inline-block;font-size:15px;float:right;">
+                            <a href="@Url.Action("GiveLike","UserManage",new { id = Model.music.music_id})" class="like"><span><i class="fa fa-thumbs-up"></i>&nbsp;点赞</span></a> |
+                            <a href="@Url.Action("MusicCollect","UserManage",new { id = Model.music.music_id})" class="collect"><span><i class="fa fa-heart"></i>&nbsp;收藏</span></a>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <span class="author">@Model.music.Users.name</span> / <span class="date">@Model.music.upTime.ToString().Substring(5, 2)-@Model.music.upTime.ToString().Substring(8, 2)</span>
+                    </div>
+                </div>
+                <div class="content">
+                    <div style="margin:40px;">
+                        <img src="@Model.music.imgage_url" style="height:500px;width:600px;">
+                    </div>
+                    <div style="margin:40px;">
+                        <p>
+                            歌曲简介:<br />&nbsp;&nbsp;&nbsp;@Model.music.music_info
+                        </p>
+                    </div>
+                    <div class="comment">
+                        <div class="u-title u-title-1">
+                            <h3><span class="f-ff2">评论</span></h3>
+                            <span class="sub s-fc3">共<span class="j-flag">15</span>条评论</span>
+                        </div>
+                        <div class="m-cmmt">
+                            <div class="iptarea">
+                                @using (Ajax.BeginForm("MusicComment", "UserManage", new AjaxOptions { HttpMethod = "post", OnSuccess = "SuccessComment" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+                                    <input type="hidden" name="id" value="@Model.music.music_id" />
+                                    <div class="head">
+                                        @{
+                                            if (Session["UserId"] != null)
+                                            {
+                                                <img src="@Session["Userphoto"]">
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Content/images/user_photo/default.jpg">
+                                            }
+                                        }
+                                    </div>
+                                    <div class="j-flag">
+                                        <div>
+                                            <div class="m-cmmtipt f-cb f-pr">
+                                                <div class="u-txtwrap holder-parent f-pr" style="display: block;">
+                                                    <textarea class="u-txt area j-flag" name="content" placeholder="评论"></textarea>
+                                                </div>
+                                                <div class="btns f-cb f-pr">
+                                                    <i class="icn u-icn u-icn-36 j-flag"></i>
+                                                    <i class="icn u-icn u-icn-41 j-flag"></i>
+                                                    <button type="submit" class="btn u-btn u-btn-1 j-flag">评论</button>
+                                                    <span class="zs s-fc4 j-flag">200字</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   }                                
+                            </div>
+                            <div class="cmmts j-flag">
+                                <h3 class="u-hd4">最新评论(@Model.Comment.Count())</h3> 
+                                @{
+                                    if (Model.Comment.Count() != 0 && Model.Comment.Count() <= 3)
+                                    {
+                                        <div id="comment-data">
+                                        @foreach (var item in Model.Comment)
+                                        {
+                                            <div class="itm">
+                                                <div class="head">
+                                                    <a href="@Url.Action("UserSingerInfo","Singers",new { id = item.user_id})">
+                                                        <img src="@item.Users.photo">
+                                                    </a>
+                                                </div>
+                                                <div class="cntwrap">
+                                                    <div class="cnt f-brk">
+                                                        <a href="@Url.Action("UserSingerInfo","Singers",new { id = item.user_id})" class="s-fc7">@item.Users.name</a>：
+                                                        @item.Comment_content
+                                                    </div>
+                                                    <div class="rp">
+                                                        <div class="time s-fc4">@item.Comment_time.ToString()</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        </div>
+                                    }
+                                    else if (Model.Comment.Count() == 0)
+                                    {
+                                        <p style="color:grey;font-size:15px;margin:20px 0px;">暂无评论哦~</p>
+                                    }
+                                    else
+                                    {
+                                        <div id="comment-data">
+                                            @foreach (var item in Model.Comment.Take(3))
+                                            {
+                                                <div class="itm">
+                                                    <div class="head">
+                                                        <a href="@Url.Action("UserSingerInfo","Singers",new { id = item.user_id})">
+                                                            <img src="@item.Users.photo">
+                                                        </a>
+                                                    </div>
+                                                    <div class="cntwrap">
+                                                        <div class="cnt f-brk">
+                                                            <a href="@Url.Action("UserSingerInfo","Singers",new { id = item.user_id})" class="s-fc7">@item.Users.name</a>：
+                                                            @item.Comment_content
+                                                        </div>
+                                                        <div class="rp">
+                                                            <div class="time s-fc4">@item.Comment_time.ToString()</div>
+                                                        </div>
+                                                    </div>
+                                                </div>                                                
+                                            }
+                                            <div id="more-data">
+                                                @foreach (var item in Model.Comment.Skip(3))
+                                                {
+                                                    <div class="itm">
+                                                        <div class="head">
+                                                            <a href="@Url.Action("UserSingerInfo","Singers",new { id = item.user_id})">
+                                                                <img src="@item.Users.photo">
+                                                            </a>
+                                                        </div>
+                                                        <div class="cntwrap">
+                                                            <div class="cnt f-brk">
+                                                                <a href="@Url.Action("UserSingerInfo","Singers",new { id = item.user_id})" class="s-fc7">@item.Users.name</a>：
+                                                                @item.Comment_content
+                                                            </div>
+                                                            <div class="rp">
+                                                                <div class="time s-fc4">@item.Comment_time.ToString()</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                        <p id="more"><a onclick="zhankai()">展开更多<i class="fa fa-sort-down"></i></a></p>
+                                    }
+                                }                                                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <div class="right-module">
+            <h4>猜你喜欢</h4>
+            <ul class="new-artist-songs">
+                @foreach (var item in Model.GuessYouLike)
+                {
+                    <li class="artist-song">
+                        <div class="avatar">
+                            <img src="@item.imgage_url">
+                        </div>
+                        <div class="info">
+                            <h3>@item.music_name</h3>
+                            <p>@item.Users.name / <span>@item.listen_times</span>次播放</p>
+                        </div>
+                        <a href="@Url.Action("Details","Music",new { id = @item.music_id})" title="@item.music_name" class="cover-link"></a>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="right-module">
+            <h4>今日热门</h4>
+            <ul class="new-artist-songs">
+                @foreach (var item in Model.TodayHotMusic)
+                {
+                    <li class="artist-song">
+                        <div class="avatar">
+                            <img src="@item.imgage_url">
+                        </div>
+                        <div class="info">
+                            <h3>@item.music_name</h3>
+                            <p>@item.Users.name / <span>@item.listen_times</span>次播放</p>
+                        </div>
+                        <a href="@Url.Action("Details","Music",new { id = @item.music_id})" title="@item.music_name" class="cover-link"></a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Content/js/APlayer.min.js"></script>
+<script>
+  var ap = new APlayer({
+    element: document.getElementById('music-player'), // Optional, player element
+    narrow: false,                                    // Optional, narrow style
+    autoplay: true,                                   // Optional, autoplay song(s), not supported by mobile browsers
+    showlrc: 0,                                       // Optional, show lrc, can be 0, 1, 2, see: ###With lrc
+    mutex: true,                                      // Optional, pause other players when this player playing
+    theme: '#B72712',                                 // Optional, theme color, default: #b7daff
+    mode: 'circulation',                              // Optional, play mode, `random` `single` `circulation`(loop) `order`(no loop), default: `circulation`
+    preload: 'metadata',                              // Optional, the way to load music, can be 'none' 'metadata' 'auto', default: 'auto'
+    listmaxheight: '513px',                           // Optional, max height of play list
+    music: {                                          // Required, music info
+      title: '@Model.music.music_name',              // Required, music title
+      author: '@Model.music.Users.name',                             // Required, music author
+      url: '@Model.music.music_url',                // Required, music url
+      pic: '@Model.music.Users.photo'               // Optional, music picture
+    }
+  });
+</script>
+<script>
+    function SuccessComment(data) {
+        if (data == "Login") {
+            alert("请先登录！");
+        }
+        else if (data == "Fault") {
+            alert("评论失败！");
+        }
+        else {
+            alert("评论成功！");
+            $('#comment-data').before(data);
+        }
+    }
+    function zhankai() {
+        var lookmore = document.getElementById("more-data");
+        lookmore.style.display = "block";
+        var more = document.getElementById("more");
+        more.innerHTML = "<a onclick='zhedie()'>收起折叠<i class='fa fa-sort-up'></i></a>"
+    }
+    function zhedie() {
+        var lookmore = document.getElementById("more-data");
+        lookmore.style.display = "none";
+        var more = document.getElementById("more");
+        more.innerHTML = "<a onclick='zhankai()'>展开更多<i class='fa fa-sort-down'></i></a>"
+    }
+</script>

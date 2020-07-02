@@ -1,0 +1,36 @@
+﻿
+@{
+    Layout = null;
+}
+@model IEnumerable<Models.Receipt_address>
+
+
+<div class="Right-list" id="Right-list1" style="display:none;">   
+    <span style="display:block;">请选择您的地址！</span>
+    @foreach (var item in Model)
+    {
+        <div id="@item.addressid" class="address-H">
+            <span style="display:block; margin:5px 0 5px 10px;">收件人姓名：@item.name</span>
+
+            <span style="display:block; margin:5px 0 5px 10px;">收件人电话：@item.telephone</span>
+
+            <span style="display:block; margin:5px 0 5px 10px;">收件人地址：@item.address</span>
+        </div>
+    }
+
+    <button id="jsuan1" class="btn3" style="display:inline-block;  color: white; background-color: #DD3B44; height:30px;width:85px;margin-top:40px;margin-left:365px;">确认订单</button>
+    <button id="jsuan2" class="btn3" style="display:inline-block; height: 30px; width: 85px; color:black; ">取消订单</button>
+
+</div>
+<script>
+    $(".address-H").click(function () {
+        $('.address-H').removeClass('active');
+        $(this).addClass("active");
+    });
+    $("#jsuan2").click(function () {
+        if ($("#Right-list1").css("display") != "none") {
+            $("#Right-list1").hide(100);
+        }
+        });
+</script>
+

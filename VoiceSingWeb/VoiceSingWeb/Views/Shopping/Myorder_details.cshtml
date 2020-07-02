@@ -1,0 +1,23 @@
+﻿
+@model IEnumerable<Models.Orderdetails>
+@{
+    Layout = null;
+}
+@foreach (var item in Model)
+{
+<ul >
+    <li style="list-style:none;display:inline-block;margin: 0px 15px 0px 15px;">
+        <a href="@Url.Action("gooddetail", "Shopping", new { id = @item.goodsid })">
+            <img src="@item.Goods.img" style="width:60px;height:60px;" />
+        </a>
+    </li>
+    <li style="float:right;">
+        <div style="list-style:none;display:inline-block;margin: 0px 0px 0px 15px;">姓名: @item.Orders.Receipt_address.name</div>
+        <div style="list-style:none;display:inline-block;margin: 0px 14px 0px 14px;">电话: @item.Orders.Receipt_address.telephone</div>
+        <div style="list-style:none;display:inline-block;margin: 0px -10px 0px 0px;">数量：@item.qty</div>
+        <div style="list-style:none;display:inline-block;margin: 0px 0px 0px 13px;">小计：@item.price$</div>
+        <div style="list-style:none;display:inline-block;margin: 0px 0px 0px 10px;">地址: @item.Orders.Receipt_address.address</div>
+    </li>
+</ul>
+}
+

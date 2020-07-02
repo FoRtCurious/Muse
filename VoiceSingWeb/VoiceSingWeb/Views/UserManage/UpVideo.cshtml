@@ -1,0 +1,172 @@
+﻿@{
+    ViewBag.Title = "视频上传";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Css{
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/upsource.css" rel="stylesheet" />
+}
+
+<div class="container box">
+    <h5 class="first">
+        <a href="#">个人中心</a> &rang;
+        <a href="#">歌曲管理</a> &rang;
+        <a href="#">上传作品</a>  
+    </h5>
+    <div class="row">
+        <div class="span8">
+            @*种类导航*@
+            <ul class="nav nav-pills">
+                <li><a href="@Url.Action("UpOrigin", "UserManage")"><h2>原创</h2></a></li>
+                <li><a href="@Url.Action("UpCover", "UserManage")"><h2>翻唱</h2></a></li>
+                <li  class="active"><a href=""><h2>视频</h2></a></li>
+            </ul>
+        </div>
+    </div>
+    <hr> <hr>
+    @using (Html.BeginForm("UpVideo", "UserManage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+    <div class="container">
+        <div class="row clearfix" style="height:975px;">
+            @*上传封面和视频*@
+            <h4>选择视频海报</h4>
+            <br />
+            <div class="form-group">
+                <div class="col-sm-4">
+                    <label for="id_avatar">
+                        <img id="avatar-img" src="~/Content/images/load/upImg.png" style="height:200px;width:200px;">
+                    </label>
+                    <input type="file" name="videoImg" id="id_avatar" style="width:65px;" required accept=".jpg,.png,.gif,.bmp">
+                    <span class="help-block"></span>
+                </div>
+                <small>
+                    <br><br><br><br><br /><em class="up_file_red">*请上传尺寸不小于800*450，体积不超过2M的视频封面</em>
+                </small>
+            </div>
+
+            <h4>选择视频文件</h4>
+            <br />
+            <div class="col-sm-3">
+                <input type="file" name="videofile" id="id_avatar2" style="width:160px;" required accept=".mp4">
+                <span class="help-block"></span>
+            </div>
+            <small>
+                请上传体积小于500M的视频文件
+            </small>
+
+            @*输入框*@
+            <h4>填写视频信息</h4>
+            <br />
+            <div class="col-md-12 column" style="height :400px;">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>
+                                视频标题:
+                            </td>
+                            <td style="width:300px">
+                                <input name="videoname" type="text" class="form-control" placeholder="请输入视频标题" required>
+                            </td>
+                        </tr>                        
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div class="hp_jobs hp_language">
+                                    <ul>
+                                        <li><a href="###yc" title="点击选中">原版PV</a></li>
+                                        <li><a href="###yc" title="点击选中">现场版</a></li>
+                                        <li><a href="###yc" title="点击选中">MAD/MMD</a></li>
+                                        <li><a href="###yc" title="点击选中">自制栏目</a></li>
+                                        <li><a href="###yc" title="点击选中">录像/实况</a></li>
+                                        <li><a href="###yc" title="点击选中">其他</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                视频类型:
+                            </td>
+                            <td>
+                                <div>
+                                    @Html.DropDownList("videoType_id", null, htmlAttributes: new { @class = "form-control" })
+                                </div>                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div class="hp_jobs hp_language">
+                                    <ul>
+                                        <li><a href="###yc" title="点击选中">大陆</a></li>
+                                        <li><a href="###yc" title="点击选中">日韩</a></li>
+                                        <li><a href="###yc" title="点击选中">欧美</a></li>
+                                        <li><a href="###yc" title="点击选中">港澳</a></li>
+                                        <li><a href="###yc" title="点击选中">其它</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>                       
+                        <tr>
+                            <td style="width:100px">
+                                关联歌曲:
+                            </td>
+                            <td style="width:300px">
+                                <input type="text" class="form-control" name="relate_music" placeholder="选填">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:100px">
+                                视频介绍:
+                            </td>
+                            <td style="width:300px">
+                                <textarea name="video_info" class="form-control" placeholder="请输入视频简介..." maxlength="500" style="width:620px;height:160px"></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        @*底部警告*@
+        <div class="row clearfix" style="height :150px;">
+            <div class="alert alert-danger" style="width:750px;">上传视频，即表示您已同意音悦网授权协议，请勿上传色情，反动等违法视频 </div>
+            <div style="margin-left:30%;">
+                <button type="submit" class="btn btn-default" style="height:50px; width:250px;background-color:forestgreen;color:white;">上传并递交审核</button>
+            </div>
+        </div>
+    </div>
+    }
+</div>
+
+<script>
+    // 找到头像的input标签绑定change事件
+    $("#id_avatar").change(function () {
+        // 1. 创建一个读取文件的对象
+        var fileReader = new FileReader();
+        // 取到当前选中的头像文件
+        // console.log(this.files[0]);
+        // 读取你选中的那个文件
+        fileReader.readAsDataURL(this.files[0]);  // 读取文件是需要时间的
+        fileReader.onload = function () {
+            // 2. 等上一步读完文件之后才 把图片加载到img标签中
+            $("#avatar-img").attr("src", fileReader.result);
+        };
+    });
+
+    $("#id_avatar2").change(function () {
+        // 1. 创建一个读取文件的对象
+        var fileReader = new FileReader();
+        // 取到当前选中的头像文件
+        // console.log(this.files[0]);
+        // 读取你选中的那个文件
+        fileReader.readAsDataURL(this.files[0]);  // 读取文件是需要时间的
+        fileReader.onload = function () {
+            // 2. 等上一步读完文件之后才 把图片加载到img标签中
+            $("#video-text").attr("src", fileReader.result);
+        };
+    });
+</script>

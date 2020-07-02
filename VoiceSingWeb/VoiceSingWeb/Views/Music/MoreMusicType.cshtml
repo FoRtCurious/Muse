@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Models.MusicType>
+@{
+    ViewBag.Title = "歌曲类型";
+}
+
+@section Css{
+    <link href="~/Content/css/hudie.css" rel="stylesheet" />
+    <link href="~/Content/css/musicType.css" rel="stylesheet" />
+    <link href="~/Content/css/fenlei.css" rel="stylesheet" />
+}
+<div class="FoodMenu">
+    <div class="content">
+        <div class="menu">
+            <div class="zhonglei" id="zhonglei">
+                <b>歌曲类型：</b>
+                <div class="info">
+                    @Ajax.ActionLink("全部", "MusicTypePageShow", "Music", new { typeName = "" }, new AjaxOptions()
+                    {
+                       UpdateTargetId = "Div1",
+                       InsertionMode = InsertionMode.Replace,
+                       HttpMethod = "GET"
+                    }, new { @class = "on" })
+                   @foreach (var p in Model)
+                    {
+                        @Ajax.ActionLink(p.typeName, "MusicTypePageShow", "Music", new { typeName = p.typeName }, new AjaxOptions()
+                       {
+                           UpdateTargetId = "Div1",
+                           InsertionMode = InsertionMode.Replace,
+                           HttpMethod = "GET"
+                       })
+                    }
+                </div>
+                <hr />
+                <div class="xian"></div>
+            </div>
+            <div id="Div1">
+                @{Html.RenderAction("MusicTypePageShow", "Music");}
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var $zhonglei_a = $('#zhonglei a');
+        $zhonglei_a.click(function () {
+            $(this).addClass('on').siblings().removeClass('on');
+        });
+    });
+</script>

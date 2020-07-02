@@ -1,0 +1,118 @@
+﻿@model IEnumerable<Models.CompanyMusics>
+@using VoiceSingWeb.Models
+@{
+    ViewBag.Title = "伴奏查询";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 1;
+    string num = "";
+}
+@section Css{
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+}
+<style>
+    a {
+        font-size: 18px;
+        color: green;
+    }
+    a:hover {
+        color: red;
+        text-decoration: none;
+    }
+</style>
+
+<div class="container box">
+    <div class="row clearfix" style="height:180px;margin-top:10px;">
+        <div class="col-md-6 column">
+            <nav class="navbar navbar-default" role="navigation" style="height:140px;padding:5px;">
+                <h4 style="color:green;font-weight:600">海量伴奏免费下载</h4>
+                <p>(下载伴奏，让更多的人一起享受音乐带来的快乐)</p>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    @using (Html.BeginForm("SearchAccompany", "AccompanyMusic", FormMethod.Get, htmlAttributes: new { @class = "navbar-form navbar-left" }))
+                    {
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="search" />
+                        </div>
+                        <button class="btn btn-default" type="submit" placeholder="输入伴奏名">搜索</button>
+                    }
+                </div>
+            </nav>
+        </div>
+        <div class="col-md-6 column">
+            <img src="~/Content/images/load/comp3.jpg" alt="load" style="height:140px;width:400px;" />
+        </div>
+    </div>
+
+    <div class="row clearfix" style="min-height:260px;overflow-y:hidden;">
+        <div class="col-md-12 column">
+            <h4 class="text-success">搜索“<span style="color:red;display:inline-table;font-weight:400;">@ViewBag.keyword</span>”为您查询出 <span style="color:red;display:inline-table">@ViewBag.sum</span> 条结果：</h4>
+            <div style="min-height:190px;">
+                <table class="table">
+                    <thead style="font-weight:600;">
+                        <tr>
+                            <th>
+                                序号
+                            </th>
+                            <th>
+                                伴奏名
+                            </th>
+                            <th>
+                                更新时间
+                            </th>
+                            <th>
+                                下载次数
+                            </th>
+                            <th>
+                                试听
+                            </th>
+                            <th>
+                                下载
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ if (Model != null)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr class="success">
+                                        <td style="height:50px;line-height:50px;">
+                                            @{
+                                                if (i < 10)
+                                                {
+                                                    num = "0" + i.ToString();
+                                                    i++;
+                                                }
+                                                else
+                                                {
+                                                    num = i.ToString();
+                                                    i++;
+                                                }
+                                            }
+                                            @num
+                                        </td>
+                                        <td style="height:50px;line-height:50px;">
+                                            @item.cm_name
+                                        </td>
+                                        <td style="height:50px;line-height:50px;">
+                                            @item.music_upTime.ToString().Substring(0,10)
+                                        </td>
+                                        <td style="height:50px;line-height:50px;">
+                                            @item.music_down
+                                        </td>
+                                        <td>
+                                            <div style="margin-top:15px;"><a href="@Url.Action("Index","MusicDetails" ,new { id = @item.cm_id})">&nbsp;&nbsp;<i class="glyphicon glyphicon-play-circle"></i></a></div>
+                                        </td>
+                                        <td>
+                                            <div style="margin-top:17px;"><a href="#">&nbsp;&nbsp;<i class="fa fa-download"></i></a></div>
+                                        </td>
+                                    </tr>
+                                    }
+                              }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

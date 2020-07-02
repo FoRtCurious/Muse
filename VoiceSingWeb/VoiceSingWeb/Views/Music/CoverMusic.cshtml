@@ -1,0 +1,198 @@
+﻿@model VoiceSingWeb.Models.CoverMusicIndexViewModels
+@{
+    ViewBag.Title = "翻唱";
+}
+@section Css{
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/covermusicIndex.css" rel="stylesheet" />
+}
+
+<!-- content -->
+<div class="container">
+    <div class="row clearfix box" style="height:430px;">
+        <div class="col-md-9 column">
+            <h4>优质翻唱</h4>
+            <hr color="grey" style="margin-top:0px;border-left:75px solid green;height:2px;" />
+            <div class="row clearfix" style="height:375px;">
+                @foreach (var item in Model.BestCoverMusic)
+                {
+                    <div class="col-md-6 column" style="padding:5px 10px;width:350px;">
+                        <a href="@Url.Action("Details","Music" ,new { id = @item.music_id})" style="display:inline-block;float:left;"><img alt="@item.music_name" src="@item.imgage_url" class="img-rounded img" style="width:100px; height:100px;" /></a>
+                        <section style="float:left;margin-left:8px;width:200px;">
+                            <span style="padding:4px;height:20px;width:40px;display:inline-block;float:right;">
+                                <a href="@Url.Action("Details","Music" ,new { id = @item.music_id})" class="musicName"><i class="fa fa-headphones img"></i></a>
+                            </span>
+                            <p><a href="@Url.Action("Details","Music" ,new { id = @item.music_id})" class="musicName">@Html.DisplayFor(modelitem => item.music_name)</a></p>
+                            <p style="font-size:12px;color:dimgrey;">音乐人:<a href="@Url.Action("UserSingerInfo", "Singers" ,new { id = @item.user_id})">&nbsp;@Html.DisplayFor(model => item.Users.name)</a></p>
+                            <p style="color:dimgrey;">@Html.DisplayFor(modelitem => item.music_info)</p>
+                        </section>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-3 column">
+            <h4>音乐嗨翻天</h4>
+            <hr color="grey" style="margin-top:0px;border-left:100px solid green;height:2px;" />
+            <div class="slider-text">
+                <ul class="slider2-text" style="color:grey;">
+                    @{
+                        int i = 1;
+                    }
+                    @foreach (var item in Model.MusicHappy)
+                    {
+                        <li style="height:25px;">
+                            @(i++)
+                            <a href="@Url.Action("Details","Music" ,new { id = @item.music_id})" class="musicName">
+                                <span style="width:100px;">
+                                    @Html.DisplayFor(modelItem => item.music_name)
+                                    <span style="float:right;color:gray;font-size:13px;">@Html.DisplayFor(modelItem => item.Users.name)</span>
+                                </span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row clearfix box" style="height:355px;">
+        <div class="col-md-9 column">
+            <h4>最新热播视频</h4>
+            <hr color="grey" style="margin-top:0px;border-left:110px solid green;height:2px;" />
+            <div class="row clearfix" style="height:285px;overflow-y:hidden;">
+                @foreach (var item in Model.HotVideo)
+                {
+                    <div class="col-md-3 column">
+                        <a href="@Url.Action("Details", "Video",new { id = item.video_id})" class="cover">
+                            <div class="mask"></div>
+                            <img alt="img" src="@item.video_photo" style="float:left;width:150px; height:200px" />
+                            <div class="imgblock">
+                                <span class="glyphicon glyphicon-film" style="float:left;line-height:25px;margin-left:20px;">@item.video_look</span>
+                                <span class="glyphicon glyphicon-heart" style="float:left;line-height:25px;margin-left:20px;">@item.video_look</span>
+                            </div>
+                        </a>
+                        <section style="clear:both;">
+                            <p style="text-align:center;">
+                                <a href="@Url.Action("VideoDetails", "Video",new { id = item.video_id})" class="Name">@Html.DisplayFor(modelitem => item.video_name)</a>
+                                <span style="color:grey;font-size:13px;">@Html.DisplayFor(modelitem => item.Users.name)</span>
+                            </p>
+                        </section>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-3 column">
+            <h4>网友自荐</h4>
+            <hr color="grey" style="margin-top:0px;border-left:75px solid green;height:2px;" />
+            <ul style="color:grey;">
+                @{
+                    int j = 1;
+                }
+                @foreach (var item in Model.SelfRecommend)
+                {
+                    <li style="height:25px;">
+                        @(j++).
+                        <a href="@Url.Action("Details","Music" ,new { id = @item.music_id})" class="Name">
+                            <span style="width:100px;">
+                                @Html.DisplayFor(modelItem => item.music_name)
+                                <span style="float:right;color:gray;font-size:13px;">@Html.DisplayFor(modelItem => item.Users.name)</span>
+                            </span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="row clearfix box" style="height:450px;">
+        <div class="col-md-9 column">                            
+            <h4>24小时最热</h4>
+            <hr color="grey" style="margin-top:0px;border-left:95px solid green;height:2px;" />
+            <div class="row clearfix">                
+                <div class="row clearfix" style="height:400px;overflow-y:hidden;">
+                    <div>
+                        <!--轮播-->
+                        <div class="lb_gl">
+                            <div class="pictureSlider poster-main">
+                                <ul id="zturn" class="poster-list">
+                                    @{
+                                        foreach (var item in Model.DayHotMusic)
+                                        {
+                                            <li class="poster-item  zturn-item">
+                                                <p class="xxgy">专辑名：<a href="@Url.Action("Details","Music",new { id = item.music_id})" class="on1">《@item.music_name》 </a></p>
+                                                <p class="say">歌手：<a href="@Url.Action("UserSingerInfo", "Singers",new { id = item.Users.userId})" class="on2">@item.Users.name</a></p>
+                                                <div class="for_btn">
+                                                    <img src="@item.imgage_url" style="width:600px;height:500px;">
+                                                </div>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>                      
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 column">
+             <h4>最新上传</h4>
+             <hr color="grey" style="margin-top:0px;border-left:75px solid green;height:2px;" />
+             <ul style="color:grey;">
+                 @{
+                     int k = 1;
+                }
+                @foreach (var item in Model.newUpMusic)
+                {
+                    <li style="height:25px;">
+                        @(k++).
+                        <a href="@Url.Action("Details","Music" ,new { id = @item.music_id})" class="Name">
+                            <span style="width:100px;">
+                                @Html.DisplayFor(modelItem => item.music_name)
+                                <span style="float:right;color:gray;font-size:13px;">@item.upTime.ToString().Substring(0, 10)</span>
+                            </span>
+                        </a>
+                    </li>
+                }
+             </ul>
+        </div>
+     </div>
+</div>
+<script src="~/Scripts/jquery-2.2.4.min.js"></script>
+<script src="~/Content/js/zturn.js"></script>
+<script>
+        // 1. 获取需要移动的标签元素(ul)
+        // 2. 每隔一段时间往上移动
+        (function(){
+            var oUl = document.querySelector('ul');//获取多个里的第1个
+            var oDiv = document.querySelectorAll('div')[0];
+            var disTop = oUl.offsetHeight - oDiv.offsetHeight; // 移动最大范围的值
+            //document.querySelectorAll();//获取多个,返回nodeList(类似于数组(array)的使用)
+
+            // 使用元素往上移动
+            function moveUp(){
+                var s = 2;  // 移动的距离
+                if (oUl.offsetTop < -disTop){
+                    oUl.style.top = '0px';
+                }
+
+                // 因为没有在html里设置过top，所以style.top只能取到一个没有长度的字符串
+                // 这里需要用offsetTop获取top的位置
+                oUl.style.top = oUl.offsetTop - s + 'px';
+            }
+            setInterval(moveUp, 100);
+        })();
+
+        var aa = new zturn({
+            id: "zturn",
+            opacity: 0.9,
+            width: 200,
+            Awidth: 300,
+            scale: 0.9,
+            auto: true, //是否轮播 默认5000
+            turning: 3000//轮播时长
+        })
+</script>

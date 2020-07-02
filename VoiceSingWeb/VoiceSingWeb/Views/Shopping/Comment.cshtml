@@ -1,0 +1,34 @@
+﻿@model PagedList.IPagedList<Models.GoodsComment>
+@using PagedList.Mvc;
+@{
+    Layout = null;
+}
+<link href="~/Content/PagedList.css" rel=" stylesheet" />
+
+
+@foreach (var item in Model)
+{
+    <div class="part-content">
+        <div class="user">
+            <img class="userimg" src="@item.Users.photo" />
+            <span class="usernum"> @item.Users.name</span>
+        </div>
+        <div class="content-box">
+            <span class="content-label">
+                @Html.Raw(item.content)               
+            </span>
+            <span class="content-time">评论时间：@item.commmenttime</span>
+        </div>
+        <p></p>
+    </div>
+}
+@Html.PagedListPager(Model,
+    page => Url.Action("Comment", "Shopping", new { page = page,id = Model.First().goodsid,sorce = ViewBag.sorce }),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions {
+        MaximumPageNumbersToDisplay = 5
+    }, new AjaxOptions {
+        HttpMethod = "post",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "part-com"
+    }))
+@*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@

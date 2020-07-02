@@ -1,0 +1,103 @@
+﻿@model Models.UserMusics
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>审核音乐浏览</title>
+    <link rel="stylesheet" href="~/Content/css/APlayer.min.css">
+    <link rel="stylesheet" href="~/Content/layui-v2.5.6/layui/css/layui.css" media="all">
+    <style type="text/css">
+        #main {
+            width: 400px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <span style="color:red;">(*音频审核)</span>
+        <div id="aplayer"></div>
+    </div>
+    <div style="width:100%; height:100%;">
+        <table class="layui-table">
+            <colgroup>
+                <col width="100">
+                <col width="300">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>属性</th>
+                    <th>属性值</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>歌曲ID</td>
+                    <td>@Model.music_id</td>
+                </tr>
+                <tr>
+                    <td style="color:red;">*歌曲海报审核</td>
+                    <td><img src="@Model.imgage_url" width="50" height="50" /></td>
+                </tr>
+                <tr>
+                    <td style="color:red;">*歌曲名称审核</td>
+                    <td>@Model.music_name</td>
+                </tr>
+                <tr>
+                    <td style="color:red;">*上传类型审核</td>
+                    <td>@Model.UpType.typeName</td>
+                </tr>
+                <tr>
+                    <td>上传用户</td>
+                    <td>@Model.user_id</td>
+                </tr>
+                <tr>
+                    <td>歌曲类型</td>
+                    <td>@Model.MusicType.typeName</td>
+                </tr>                
+                <tr>
+                    <td>上传时间</td>
+                    <td>@Model.upTime</td>
+                </tr>
+                <tr>
+                    <td>歌曲文件地址</td>
+                    <td>@Model.music_url</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<script src="~/Scripts/APlayer.min.js"></script>
+<script>
+      var ap = new APlayer({
+      element: document.getElementById('aplayer'),
+      narrow: false,
+      /*自动播放，默认值为false，true为开启自动播放*/
+      autoplay: true,
+      showlrc: true,
+      loop:  'none',
+      /*lrc歌词显示方式,默认值为1,HTML显示方式，2为JavaScript字符串显示方式，3为lrc文件加载显示方式*/
+      lrcType: 3,
+      /*主题颜色*/
+      theme: '#00b5ad',
+      /*歌曲集合列表*/
+      audio:[
+          {
+              /*歌名*/
+              title: '@Model.music_name',
+              /*作者*/
+              author: '@Model.Users.name',
+              /*歌曲*/
+              url: '@Model.music_url',
+              /*音乐专辑图片*/
+              pic: '@Model.imgage_url',
+              /*歌词*/
+              lrc: '1'
+          }
+      ]
+  });
+</script>
+</body>
+</html>

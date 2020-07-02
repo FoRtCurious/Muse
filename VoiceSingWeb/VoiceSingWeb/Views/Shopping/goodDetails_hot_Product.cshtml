@@ -1,0 +1,21 @@
+﻿
+@{
+    Layout = null;
+}
+@*注意点*@
+@model IEnumerable<Models.Goods>
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            <a href="@Url.Action("gooddetail","Shopping",new { id = item.goodsid })">
+                <img src="@item.img" alt="">
+                <div class="wrap">
+                    <span>热门</span>
+                    <span class="title">@item.goodsname</span>
+                    <p>￥@item.price</p>
+                </div>
+            </a>
+        </li>
+    }
+</ul>

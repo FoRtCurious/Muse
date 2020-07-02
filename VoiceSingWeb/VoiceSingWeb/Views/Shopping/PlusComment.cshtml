@@ -1,0 +1,66 @@
+﻿@model VoiceSingWeb.Models.PlusGoodsCommentModel
+@{
+    ViewBag.Title = "PlusComment";
+    Layout = "~/Views/Shared/_MarketLayout.cshtml";
+}
+@section Css{
+    <link rel="stylesheet" type="text/css" href="~/Content/css/AddComment.css" />
+    }
+    <div class="C-head">
+        <div class="block">
+            <span>
+                <a href="@Url.Action("Shop_Center", "Shopping")">个人中心</a>
+            </span>
+            <span class="pointer">
+                <i></i>
+                我的追评
+            </span>
+        </div>
+    </div>
+    @using (Ajax.BeginForm("PlusAddComment", "Shopping", new AjaxOptions { HttpMethod = "post", OnSuccess = "success" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+    <div class="Box">
+        <div class="good-box">
+            <input type="hidden" name="commentid" value="@Model.commentid" />
+            <input type="hidden" name="goodid" value="@Model.goodid" />
+            <div class="product">
+                <span><img src="@Model.img" /></span>
+                <span class="name">@Model.name</span>
+                <span class="time">@Model.Time</span>
+
+            </div>
+        </div>
+
+        <div class="content-one">
+            <span>初次评价：</span>
+            <div class="a">
+                @Html.Raw(Model.content)
+            </div>
+        </div>
+
+        <div class="good-content">
+            <textarea id="editor" name="content"></textarea>
+        </div>
+
+        <div class="But">
+            <input class="tj" type="submit" value="追评" />
+        </div>
+    </div>
+    }
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <script src="~/Scripts/ckeditor/config1.js"></script>
+    <script>
+        var editor = CKEDITOR.replace('editor');
+        function success(data) {
+            if (data == "success") {
+                alert('追评成功！');
+                window.location = '../../Shopping/Shop_Center';
+            }
+            else {
+                alert('您还没有登入哦！');
+            }
+        }
+    </script>
+

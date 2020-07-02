@@ -1,0 +1,89 @@
+﻿@model VoiceSingWeb.Models.SingerApplyViewModels
+@{
+    ViewBag.Title = "申请音悦人";
+    Layout = null;
+}
+<a href="@Url.Action("UserCenter","UserManage")" class="backcenter">个人中心</a>
+<hr class="hr"/>
+<h3 class="headtitle">申请音悦人:</h3>
+<div>
+    @*申请部分*@
+    <div style="float:left;width:400px">
+        <ul class="apply">
+            <li>
+                <span class="glyphicon glyphicon-remove-circle"> 1.歌曲数量(需大于等于1): <strong>@Model.user.UserMusics.Count()</strong></span>
+            </li>
+            <li>
+                <span class="glyphicon glyphicon-ok-circle"> 2.形象照(必须项): <strong>有</strong></span>
+            </li>
+            <li>
+                <span class="glyphicon glyphicon-ok-circle"> 3.粉丝量(需大于1000): <strong>@Model.user.user_fans</strong> </span>
+            </li>
+            <li>
+                <span class="glyphicon glyphicon-remove-circle"> 4.实名认证: <a href="#" style="color:dodgerblue;"><strong>申请认证</strong></a></span>
+            </li>
+        </ul>
+        <p class="text-danger"><span class="glyphicon glyphicon-exclamation-sign">*以上四项条件都满足时，才能审核通过哦  </span> </p>
+        <br />
+        @{
+            bool flag = false;
+            foreach (var item in Model.apply)
+            {
+                if (item.deal_state == 0)
+                {
+                    flag = true;
+                }
+            }
+            if (Model.user.userType_id == 1 && flag)
+            {
+                <button id="apply" type="button" class="apply-btn" style="background-color:green;">&nbsp;&nbsp;待审核中&nbsp;&nbsp;</button>
+            }
+            else if (Model.user.userType_id == 1)
+            {
+                <button id="apply" type="button" class="apply-btn1" style="background-color:green;">&nbsp;&nbsp;@Ajax.ActionLink("立即申请", "SingerApply", "UserManage", null, new AjaxOptions { OnSuccess = "CheckApply" }, new { @style = "color:white;" })&nbsp;&nbsp;</button>
+            }
+            else if (Model.user.userType_id == 2)
+            {
+                <p style="color:green;font-size:18px;font-weight:500;">你已经是Sing音悦人啦~</p>
+            }
+        }
+
+    </div>
+    @*警告部分*@
+    <div style="float:right;width:400px;">
+        <strong class="prov">音乐人特权:</strong>
+        <ul class="apply-2">
+            <li>
+                <span>1.上传原创歌曲</span><br />
+            </li>
+            <li>
+                <span>2.音乐人勋章——实力的象征</span><br />
+            </li>
+            <li>
+                <span>3.专享的音乐人模板 &nbsp;&nbsp;<a href="">立即预览</a></span><br />
+            </li>
+            <li>
+                <span>4.优先合作推广机会</span>
+            </li>
+        </ul>
+        <h4 style="font-size:16px;color:black;margin-top:20px;">提示:</h4>
+        <ul class="apply-3">
+            <li><span>1.通过实名认证且原创&翻唱作品总量需达到1首以上即可申请音悦网音乐人。</span></li>
+            <li><span>2.音乐人审核标准：以歌曲的整体质量，包括申请者唱功、后期、创作等作为考核标准。</span></li>
+        </ul>
+        <p class="text-danger"><small>PS：我们会在３个工作日内完成您的审核，请耐心等待…</small> <p>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function CheckApply(data) {
+        if (data == "suc") {
+            var apply = document.getElementById("apply");
+            alert("已提交申请，请等待审核！");
+            apply.innerHTML = "待审核中";
+        }
+        else {
+            alert("申请失败");
+        }
+    }
+</script>

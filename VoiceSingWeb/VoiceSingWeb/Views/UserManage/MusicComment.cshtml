@@ -1,0 +1,21 @@
+﻿@model Models.MusicComment
+@{ 
+    Layout = null;
+}
+<div class="itm">
+    <div class="head">
+        <a href="@Url.Action("UserSingerInfo","Singers",new { id = Model.user_id})">
+            <img src="@Model.Users.photo">
+        </a>
+    </div>
+    <div class="cntwrap">
+        <div class="cnt f-brk">
+            <a href="@Url.Action("UserSingerInfo","Singers",new { id = Model.user_id})" class="s-fc7">@Model.Users.name</a>：
+            @Model.Comment_content
+        </div>
+        <div class="rp">
+            <div class="time s-fc4">@Model.Comment_time.ToString()</div>
+        </div>
+    </div>
+</div>
+

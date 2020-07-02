@@ -1,0 +1,738 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{35E8FE5E-7481-4EC9-91A3-E9728B643AC2}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VoiceSingWeb</RootNamespace>
+    <AssemblyName>VoiceSingWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.0.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.0.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.0.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.0.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.0.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\AccompanyMusicController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CampController.cs" />
+    <Compile Include="Controllers\CircleController.cs" />
+    <Compile Include="Controllers\MailController.cs" />
+    <Compile Include="Controllers\MusicController.cs" />
+    <Compile Include="Controllers\ShoppingController.cs" />
+    <Compile Include="Controllers\SingersController.cs" />
+    <Compile Include="Controllers\UserManageController.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\VideoController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccompanyMusicIndexViewModels.cs" />
+    <Compile Include="Models\CollectViewModel.cs" />
+    <Compile Include="Models\CoverMusicIndexViewModels.cs" />
+    <Compile Include="Models\GoodCommentModel.cs" />
+    <Compile Include="Models\GoodsdetailsViewModel.cs" />
+    <Compile Include="Models\HomeIndexViewModels.cs" />
+    <Compile Include="Models\MusicDetailIndexViewModels.cs" />
+    <Compile Include="Models\MyCircleViewModels.cs" />
+    <Compile Include="Models\OrderDetailsViewModels.cs" />
+    <Compile Include="Models\OriginMusicIndexViewModels.cs" />
+    <Compile Include="Models\PlaceOrderModel.cs" />
+    <Compile Include="Models\PlaceOrder_AddressViewModel.cs" />
+    <Compile Include="Models\PlusGoodsCommentModel.cs" />
+    <Compile Include="Models\ShopCenterViewModel.cs" />
+    <Compile Include="Models\ShoppingHomeViewModel.cs" />
+    <Compile Include="Models\SingerApplyViewModels.cs" />
+    <Compile Include="Models\UpdateAddressModel.cs" />
+    <Compile Include="Models\UserCenterViewModels.cs" />
+    <Compile Include="Models\UserSingerInfoViewModels.cs" />
+    <Compile Include="Models\VideoDetailsIndexViewModels.cs" />
+    <Compile Include="Models\VideoIndexViewModels.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\css\AddComment.css" />
+    <Content Include="Content\css\Address.css" />
+    <Content Include="Content\css\admin.css" />
+    <Content Include="Content\css\APlayer.min.css" />
+    <Content Include="Content\css\BuyNow.css" />
+    <Content Include="Content\css\covermusicIndex.css" />
+    <Content Include="Content\css\hexagons.css" />
+    <Content Include="Content\css\homeIndex.css" />
+    <Content Include="Content\css\adiconfont.css" />
+    <Content Include="Content\css\iconfont.css" />
+    <Content Include="Content\css\layout.css" />
+    <Content Include="Content\css\adminlogin.css" />
+    <Content Include="Content\css\shoppingindex.css" />
+    <Content Include="Content\css\usercenter.css" />
+    <Content Include="Content\images\admin\admin.png" />
+    <Content Include="Content\images\admin\mini.png" />
+    <Content Include="Content\css\login.css" />
+    <Content Include="Content\css\originmusicIndex.css" />
+    <Content Include="Content\css\upsource.css" />
+    <Content Include="Content\css\videodetailIndex.css" />
+    <Content Include="Content\css\videoIndex.css" />
+    <Content Include="Content\images\admin\preview.jpg" />
+    <Content Include="Content\images\load\1.jpg" />
+    <Content Include="Content\images\load\circle3.jpg" />
+    <Content Include="Content\images\load\nulladdtion.png" />
+    <Content Include="Content\images\load\nullcircle.png" />
+    <Content Include="Content\images\load\nullfans.png" />
+    <Content Include="Content\images\load\registerad.png" />
+    <Content Include="Content\images\videos\CommentImg\63711572641971.jpg" />
+    <Content Include="Content\images\videos\CommentImg\63711575596358.jpg" />
+    <Content Include="Content\images\videos\CommentImg\63711655078785.jpg" />
+    <Content Include="Content\images\videos\CommentImg\63711658433652.jpg" />
+    <Content Include="Content\images\videos\CommentImg\63711854303219.jpg" />
+    <Content Include="Content\images\videos\CommentImg\63712118260000.jpg" />
+    <Content Include="Content\images\videos\CommentImg\63712195057940.jpg" />
+    <Content Include="Content\images\videos\CommentImg\63712195394140.jpg" />
+    <Content Include="Content\images\videos\CommentImg\63712195493472.jpg" />
+    <Content Include="Content\images\videos\CommentImg\63712447904133.jpg" />
+    <Content Include="Content\images\videos\CommentImg\63712775407092.jpg" />
+    <Content Include="Content\images\videos\CommentImg\63724920660654.jpg" />
+    <Content Include="Content\images\videos\CommentImg\63724920958815.jpg" />
+    <Content Include="Content\images\videos\CommentImg\63724921281309.jpg" />
+    <Content Include="Content\images\videos\CommentImg\63724956560800.jpg" />
+    <Content Include="Content\images\videos\CommentImg\63724960126137.jpg" />
+    <Content Include="Content\images\videos\CommentImg\63724995439220.jpg" />
+    <Content Include="Content\images\videos\CommentImg\63725179253367.jpg" />
+    <Content Include="Content\images\videos\CommentImg\63726281225504.jpg" />
+    <Content Include="Content\images\videos\CommentImg\63726551806139.jpg" />
+    <Content Include="Content\images\videos\CommentImg\63726551846165.jpg" />
+    <Content Include="Content\images\videos\load\播放.png" />
+    <Content Include="Content\images\videos\video-post\1.jpg" />
+    <Content Include="Content\images\videos\video-post\10.jpg" />
+    <Content Include="Content\images\videos\video-post\2.jpg" />
+    <Content Include="Content\images\videos\video-post\2019-12-19593c34de-ddd4-4b5d-bcb3-bef06e469e87.PNG" />
+    <Content Include="Content\images\videos\video-post\3.jpg" />
+    <Content Include="Content\images\videos\video-post\4.jpg" />
+    <Content Include="Content\images\videos\video-post\5.jpg" />
+    <Content Include="Content\images\videos\video-post\6.jpg" />
+    <Content Include="Content\images\videos\video-post\7.jpg" />
+    <Content Include="Content\images\videos\video-post\8.jpg" />
+    <Content Include="Content\images\videos\video-post\9.jpg" />
+    <Content Include="Content\images\videos\video-post\vd1.jpg" />
+    <Content Include="Content\images\videos\video-post\vd2.jpg" />
+    <Content Include="Content\images\videos\video-post\vd3.jpg" />
+    <Content Include="Content\images\videos\video-post\vd4.jpg" />
+    <Content Include="Content\images\videos\videoPlayPage\vd1.jpg" />
+    <Content Include="Content\images\videos\videoPlayPage\vd2.jpg" />
+    <Content Include="Content\images\videos\videoPlayPage\vd3.png" />
+    <Content Include="Content\images\videos\videoPlayPage\vd4.jpg" />
+    <Content Include="Content\js\Admin.js" />
+    <Content Include="Content\js\Layout.js" />
+    <Content Include="Content\js\zturn.js" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Scripts\APlayer.min.js" />
+    <Content Include="Scripts\ckeditor\build-config.js" />
+    <Content Include="Scripts\ckeditor\ckeditor.js" />
+    <Content Include="Scripts\ckeditor\config.js" />
+    <Content Include="Scripts\ckeditor\contents.css" />
+    <Content Include="Scripts\ckeditor\styles.js" />
+    <Content Include="Content\css\carts.css" />
+    <Content Include="Content\css\goodsdetail.css" />
+    <Content Include="Content\css\hudie.css" />
+    <Content Include="Content\css\list.css" />
+    <Content Include="Content\css\musicType.css" />
+    <Content Include="Content\css\fenlei.css" />
+    <Content Include="Content\css\shopping.css" />
+    <Content Include="Content\css\Shop_Center.css" />
+    <Content Include="Content\images\Camp\01.jpg" />
+    <Content Include="Content\images\Camp\02.jpg" />
+    <Content Include="Content\images\Camp\03.jpg" />
+    <Content Include="Content\images\Camp\04.jpg" />
+    <Content Include="Content\images\Camp\05.jpg" />
+    <Content Include="Content\images\Camp\06.jpg" />
+    <Content Include="Content\images\Camp\07.jpg" />
+    <Content Include="Content\images\coverMusics\01.jpg" />
+    <Content Include="Content\images\coverMusics\02.jpg" />
+    <Content Include="Content\images\coverMusics\03.jpg" />
+    <Content Include="Content\images\coverMusics\04.jpg" />
+    <Content Include="Content\images\coverMusics\05.jpg" />
+    <Content Include="Content\images\coverMusics\06.jpg" />
+    <Content Include="Content\images\coverMusics\07.jpg" />
+    <Content Include="Content\images\coverMusics\08.jpg" />
+    <Content Include="Content\images\coverMusics\09.jpg" />
+    <Content Include="Content\images\coverMusics\10.jpg" />
+    <Content Include="Content\images\coverMusics\11.jpg" />
+    <Content Include="Content\images\coverMusics\12.jpg" />
+    <Content Include="Content\images\coverMusics\13.jpg" />
+    <Content Include="Content\images\coverMusics\14.jpg" />
+    <Content Include="Content\images\coverMusics\15.jpg" />
+    <Content Include="Content\images\coverMusics\16.jpg" />
+    <Content Include="Content\images\coverMusics\17.jpg" />
+    <Content Include="Content\images\coverMusics\18.jpg" />
+    <Content Include="Content\images\coverMusics\19.jpg" />
+    <Content Include="Content\images\coverMusics\20.jpg" />
+    <Content Include="Content\images\coverMusics\2019-12-0363f1c7a6-a975-4e74-84aa-5c7f5cecbc64.jpg" />
+    <Content Include="Content\images\coverMusics\2019-12-040ea8b6cf-f901-4d1f-8207-320edfd50071.jpg" />
+    <Content Include="Content\images\coverMusics\2019-12-0436395017-65d2-491e-a93e-0a16ff82a0fc.jpg" />
+    <Content Include="Content\images\coverMusics\2019-12-043c080c68-f5ec-42c3-a6bf-8e2ea5acc377.jpg" />
+    <Content Include="Content\images\coverMusics\2019-12-0496ef73f1-726c-4910-9bc7-13fb9bcf35c9.jpg" />
+    <Content Include="Content\images\coverMusics\2019-12-04bf53f7b0-8d00-46e9-8499-7357162cde6b.jpg" />
+    <Content Include="Content\images\coverMusics\2019-12-066ee71ee2-a9b3-4531-b68d-4cc3f23f07e4.jpg" />
+    <Content Include="Content\images\coverMusics\21.jpg" />
+    <Content Include="Content\images\coverMusics\22.jpg" />
+    <Content Include="Content\images\coverMusics\23.jpg" />
+    <Content Include="Content\images\coverMusics\24.jpg" />
+    <Content Include="Content\images\coverMusics\25.jpg" />
+    <Content Include="Content\images\coverMusics\26.jpg" />
+    <Content Include="Content\images\coverMusics\27.jpg" />
+    <Content Include="Content\images\coverMusics\28.jpg" />
+    <Content Include="Content\images\load\02.png" />
+    <Content Include="Content\images\load\04.jpg" />
+    <Content Include="Content\images\load\category.jpg" />
+    <Content Include="Content\images\originMusics\07.jpg" />
+    <Content Include="Content\images\originMusics\08.jpg" />
+    <Content Include="Content\images\originMusics\09.jpg" />
+    <Content Include="Content\images\originMusics\10.jpg" />
+    <Content Include="Content\images\originMusics\11.jpg" />
+    <Content Include="Content\images\originMusics\12.jpg" />
+    <Content Include="Content\images\originMusics\13.jpg" />
+    <Content Include="Content\images\originMusics\14.jpg" />
+    <Content Include="Content\images\originMusics\15.jpg" />
+    <Content Include="Content\images\originMusics\16.jpg" />
+    <Content Include="Content\images\originMusics\17.jpg" />
+    <Content Include="Content\images\originMusics\18.jpg" />
+    <Content Include="Content\images\originMusics\19.jpg" />
+    <Content Include="Content\images\originMusics\20.jpg" />
+    <Content Include="Content\images\originMusics\21.jpg" />
+    <Content Include="Content\images\originMusics\22.jpg" />
+    <Content Include="Content\images\originMusics\23.jpg" />
+    <Content Include="Content\images\originMusics\24.jpg" />
+    <Content Include="Content\images\originMusics\25.jpg" />
+    <Content Include="Content\images\originMusics\26.jpg" />
+    <Content Include="Content\images\originMusics\27.jpg" />
+    <Content Include="Content\images\originMusics\28.jpg" />
+    <Content Include="Content\images\originMusics\29.jpg" />
+    <Content Include="Content\images\originMusics\30.jpg" />
+    <Content Include="Content\images\originMusics\31.jpg" />
+    <Content Include="Content\images\originMusics\32.jpg" />
+    <Content Include="Content\images\shopping\goods\0.png" />
+    <Content Include="Content\images\shopping\goods\1.png" />
+    <Content Include="Content\images\shopping\goods\10.png" />
+    <Content Include="Content\images\shopping\goods\11.png" />
+    <Content Include="Content\images\shopping\goods\12.png" />
+    <Content Include="Content\images\shopping\goods\13.png" />
+    <Content Include="Content\images\shopping\goods\14.png" />
+    <Content Include="Content\images\shopping\goods\15.png" />
+    <Content Include="Content\images\shopping\goods\16.png" />
+    <Content Include="Content\images\shopping\goods\17.png" />
+    <Content Include="Content\images\shopping\goods\18.png" />
+    <Content Include="Content\images\shopping\goods\19.png" />
+    <Content Include="Content\images\shopping\goods\2.png" />
+    <Content Include="Content\images\shopping\goods\20.png" />
+    <Content Include="Content\images\shopping\goods\21.png" />
+    <Content Include="Content\images\shopping\goods\3.png" />
+    <Content Include="Content\images\shopping\goods\4.png" />
+    <Content Include="Content\images\shopping\goods\5.png" />
+    <Content Include="Content\images\shopping\goods\6.png" />
+    <Content Include="Content\images\shopping\goods\7.png" />
+    <Content Include="Content\images\shopping\goods\8.png" />
+    <Content Include="Content\images\shopping\goods\9.png" />
+    <Content Include="Content\images\shopping\home\10.png" />
+    <Content Include="Content\images\shopping\home\6.png" />
+    <Content Include="Content\images\shopping\home\7.png" />
+    <Content Include="Content\images\shopping\home\8.png" />
+    <Content Include="Content\images\shopping\home\9.png" />
+    <Content Include="Content\images\shopping\home\购物车.png" />
+    <Content Include="Content\images\user_photo\01.jpg" />
+    <Content Include="Content\images\user_photo\02.jpg" />
+    <Content Include="Content\images\user_photo\03.jpg" />
+    <Content Include="Content\images\user_photo\04.jpg" />
+    <Content Include="Content\images\user_photo\05.jpg" />
+    <Content Include="Content\images\user_photo\06.jpeg" />
+    <Content Include="Content\images\user_photo\07.jpg" />
+    <Content Include="Content\images\user_photo\08.jpg" />
+    <Content Include="Content\js\goodsdetail.js" />
+    <Content Include="Content\js\shopping.js" />
+    <Content Include="Content\js\jquery-1.11.1.min.js" />
+    <Content Include="Content\js\list.js" />
+    <Content Include="Content\css\PagedList.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\category.css" />
+    <Content Include="Content\css\common.css" />
+    <Content Include="Content\css\font-awesome.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\music.css" />
+    <Content Include="Content\css\reset.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\images\load\bg2.jpg" />
+    <Content Include="Content\images\load\btn-left.png" />
+    <Content Include="Content\images\load\btn-right.png" />
+    <Content Include="Content\images\load\QQ.jpg" />
+    <Content Include="Content\images\load\微信.jpg" />
+    <Content Include="Content\images\load\微博.jpg" />
+    <Content Include="Content\images\load\网易云.jpg" />
+    <Content Include="Content\images\load\logo.png" />
+    <Content Include="Content\images\originMusics\01.jpg" />
+    <Content Include="Content\images\originMusics\02.jpg" />
+    <Content Include="Content\images\originMusics\03.jpg" />
+    <Content Include="Content\images\originMusics\04.jpg" />
+    <Content Include="Content\images\originMusics\05.jpg" />
+    <Content Include="Content\images\originMusics\06.jpg" />
+    <Content Include="Content\images\shopping\home\0.png" />
+    <Content Include="Content\images\shopping\home\1.png" />
+    <Content Include="Content\images\shopping\home\2.png" />
+    <Content Include="Content\images\shopping\home\3.png" />
+    <Content Include="Content\images\shopping\home\4.png" />
+    <Content Include="Content\images\shopping\home\5.png" />
+    <Content Include="Content\images\shopping\home\ad1.png" />
+    <Content Include="Content\images\shopping\home\ad2.png" />
+    <Content Include="Content\images\shopping\home\bannerMid.png" />
+    <Content Include="Content\images\shopping\home\detail.png" />
+    <Content Include="Content\images\shopping\home\searchbox.png" />
+    <Content Include="Content\images\slider\1.jpg" />
+    <Content Include="Content\images\slider\2.jpg" />
+    <Content Include="Content\images\slider\3.jpg" />
+    <Content Include="Content\images\slider\4.jpg" />
+    <Content Include="Content\images\slider\5.jpg" />
+    <Content Include="Content\images\slider\6.jpg" />
+    <Content Include="Content\js\APlayer.min.js" />
+    <Content Include="Content\js\jquery.js" />
+    <Content Include="Content\js\jquery.min.js" />
+    <Content Include="Content\js\slider.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Scripts\ckeditor\CHANGES.md" />
+    <Content Include="Scripts\ckeditor\LICENSE.md" />
+    <Content Include="Scripts\ckeditor\README.md" />
+    <Content Include="Scripts\APlayer.min.js.map" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\jquery-2.2.4.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\UserManage\UpdateInfo.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\UserManage\UpCover.cshtml" />
+    <Content Include="Views\UserManage\UpOrigin.cshtml" />
+    <Content Include="Views\UserManage\UpVideo.cshtml" />
+    <Content Include="Views\Shared\_MarketLayout.cshtml" />
+    <Content Include="Views\UserManage\VideoComment.cshtml" />
+    <Content Include="Views\UserManage\MyAddtion.cshtml" />
+    <Content Include="Views\UserManage\MyFans.cshtml" />
+    <Content Include="Views\UserManage\UserLeave.cshtml" />
+    <Content Include="Views\UserManage\PostMessage.cshtml" />
+    <Content Include="Views\Admin\Users.cshtml" />
+    <Content Include="Views\Music\OriginMusic.cshtml" />
+    <Content Include="Views\Music\OriginOptionMusic.cshtml" />
+    <Content Include="Views\Music\CoverMusic.cshtml" />
+    <Content Include="Views\Video\Index.cshtml" />
+    <Content Include="Views\Video\Details.cshtml" />
+    <Content Include="Views\AccompanyMusic\Index.cshtml" />
+    <Content Include="Views\AccompanyMusic\SearchAccompany.cshtml" />
+    <Content Include="Views\Music\Details.cshtml" />
+    <Content Include="Views\Music\MusicTypePageShow.cshtml" />
+    <Content Include="Views\Music\MoreMusicType.cshtml" />
+    <Content Include="Views\Singers\UserSingerInfo.cshtml" />
+    <Content Include="Views\Singers\UserLeave.cshtml" />
+    <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\EditUserInfo.cshtml" />
+    <Content Include="Views\Admin\UserDetails.cshtml" />
+    <Content Include="Views\Admin\Musics.cshtml" />
+    <Content Include="Views\Admin\Videos.cshtml" />
+    <Content Include="Views\Admin\UpNewProduct.cshtml" />
+    <Content Include="Views\Admin\Products.cshtml" />
+    <Content Include="Views\Admin\EditProduct.cshtml" />
+    <Content Include="Views\Admin\UserOrders.cshtml" />
+    <Content Include="Views\Admin\OrdersDetails.cshtml" />
+    <Content Include="Views\Admin\UserSingerApply.cshtml" />
+    <Content Include="Views\Admin\BeCloseDownUser.cshtml" />
+    <Content Include="Views\Shopping\AddCart_goods.cshtml" />
+    <Content Include="Views\Shopping\Carts_hot_Product.cshtml" />
+    <Content Include="Views\Shopping\Carts_number.cshtml" />
+    <Content Include="Views\Shopping\gooddetail.cshtml" />
+    <Content Include="Views\Shopping\goodDetails_hot_Product.cshtml" />
+    <Content Include="Views\Shopping\goodsList.cshtml" />
+    <Content Include="Views\Shopping\Index.cshtml" />
+    <Content Include="Views\Shopping\MyAddress.cshtml" />
+    <Content Include="Views\Shopping\MyOrderaddress.cshtml" />
+    <Content Include="Views\Shopping\Myorder_details.cshtml" />
+    <Content Include="Views\Shopping\Shop_Center.cshtml" />
+    <Content Include="Views\Mail\Fans.cshtml" />
+    <Content Include="Views\Mail\fans1.cshtml" />
+    <Content Include="Views\Mail\friend1.cshtml" />
+    <Content Include="Views\Mail\Friends.cshtml" />
+    <Content Include="Views\Mail\Index.cshtml" />
+    <Content Include="Views\Mail\Rmail.cshtml" />
+    <Content Include="Views\Mail\Rubbish.cshtml" />
+    <Content Include="Views\Mail\Rubmail.cshtml" />
+    <Content Include="Views\Mail\Sent.cshtml" />
+    <Content Include="Views\Mail\Smail.cshtml" />
+    <Content Include="Views\Mail\Write.cshtml" />
+    <Content Include="Views\Camp\allcamp.cshtml" />
+    <Content Include="Views\Camp\Camp1.cshtml" />
+    <Content Include="Views\Camp\CampDetails.cshtml" />
+    <Content Include="Views\Camp\Index.cshtml" />
+    <Content Include="Views\Camp\likecamp.cshtml" />
+    <Content Include="Views\Camp\mycamp.cshtml" />
+    <Content Include="Views\Camp\Publish.cshtml" />
+    <Content Include="Views\Camp\usedcamp.cshtml" />
+    <Content Include="Views\Singers\allLeaveMg.cshtml" />
+    <Content Include="Views\Singers\CampAlbum.cshtml" />
+    <Content Include="Views\Singers\Index.cshtml" />
+    <Content Include="Views\Singers\SA1.cshtml" />
+    <Content Include="Views\Singers\SA2.cshtml" />
+    <Content Include="Views\Singers\Singer.cshtml" />
+    <Content Include="Views\Singers\SingerActivity.cshtml" />
+    <Content Include="Views\Singers\SingerAlbum.cshtml" />
+    <Content Include="Views\Singers\Topic.cshtml" />
+    <Content Include="Views\Singers\userSingerDetails.cshtml" />
+    <Content Include="Views\Admin\AccusedUsers.cshtml" />
+    <Content Include="Views\Admin\AccusedReasons.cshtml" />
+    <Content Include="Views\Admin\CheckMusics.cshtml" />
+    <Content Include="Views\Admin\ApplyDetails.cshtml" />
+    <Content Include="Views\Admin\MusicDetails.cshtml" />
+    <Content Include="Views\Admin\DownMusics.cshtml" />
+    <Content Include="Views\Admin\PublishMusic.cshtml" />
+    <Content Include="Views\Admin\ScanCheckMusic.cshtml" />
+    <Content Include="Views\Admin\CheckVideos.cshtml" />
+    <Content Include="Views\Admin\DownVideos.cshtml" />
+    <Content Include="Views\Admin\PublishVideo.cshtml" />
+    <Content Include="Views\Admin\DownProducts.cshtml" />
+    <Content Include="Views\Admin\MarketSaleData.cshtml" />
+    <Content Include="Views\Admin\VideoDetails.cshtml" />
+    <Content Include="Views\Admin\ScanCheckVideo.cshtml" />
+    <Content Include="Views\Shopping\BuyNow.cshtml" />
+    <Content Include="Views\Shopping\UpdateAddressView.cshtml" />
+    <Content Include="Views\Admin\SearchGood.cshtml" />
+    <Content Include="Views\UserManage\UserCenter.cshtml" />
+    <Content Include="Views\UserManage\UserSingerApply.cshtml" />
+    <Content Include="Views\UserManage\MyCircle.cshtml" />
+    <Content Include="Views\Video\VideoTypePageShow.cshtml" />
+    <Content Include="Views\Video\SearchVideo.cshtml" />
+    <Content Include="Views\UserManage\MusicComment.cshtml" />
+    <Content Include="Views\Singers\CA1.cshtml" />
+    <Content Include="Views\Circle\all.cshtml" />
+    <Content Include="Views\Circle\allcircle.cshtml" />
+    <Content Include="Views\Circle\AllReply.cshtml" />
+    <Content Include="Views\Circle\circle.cshtml" />
+    <Content Include="Views\Circle\circle1.cshtml" />
+    <Content Include="Views\Circle\circle2.cshtml" />
+    <Content Include="Views\Circle\circle3.cshtml" />
+    <Content Include="Views\Circle\CircleComplain.cshtml" />
+    <Content Include="Views\Circle\circledetail.cshtml" />
+    <Content Include="Views\Circle\detailreply.cshtml" />
+    <Content Include="Views\Circle\hot.cshtml" />
+    <Content Include="Views\Circle\Index.cshtml" />
+    <Content Include="Views\Circle\Zone.cshtml" />
+    <Content Include="Views\Circle\ZoneComplain.cshtml" />
+    <Content Include="Views\Circle\ZoneDetails.cshtml" />
+    <Content Include="Views\Mail\ChatAll.cshtml" />
+    <Content Include="Views\Mail\ChatHistory.cshtml" />
+    <Content Include="Views\Mail\ChatIndex.cshtml" />
+    <Content Include="Views\Mail\ChatNew.cshtml" />
+    <Content Include="Views\Mail\ChatSearch.cshtml" />
+    <Content Include="Views\Mail\Writemail.cshtml" />
+    <Content Include="Views\Camp\Complain.cshtml" />
+    <Content Include="Views\Shopping\AddComentPage.cshtml" />
+    <Content Include="Views\Shopping\AddComment.cshtml" />
+    <Content Include="Views\Shopping\Comment.cshtml" />
+    <Content Include="Views\Shopping\Commentnumber.cshtml" />
+    <Content Include="Views\Shopping\PlusComment.cshtml" />
+    <Content Include="Views\Mail\CreateChat.cshtml" />
+    <Content Include="Views\Mail\SentMsg.cshtml" />
+    <Content Include="Views\Singers\AllLeave.cshtml" />
+    <Content Include="Views\Singers\CampLeave.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\layui-v2.5.6\" />
+    <Folder Include="Content\source\coverMusic-source\" />
+    <Folder Include="Content\source\originMusic-source\" />
+    <Folder Include="Content\source\video-source\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{c9150e9b-30fd-483e-96cf-d88fba4505e7}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IDAL\IDAL.csproj">
+      <Project>{D27F46BA-4AB7-4B0B-BAAF-FCFEDB414CD2}</Project>
+      <Name>IDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{82b721ea-c27b-4742-9fda-d5bb0c101693}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>37355</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:37355/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

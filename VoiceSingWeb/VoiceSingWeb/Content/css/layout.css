@@ -1,0 +1,620 @@
+﻿/*登录模态框样式*/
+.overCurtain {
+	border-top:1px solid rgb(230,245,255);
+	position:fixed;
+	height:100%;
+	width:100%;
+	left:0px;
+	top:0px;
+	opacity:0.3;
+	display:none;
+	background-color:black;
+    z-index:999;
+}
+.hide-center {
+	width:420px;
+	height:470px;
+	position:fixed;
+	right:0;
+	left:0;
+	bottom:0;
+	top:0;
+	margin:auto;
+	display:none;
+	z-index:999;
+}
+.hide-center #formhead {
+	width:420px;
+	height:60px;
+	margin:0;
+	padding-bottom:-30px;
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+	background-color:whitesmoke;
+}
+.hide-center #formhead-title {
+    width: 210px;
+    height: 50px;
+    line-height:50px;
+    margin-left: 160px;
+    margin-right: 36px;
+    color:forestgreen;
+    font-weight: 900;
+    display: inline-block;
+    font-size: 20px;
+}
+.hide-center #close {
+	width: 25px;
+    height: 25px;
+    margin-top: 17px;
+    border: 0;
+    border-radius: 20%;
+    background-color:red;
+    color:white;
+    float: right;
+    font-size:15px;
+    line-height: 25px;
+    font-weight: 200;
+    cursor:pointer;
+}
+.hide-center #formbody {
+	width:420px;
+	height:470px;
+	background-color:white;
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
+}
+.hide-center .loginHead {
+	margin-right:-8px;
+	padding:13px;
+	width:25px;
+	height:28px;
+	background-color:#141414;
+	vertical-align:middle;
+}
+.hide-center .loginInput {
+	height:52px;
+	width:240px;
+	padding-left:15px;
+	border:0;
+	background-color:whitesmoke;
+	color:black;
+    font-size:15px;
+    box-sizing:border-box;
+}
+.hide-center .loginUserName {
+	padding-left:80px;
+	height: 95px;
+    line-height: 110px;
+}
+.hide-center .login1 #img-topleft-loginHead {
+	border-top-left-radius:5px;
+}
+.hide-center .login1 #input-topright-loginInput {
+	border-top-right-radius:5px;
+}
+.hide-center .login1 #img-bottomleft-loginHead {
+	border-bottom-left-radius:5px;
+}
+.hide-center .login1 #input-bottomright-loginInput {
+	border-bottom-right-radius:5px;
+}
+.hide-center .loginPassword {
+	padding-left:80px;
+    height:65px;
+    position:relative;
+}
+.hide-center .loginPassword .hide{
+    position:absolute;
+    line-height:60px;
+    right:105px;
+    cursor:pointer;
+    font-size:20px;
+    color:gray;
+}
+.hide-center .formfoot {
+	padding-left:80px;
+    height:65px;
+}
+.hide-center .forgetpwd {
+    padding-left:85px;
+	padding-right:85px;
+    height:40px;
+    line-height: 40px;
+}
+.hide-center .forgetpwd .rg{
+    display:block;
+    font-size:14px;
+    font-weight:500;
+    color:forestgreen;
+    height:20px;
+    float:left;
+    margin-bottom:20px;
+}
+.hide-center .forgetpwd .fg{
+    display:block;
+    font-size:14px;
+    font-weight:500;
+    color:forestgreen;
+    height:20px;
+    float:right;
+    margin-bottom:20px;
+}
+.hide-center .forgetpwd .rg:hover{
+    color:#0c8cdb;
+    cursor:pointer;
+}
+.hide-center .forgetpwd .fg:hover{
+    color:#0c8cdb;
+    cursor:pointer;
+}
+.hide-center #BSignIn {
+	border:0;
+	background:#329d90;
+	color:#ffffff;
+	width:240px;
+	height:40px;
+    line-height: 40px;
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+    cursor:pointer;
+    font-size:15px;
+}
+.hide-center #formbody #otherlogin{
+    margin-left:55px;
+    margin-right:55px;
+    padding:10px;
+    height:60px;
+    line-height:40px;
+    background-color:whitesmoke;
+    box-sizing:border-box;
+}
+#otherlogin ul li a img{
+    height:35px;
+    width:35px;
+    margin-right:5px;
+    border-radius:2px;
+}
+
+/*注册模态框样式*/
+.r-overCurtain {
+	border-top:1px solid rgb(230,245,255);
+	position:fixed;
+	height:100%;
+	width:100%;
+	left:0px;
+	top:0px;
+	opacity:0.3;
+	display:none;
+	background-color:black;
+    z-index:999;
+}
+.r-hide-center {
+	width:420px;
+	height:470px;
+	position:fixed;
+	right:0;
+	left:0;
+	bottom:0;
+	top:0;
+	margin:auto;
+	display:none;
+	z-index:999;
+}
+.r-hide-center #r-formhead {
+	width:420px;
+	height:60px;
+	margin:0;
+	padding-bottom:-30px;
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+	background-color:whitesmoke;
+}
+.r-hide-center #r-formhead-title {
+    width: 210px;
+    height: 50px;
+    line-height:50px;
+    margin-left: 160px;
+    margin-right: 36px;
+    color:forestgreen;
+    font-weight: 900;
+    display: inline-block;
+    font-size: 20px;
+}
+.r-hide-center #r-close {
+	width: 25px;
+    height: 25px;
+    margin-top: 17px;
+    border: 0;
+    border-radius: 20%;
+    background-color:red;
+    color:white;
+    float: right;
+    font-size:15px;
+    line-height: 25px;
+    font-weight: 200;
+    cursor:pointer;
+}
+.r-hide-center #r-formbody {
+	width:420px;
+	height:470px;
+	background-color:white;
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
+}
+.r-hide-center .r-Head {
+	margin-right:-8px;
+	padding:13px;
+	width:25px;
+	height:28px;
+	background-color:#141414;
+	vertical-align:middle;
+}
+.r-hide-center .r-Input{
+	height:52px;
+	width:240px;
+	padding-left:15px;
+	border:0;
+	background-color:whitesmoke;
+	color:black;
+    font-size:15px;
+    box-sizing:border-box;
+}
+.r-hide-center .r-CodeInput{
+    display:inline-block;
+	height:52px;
+	width:120px;
+	padding-left:15px;
+	border:0;
+	background-color:whitesmoke;
+	color:black;
+    font-size:15px;
+    box-sizing:border-box;
+}
+.r-hide-center .r-Title {
+	padding-left:80px;
+    height:40px;
+    font-size:15px;
+    line-height:40px;
+    color:forestgreen;
+}
+.r-hide-center .r-Title .title {
+    font-weight:600;
+    font-size:17px;
+}
+.r-hide-center .r-Title .tologin {
+    font-weight:500;
+    font-size:15px;
+    margin-left:35px;
+}
+#Haccount{
+    color:#0c8cdb;
+    cursor:pointer;
+}
+#Haccount:hover{
+    color:black;
+}
+.r-hide-center .r-Phone {
+	padding-left:80px;
+    height:60px;
+}
+.r-hide-center .r-Code {
+    padding-left:80px;
+    height:65px;
+}
+.r-hide-center .r-Code #BCode{
+    display:inline-block;
+    margin:8px 0px 0px 7px;
+    border:0;
+	background:#329d90;
+	color:#ffffff;
+	width:110px;
+	height:50px;
+    line-height: 50px;
+    cursor:pointer;
+    font-size:15px;
+}
+.red{
+    color:red;
+}
+.r-hide-center .r-Pwd {
+	padding-left:80px;
+    height:65px;
+    position: relative;
+}
+.r-hide-center .r-Pwd .hide{
+    position:absolute;
+    line-height:65px;
+    right:105px;
+    cursor:pointer;
+    font-size:20px;
+    color:gray;
+}
+.r-hide-center .checkbox {
+	padding-left:80px;
+    color:forestgreen;
+    font-size:13px;
+    height:30px;
+    line-height:30px;
+    cursor:pointer;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.r-hide-center #phone {
+	border-top-right-radius:5px;
+}
+.r-hide-center #confirmpassword {
+	border-bottom-right-radius:5px;
+}
+.r-hide-center .formfoot {
+	padding-left:80px;
+    height:65px;
+}
+.r-hide-center #r-BSignIn {
+	border:0;
+	background:#329d90;
+	color:#ffffff;
+	width:240px;
+	height:40px;
+    line-height: 40px;
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+    cursor:pointer;
+    font-size:15px;
+}
+.r-hide-center #r-formbody #r-otherlogin{
+    margin-left:55px;
+    margin-right:55px;
+    padding:10px;
+    height:60px;
+    line-height:40px;
+    background-color:whitesmoke;
+    box-sizing:border-box;
+}
+#r-otherlogin ul li a img{
+    height:35px;
+    width:35px;
+    margin-right:5px;
+    border-radius:2px;
+}
+#phonecheck,#passwordcheck,#confirmpasswordcheck{
+    font-size:10px;
+}
+/*找回密码模态框样式*/
+.f-overCurtain {
+	border-top:1px solid rgb(230,245,255);
+	position:fixed;
+	height:100%;
+	width:100%;
+	left:0px;
+	top:0px;
+	opacity:0.3;
+	display:none;
+	background-color:black;
+    z-index:999;
+}
+.f-hide-center {
+	width:420px;
+	height:470px;
+	position:fixed;
+	right:0;
+	left:0;
+	bottom:0;
+	top:0;
+	margin:auto;
+	display:none;
+	z-index:999;
+}
+.f-hide-center #f-formhead {
+	width:420px;
+	height:60px;
+	margin:0;
+	padding-bottom:-30px;
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+	background-color:whitesmoke;
+}
+.f-hide-center #f-formhead-title {
+    width: 210px;
+    height: 50px;
+    line-height: 50px;
+    margin-left: 160px;
+    margin-right: 36px;
+    color:forestgreen;
+    font-weight: 900;
+    display: inline-block;
+    font-size: 20px;
+}
+.f-hide-center #f-close {
+	width: 25px;
+    height: 25px;
+    margin-top: 17px;
+    border: 0;
+    border-radius: 20%;
+    background-color:red;
+    color:white;
+    float: right;
+    font-size:15px;
+    line-height: 25px;
+    font-weight: 200;
+    cursor:pointer;
+}
+.f-hide-center #f-formbody {
+	width:420px;
+	height:470px;
+	background-color:white;
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
+}
+.r-hide-center .f-Head {
+	margin-right:-8px;
+	padding:13px;
+	width:25px;
+	height:28px;
+	background-color:#141414;
+	vertical-align:middle;
+}
+.f-hide-center .f-Input{
+	height:52px;
+	width:240px;
+	padding-left:15px;
+	border:0;
+	background-color:whitesmoke;
+	color:black;
+    font-size:15px;
+    box-sizing:border-box;
+}
+.f-hide-center .f-CodeInput{
+    display:inline-block;
+	height:52px;
+	width:120px;
+	padding-left:15px;
+	border:0;
+	background-color:whitesmoke;
+	color:black;
+    font-size:15px;
+    box-sizing:border-box;
+}
+.f-hide-center .f-Title {
+	padding-left:80px;
+    height:40px;
+    font-size:15px;
+    line-height:40px;
+    color:forestgreen;
+}
+.f-hide-center .f-Title .title {
+    font-weight:600;
+    font-size:17px;
+}
+.f-hide-center .f-Phone {
+	padding-left:80px;
+    height:60px;
+}
+.f-hide-center .f-Code {
+    padding-left:80px;
+    height:65px;
+}
+.f-hide-center .f-Code #f-BCode{
+    display:inline-block;
+    margin:8px 0px 0px 7px;
+    border:0;
+	background:#329d90;
+	color:#ffffff;
+	width:110px;
+	height:50px;
+    line-height: 50px;
+    cursor:pointer;
+    font-size:15px;
+}
+.f-hide-center .f-Pwd {
+	padding-left:80px;
+    height:65px;
+    position: relative;
+}
+.f-hide-center .f-Pwd .hide{
+    position:absolute;
+    line-height:65px;
+    right:105px;
+    cursor:pointer;
+    font-size:20px;
+    color:gray;
+}
+.f-hide-center #f-phone {
+	border-top-right-radius:5px;
+}
+.f-hide-center #f-confirmpassword {
+	border-bottom-right-radius:5px;
+}
+.f-hide-center .formfoot {
+	padding-left:80px;
+    height:65px;
+}
+.f-hide-center #f-BSignIn {
+	border:0;
+	background:#329d90;
+	color:#ffffff;
+	width:240px;
+	height:40px;
+    line-height: 40px;
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+    cursor:pointer;
+    font-size:15px;
+}
+.f-hide-center #f-formbody #f-otherlogin{
+    margin-left:55px;
+    margin-right:55px;
+    padding:10px;
+    height:60px;
+    line-height:40px;
+    background-color:whitesmoke;
+    box-sizing:border-box;
+}
+#f-otherlogin ul li a img{
+    height:35px;
+    width:35px;
+    margin-right:5px;
+    border-radius:2px;
+}
+.pull-right{
+    float:right;
+}
+
+/*返回顶部样式*/
+*{ padding:0px; margin:0px;}
+html{
+    background-attachment:fixed;
+}
+#code,#envolupe,#gotop{ 
+    width:45px; 
+    height:45px; 
+    position:fixed; 
+    right:4.5%; 
+    cursor:pointer;
+    background-color:#d4d1d1;
+}
+#code:hover,#envolupe:hover,#gotop:hover{
+    background-color:#808080;
+}
+
+#code{ 
+    bottom:250px;
+    text-align:center; 
+}
+#envolupe{ 
+    font-size:28px;
+    color:white;
+    text-align:center;
+    line-height:40px;
+    bottom:200px;
+}
+#gotop{ 
+    bottom:150px;
+} 
+
+#code_img{ 
+    width:200px; 
+    height:200px; 
+    position:fixed; 
+    right:7%; 
+    bottom:210px; 
+    cursor:pointer; 
+    z-index:999;
+    display:none;
+}
+#code_img > img{
+    width:200px; 
+    height:200px;
+}
+#code img{
+    width:35px;
+    height:35px;
+    border-radius:2px;
+    margin-top:5px;
+}

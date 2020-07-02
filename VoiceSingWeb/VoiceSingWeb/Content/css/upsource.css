@@ -1,0 +1,82 @@
+﻿
+    h2 {
+        width: 100px;
+        text-align: center;
+    }
+
+    .first {
+        color: blue;
+    }
+
+    hr {
+        color: greenyellow;
+    }
+
+    .color-red {
+        color: red;
+    }
+
+    /*字体加重*/
+    .up_file_red {
+        color: #e00;
+        margin-right: 8px;
+    }
+    /*语言选择*/
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    .hp_jobs ul {
+        overflow: hidden;
+        zoom: 1;
+        width: 620px;
+    }
+
+    ul, dd, dl, dt, ol, li {
+        list-style: none;
+    }
+
+    html, body {
+        font-family: "Helvetica Neue","Hiragino Sans GB","Microsoft YaHei","\9ED1\4F53",Arial,sans-serif;
+    }
+
+    body {
+        font: 12px/1.5 'Microsoft Yahei',Tahoma,Helvetica,Arial,sans-serif;
+        font-family: "Microsoft Yahei", Tahoma, Helvetica, Arial, sans-serif;
+        color: #666;
+    }
+
+    .hp_jobs ul li {
+        float: left;
+        margin: 0 25px 15px 0;
+    }
+
+    body, form, p, ol, ul, p, h1, h2, h3, h4, li, dt, dd, dl, li {
+        margin: 0;
+        padding: 0;
+    }
+
+    .hp_jobs ul li a:link, .hp_jobs ul li a:visited {
+        color: #333;
+    }
+
+    .hp_jobs ul li a {
+        display: block;
+        border: 1px solid #e1e1e1;
+        background: #fff;
+        line-height: 28px;
+        height: 28px;
+        width: 68px;
+        text-align: center;
+        float: left;
+        white-space: nowrap;
+    }
+
+    a:link, a:visited {
+        text-decoration: none;
+        color: #666666;
+    }
+   .table th, .table td {
+        vertical-align: middle!important;
+}

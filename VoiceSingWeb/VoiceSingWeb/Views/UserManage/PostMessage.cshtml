@@ -1,0 +1,30 @@
+﻿@model Models.Circle
+
+<div class="card bg-light text-dark">
+    <div class="card-body">
+        <div class="col-md-1  column">
+            @*头像*@
+            <img alt="140x140" src="@Model.users.photo" class="img-circle" width="60" />
+        </div>
+        <div class="col-md-11  column">
+            @*评论*@
+            <a style="display:inline-grid"> @Html.DisplayFor(modelItem => Model.users.name)  </a>  ：      @*用户名*@
+            <p> @Html.Raw(Model.content)</p>       @*文本*@
+            &nbsp;<img alt="" src="@Model.imageurl" width="260" />     @*图片*@
+
+            <br>
+            @*点赞评论*@
+            <div class="col-md-8 column">
+            </div>
+            <div class="col-md-4 column">
+                <div class="doper j-flag">
+                    <small style="color:dimgrey;display:inline-block; ">&nbsp; @Html.DisplayFor(modelItem => Model.uptime)  </small>     @*时间展示*@
+                    <a href="#" class="s-fc7" data-action="like" style="display:inline-block;"> <i class="icn u-dicn u-dicn-3"> </i></a>
+                    <a href="#" class="s-fc7" data-action="like" style="display:inline-block;"> 喜欢 <span class="j-flag " data-count="666">(@Html.DisplayFor(modelItem => Model.thumbs))</span></a>    @*点赞数量*@
+                    <span class="line" style="display:inline-block;">|</span>
+                    <a href="#" class="s-fc7" data-action="comment" style="display:inline-block;">评论 <span class="j-flag " data-count="25">(@Html.DisplayFor(modelItem => Model.replysum))</span></a>    @*评论数量*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

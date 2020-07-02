@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SingMusicDataBaseModelStoreContainer" CdmEntityContainer="SingMusicDataBaseEntities">
+    <EntitySetMapping Name="active">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.active">
+        <MappingFragment StoreEntitySet="active">
+          <ScalarProperty Name="actno" ColumnName="actno" />
+          <ScalarProperty Name="actname" ColumnName="actname" />
+          <ScalarProperty Name="actinfo" ColumnName="actinfo" />
+          <ScalarProperty Name="orienroll" ColumnName="orienroll" />
+          <ScalarProperty Name="recenroll" ColumnName="recenroll" />
+          <ScalarProperty Name="image_url" ColumnName="image_url" />
+          <ScalarProperty Name="Joinsum" ColumnName="Joinsum" />
+          <ScalarProperty Name="Viewsum" ColumnName="Viewsum" />
+          <ScalarProperty Name="DDLine" ColumnName="DDLine" />
+          <ScalarProperty Name="Holder" ColumnName="Holder" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Block">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.Block">
+        <MappingFragment StoreEntitySet="Block">
+          <ScalarProperty Name="Bno" ColumnName="Bno" />
+          <ScalarProperty Name="Bname" ColumnName="Bname" />
+          <ScalarProperty Name="Btopicsum" ColumnName="Btopicsum" />
+          <ScalarProperty Name="Breplysum" ColumnName="Breplysum" />
+          <ScalarProperty Name="Busersum" ColumnName="Busersum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cart">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.cart">
+        <MappingFragment StoreEntitySet="cart">
+          <ScalarProperty Name="cartkid" ColumnName="cartkid" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="goodsid" ColumnName="goodsid" />
+          <ScalarProperty Name="qty" ColumnName="qty" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Category">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="Cno" ColumnName="Cno" />
+          <ScalarProperty Name="Cname" ColumnName="Cname" />
+          <ScalarProperty Name="Usersum" ColumnName="Usersum" />
+          <ScalarProperty Name="Actsum" ColumnName="Actsum" />
+          <ScalarProperty Name="Clicksum" ColumnName="Clicksum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="circle">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.circle">
+        <MappingFragment StoreEntitySet="circle">
+          <ScalarProperty Name="cno" ColumnName="cno" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="uptime" ColumnName="uptime" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="imageurl" ColumnName="imageurl" />
+          <ScalarProperty Name="thumbs" ColumnName="thumbs" />
+          <ScalarProperty Name="replysum" ColumnName="replysum" />
+          <ScalarProperty Name="varify" ColumnName="varify" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="companyMusics">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.companyMusics">
+        <MappingFragment StoreEntitySet="companyMusics">
+          <ScalarProperty Name="cm_id" ColumnName="cm_id" />
+          <ScalarProperty Name="cm_name" ColumnName="cm_name" />
+          <ScalarProperty Name="music_url" ColumnName="music_url" />
+          <ScalarProperty Name="music_down" ColumnName="music_down" />
+          <ScalarProperty Name="music_upTime" ColumnName="music_upTime" />
+          <ScalarProperty Name="music_type" ColumnName="music_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Goods">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.Goods">
+        <MappingFragment StoreEntitySet="Goods">
+          <ScalarProperty Name="goodsid" ColumnName="goodsid" />
+          <ScalarProperty Name="goodsname" ColumnName="goodsname" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="goodstypeid" ColumnName="goodstypeid" />
+          <ScalarProperty Name="img" ColumnName="img" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="goodsType">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.goodsType">
+        <MappingFragment StoreEntitySet="goodsType">
+          <ScalarProperty Name="goodstypeid" ColumnName="goodstypeid" />
+          <ScalarProperty Name="typename" ColumnName="typename" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JoinAct">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.JoinAct">
+        <MappingFragment StoreEntitySet="JoinAct">
+          <ScalarProperty Name="JoinAct_no" ColumnName="JoinAct_no" />
+          <ScalarProperty Name="JoinUser_id" ColumnName="JoinUser_id" />
+          <ScalarProperty Name="JoinCategory_id" ColumnName="JoinCategory_id" />
+          <ScalarProperty Name="Jointime" ColumnName="Jointime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="musicCollectRecord">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.musicCollectRecord">
+        <MappingFragment StoreEntitySet="musicCollectRecord">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="music_id" ColumnName="music_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="collect_time" ColumnName="collect_time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="musicType">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.musicType">
+        <MappingFragment StoreEntitySet="musicType">
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="typeName" ColumnName="typeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orderdetails">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.Orderdetails">
+        <MappingFragment StoreEntitySet="Orderdetails">
+          <ScalarProperty Name="orderdetailsid" ColumnName="orderdetailsid" />
+          <ScalarProperty Name="orderid" ColumnName="orderid" />
+          <ScalarProperty Name="goodsid" ColumnName="goodsid" />
+          <ScalarProperty Name="qty" ColumnName="qty" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orders">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.orders">
+        <MappingFragment StoreEntitySet="orders">
+          <ScalarProperty Name="orderid" ColumnName="orderid" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="addressid" ColumnName="addressid" />
+          <ScalarProperty Name="ordertime" ColumnName="ordertime" />
+          <ScalarProperty Name="Tot_amt" ColumnName="Tot_amt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="playRecord">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.playRecord">
+        <MappingFragment StoreEntitySet="playRecord">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="music_id" ColumnName="music_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="play_time" ColumnName="play_time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Receipt_address">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.Receipt_address">
+        <MappingFragment StoreEntitySet="Receipt_address">
+          <ScalarProperty Name="addressid" ColumnName="addressid" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="telephone" ColumnName="telephone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reply">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.Reply">
+        <MappingFragment StoreEntitySet="Reply">
+          <ScalarProperty Name="Rno" ColumnName="Rno" />
+          <ScalarProperty Name="Responder_id" ColumnName="Responder_id" />
+          <ScalarProperty Name="RTLocation_id" ColumnName="RTLocation_id" />
+          <ScalarProperty Name="RBLocation_id" ColumnName="RBLocation_id" />
+          <ScalarProperty Name="RContent" ColumnName="RContent" />
+          <ScalarProperty Name="Rtime" ColumnName="Rtime" />
+          <ScalarProperty Name="Likesum" ColumnName="Likesum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Topic">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.Topic">
+        <MappingFragment StoreEntitySet="Topic">
+          <ScalarProperty Name="Tno" ColumnName="Tno" />
+          <ScalarProperty Name="Tname" ColumnName="Tname" />
+          <ScalarProperty Name="Holder" ColumnName="Holder" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="TContent" ColumnName="TContent" />
+          <ScalarProperty Name="Readsum" ColumnName="Readsum" />
+          <ScalarProperty Name="Replysum" ColumnName="Replysum" />
+          <ScalarProperty Name="Varify" ColumnName="Varify" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="upType">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.upType">
+        <MappingFragment StoreEntitySet="upType">
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="typeName" ColumnName="typeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_friends">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.user_friends">
+        <MappingFragment StoreEntitySet="user_friends">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="adduserId" ColumnName="adduserId" />
+          <ScalarProperty Name="add_date" ColumnName="add_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="userLeave">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.userLeave">
+        <MappingFragment StoreEntitySet="userLeave">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="Leaveuser_id" ColumnName="Leaveuser_id" />
+          <ScalarProperty Name="Leave_time" ColumnName="Leave_time" />
+          <ScalarProperty Name="Leave_content" ColumnName="Leave_content" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="userMusics">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.userMusics">
+        <MappingFragment StoreEntitySet="userMusics">
+          <ScalarProperty Name="music_id" ColumnName="music_id" />
+          <ScalarProperty Name="music_name" ColumnName="music_name" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="imgage_url" ColumnName="imgage_url" />
+          <ScalarProperty Name="music_url" ColumnName="music_url" />
+          <ScalarProperty Name="musicType_id" ColumnName="musicType_id" />
+          <ScalarProperty Name="upType_id" ColumnName="upType_id" />
+          <ScalarProperty Name="music_like" ColumnName="music_like" />
+          <ScalarProperty Name="music_info" ColumnName="music_info" />
+          <ScalarProperty Name="upTime" ColumnName="upTime" />
+          <ScalarProperty Name="listen_times" ColumnName="listen_times" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.users">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="phone_num" ColumnName="phone_num" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="photo" ColumnName="photo" />
+          <ScalarProperty Name="birthday" ColumnName="birthday" />
+          <ScalarProperty Name="user_sex" ColumnName="user_sex" />
+          <ScalarProperty Name="register_time" ColumnName="register_time" />
+          <ScalarProperty Name="userType_id" ColumnName="userType_id" />
+          <ScalarProperty Name="area" ColumnName="area" />
+          <ScalarProperty Name="user_fans" ColumnName="user_fans" />
+          <ScalarProperty Name="user_info" ColumnName="user_info" />
+          <ScalarProperty Name="user_add" ColumnName="user_add" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="userType">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.userType">
+        <MappingFragment StoreEntitySet="userType">
+          <ScalarProperty Name="userType_id" ColumnName="userType_id" />
+          <ScalarProperty Name="userType_name" ColumnName="userType_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="videoCollectRecord">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.videoCollectRecord">
+        <MappingFragment StoreEntitySet="videoCollectRecord">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="video_id" ColumnName="video_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="collect_time" ColumnName="collect_time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="videoComment">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.videoComment">
+        <MappingFragment StoreEntitySet="videoComment">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="video_id" ColumnName="video_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="Comment_time" ColumnName="Comment_time" />
+          <ScalarProperty Name="Comment_content" ColumnName="Comment_content" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="videos">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.videos">
+        <MappingFragment StoreEntitySet="videos">
+          <ScalarProperty Name="video_id" ColumnName="video_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="video_name" ColumnName="video_name" />
+          <ScalarProperty Name="video_photo" ColumnName="video_photo" />
+          <ScalarProperty Name="video_url" ColumnName="video_url" />
+          <ScalarProperty Name="videoType_id" ColumnName="videoType_id" />
+          <ScalarProperty Name="video_look" ColumnName="video_look" />
+          <ScalarProperty Name="video_info" ColumnName="video_info" />
+          <ScalarProperty Name="video_upTime" ColumnName="video_upTime" />
+          <ScalarProperty Name="relate_music" ColumnName="relate_music" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="videoType">
+      <EntityTypeMapping TypeName="SingMusicDataBaseModel.videoType">
+        <MappingFragment StoreEntitySet="videoType">
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="typeName" ColumnName="typeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

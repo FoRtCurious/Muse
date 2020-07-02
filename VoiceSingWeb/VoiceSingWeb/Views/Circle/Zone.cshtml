@@ -1,0 +1,119 @@
+﻿@model Models.Users
+@{
+    ViewBag.Title = "个人中心";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Css{
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+}
+
+<style>
+    .box1 {
+        display: flex;
+        width: 300px;
+        height: 70px;
+        background-color: white ;
+        text-align :center ;
+        margin-left :15px;
+
+    }
+
+    .box2 {
+        width: 85px;
+        min-height: 50px;
+        margin-top: 10px;
+        margin-left: 10px;
+        text-align: center;
+    }
+    .box3 {      
+        width: 300px;
+        height: 320px;
+        margin-top: 40px;       
+        background-color: white ;
+         margin-left :15px;
+    }
+
+
+</style>
+
+
+<div class="container">
+    <div class="row clearfix" style="min-height :900px;background-color :#f2f5f1; ">
+        <div class="col-md-12 column">
+            <div class="row clearfix" >
+                <div class="col-md-12 column" style="overflow:hidden ;text-align: center ; height :320px;">
+                    <img class="img-circle photo" style="height:110px; margin-top :50px; border: 3px solid #73AD21;" alt="user" src="@Model.photo " />
+                    <div style="margin-top :15px;font-size:25px ; color :#808080 ; "> @Model.name   </div>
+                    <div style="margin-top :10px;">
+                        <button type="button" class="btn btn-primary btn-lg" style="margin-left :45px;" onclick="location.href='@Url.Action("userSingerDetails", "Singers", new { id = Model.userId })'">个人中心</button>
+                        <button type="button" class="btn btn-info btn-lg" style="margin-left :30px;width:110px; " onclick="location.href='@Url.Action("Write", "Mail"  )'">站内信</button>
+
+                        <div class="btn-group">
+                            <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+                            <ul class="dropdown-menu" >
+                                <li>
+                                    <a href="@Url.Action("ChatIndex", "Mail" )">聊天 </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("ZoneComplain", "Circle",new {id = Model.userId  } )">投诉</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row clearfix" style="margin-top :30px; overflow :hidden ;">
+                <div class="col-md-4 column" >
+                    <div class="box1">
+                        <div class="box2" >
+                            <div >
+                                <p style="text-align: center ; font-size :18px; "> @Model.user_add  </p> 
+                                <p style="text-align: center ; font-size :15px; "> 关注 </p> 
+                            </div>
+                        </div>
+
+                        <div class="box2">
+                            <div>
+                                <p style="text-align: center ; font-size :18px;"> @Model.user_fans  </p>
+                                <p style="text-align: center ; font-size :15px;"> 粉丝 </p>
+                            </div>
+                        </div>
+
+                        <div class="box2">
+                            <div>
+                                <p style="text-align: center ; font-size :18px; "> 2 </p>
+                                <p style="text-align: center ; font-size :15px; "> 动态 </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="box3">
+                      
+                        <div style="text-indent:30px; margin-top :20px;"> 我本将心照明月，奈何明月照沟渠。 </div>
+                        <hr>                       
+                        <span class="glyphicon glyphicon-map-marker" style="margin-left :20px;font-size:16px;"> @Model.area   </span> <br/>
+                        <span class="glyphicon glyphicon-gift" style="margin-left :20px;font-size:16px ;"> @Model.birthday    </span><br/>
+                        <span class="glyphicon glyphicon-comment" style="margin-left :20px;font-size:16px ;"> <img alt="140x140" src="~/Content/images/load/zone.jpg" style="width :150px;" />  </span><br />
+                                            
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-8 column">
+
+
+                    @Html.Action("ZoneDetails", "Circle", new {id=Model.userId  })       @*相关动态*@
+
+
+                    
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

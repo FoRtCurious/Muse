@@ -1,0 +1,112 @@
+﻿@model  Models.Active
+@{
+    ViewBag.Title = Model.actname;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/css/bootstrap.css" />
+<link rel="stylesheet" href="~/Content/css/bootstrap.min.css" />
+<style>
+    .part-txt {
+        line-height: 2;
+    }
+
+    .part-body {
+        font-size: 19px;
+        text-align: center;
+        color: #8cbfb4;
+    }
+</style>
+@*顶部图*@<br>
+<div class="container">
+    <div class="row clearfix" style="height:320px;">
+        <div class="col-md-12 column">
+            <div class="row clearfix" style="height:290px; background:url(../../@Model.image_url) no-repeat; ">
+                <div style="text-align:right ;">
+                    <button class="btn btn-info" type="button" onclick="location.href='@Url.Action("Complain", "Camp",new{id= @Model.actno})'">投诉</button>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+</div>
+
+@*主页内容*@
+<div class="container">
+    <div class="row clearfix" style="min-height:500px;overflow-y:hidden;">
+        <div class="col-md-12 column">
+            <div class="panel-group" id="panel-895419">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a class="panel-title" data-toggle="collapse" data-parent="#panel-895419" href="#panel-element-920450">活动详情</a>
+                    </div>
+                    <div id="panel-element-920450" class="panel-collapse in">
+                        <div class="panel-body">
+
+                            <div class="part-body self-bg">
+                                <p class="part-txt">@Model.actinfo </p>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-895419" href="#panel-element-768588">报名方式</a>
+                    </div>
+                    <div id="panel-element-768588" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            <div class="tab-body tab-body-yc">
+                                <strong>
+                                    原创报名：
+                                </strong>
+                                @Model.orienroll
+                                <br>
+                                <strong>
+                                    其他报名：
+                                </strong>
+                                @Model.recenroll
+                                <div class="sign-panel">
+                                    <div class="sign-warpper">
+                                        @*<input type="text" placeholder="" class="sign-textbox">*@
+                                        <a href="javascript:;" class="sign-button">我要参赛</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-group" id="panel-195098">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a class="panel-title" data-toggle="collapse" data-parent="#panel-195098" href="#panel-element-370006">参赛歌曲</a>
+                    </div>
+                    <div id="panel-element-370006" class="panel-collapse collapse in">
+                      
+                        @Html.Action("CA1", "Singers", new { id = Model.actno })   @*跳往专辑内容页*@
+                        
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a class="panel-title" data-toggle="collapse" data-parent="#panel-195098" href="#panel-element-565182">参赛视频</a>
+                    </div>
+                    <div id="panel-element-565182" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            @*视频元素*@
+                            <div style="width: 500px;height: 400px" align="center">
+                                <iframe height=400 width=640 src="~/Content/source/video-source/16.mp4" frameborder=0></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

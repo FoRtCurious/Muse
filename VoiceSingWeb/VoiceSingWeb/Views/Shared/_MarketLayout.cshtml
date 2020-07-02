@@ -1,0 +1,265 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>音悦城-@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/css/iconfont.css" type="text/css" />
+    <link rel="stylesheet" href="~/Content/css/font-awesome.css" type="text/css" /> 
+    <link rel="stylesheet" href="~/Content/css/layout.css" type="text/css" />
+    <link rel="stylesheet" href="~/Content/css/shopping.css">              
+    @RenderSection("Css", required: false)       
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Content/js/shopping.js"></script>
+</head>
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="top">
+            <div class="logo">
+                <a href="@Url.Action("Index","Home")"><img src="~/Content/images/load/logo.png" style="height:70px;width:160px;"></a>
+            </div>
+
+            <div class="topRight">
+                <div class="searchbox">
+                    <input type="text" name="search" id="search" placeholder="氧气耳机">
+                </div>
+
+                <div class="shopcart">
+                    @Html.Action("Carts_number", "Shopping")
+                </div>
+
+                <div class="userInfo">
+                    @if (Session["UserId"] != null)
+                    {
+                        <span class="dropdown"><a href="@Url.Action("Shop_Center","Shopping")" title="个人中心"><img src="@Session["Userphoto"]" alt="photo" style="width:40px;height:40px;border-radius:50%;" /></a></span>
+                    }
+                    else
+                    {
+                        <span><a id="login" style="cursor:pointer;">登录&nbsp;&nbsp;<i class="fa fa-sign-in"></i></a></span>
+                        <!-- 用户登录模态框（Modal） -->
+                        <div class="overCurtain"></div>
+                        using (Ajax.BeginForm("Login", "UserManage", new AjaxOptions() { HttpMethod = "post", OnSuccess = "LoginSuccess" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            <div class="hide-center">
+                                <div id="formhead">
+                                    <div id="formhead-title">
+                                        用户登录
+                                        <button type="button" id="close">X</button>
+                                    </div>
+                                </div>
+                                <div id="formbody">
+                                    <div class="loginUserName">
+                                        <input id="input-topright-loginInput" name="userId" class="loginInput" placeholder="账号/手机号" type="text">
+                                    </div>
+                                    <div class="loginPassword">
+                                        <i class="fa fa-eye-slash hide"></i>
+                                        <input id="input-bottomright-loginInput" name="password" class="loginInput" placeholder="用户密码" type="password" style="border-bottom-right-radius:5px;">
+                                    </div>
+                                    <div class="forgetpwd">
+                                        <a class="rg" id="toregister">注册</a>
+                                        <a class="fg" id="toforgetpwd">忘记密码？</a>
+                                    </div>
+                                    <div class="formfoot">
+                                        <button id="BSignIn" type="submit">登录</button>
+                                    </div>
+                                    <div id="otherlogin">
+                                        <span style="font-size:15px;">其他账号登录：</span>
+                                        <ul class="pull-right">
+                                            <li class="pull-right"><a href="#"><img src="~/Content/images/load/网易云.jpg" alt="网易云" /></a></li>
+                                            <li class="pull-right"><a href="#"><img src="~/Content/images/load/微博.jpg" alt="微博" /></a></li>
+                                            <li class="pull-right"><a href="#"><img src="~/Content/images/load/微信.jpg" alt="微信" /></a></li>
+                                            <li class="pull-right"><a href="#"><img src="~/Content/images/load/QQ.jpg" alt="qq" /></a></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <img src="~/Content/images/load/registerad.png" style="width:320px;height:120px;margin-left:35px;" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <!-- 用户注册模态框（Modal） -->
+                        <div class="r-overCurtain"></div>
+                        using (Ajax.BeginForm("Register", "UserManage", new AjaxOptions() { HttpMethod = "post", OnSuccess = "RegisterSuccess" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            <div class="r-hide-center">
+                                <div id="r-formhead">
+                                    <div id="r-formhead-title">
+                                        用户注册
+                                        <button type="button" id="r-close">X</button>
+                                    </div>
+                                </div>
+                                <div id="r-formbody">
+                                    <div class="r-Title">
+                                        <span class="title">手机号注册</span>
+                                        <span class="tologin">已有账号？<a id="Haccount">登录</a></span>
+                                    </div>
+                                    <div class="r-Phone">
+                                        <input id="phone" name="phone" class="r-Input" placeholder="请输入手机号" type="text">
+                                        <span id="phonecheck" class="red"></span>
+                                    </div>
+                                    <div class="r-Code">
+                                        <input id="confirmcode" name="code" class="r-CodeInput" placeholder="输入验证码" type="text">
+                                        <button id="BCode" type="button">发送</button>
+                                    </div>
+                                    <div class="r-Pwd">
+                                        <i class="fa fa-eye-slash hide"></i>
+                                        <input id="password" name="password" class="r-Input" placeholder="设置账户密码" type="password">
+                                        <span id="passwordcheck" class="red"></span>
+                                    </div>
+                                    <div class="r-Pwd">
+                                        <i class="fa fa-eye-slash hide"></i>
+                                        <input id="confirmpassword" name="confirmpassword" class="r-Input" placeholder="确认账户密码" type="password">
+                                        <span id="confirmpasswordcheck" class="red"></span>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" required="required" />同意并遵守<a href="#">《音悦网用户协议》</a>和<a href="#">《隐私政策》</a></label>
+                                    </div>
+                                    <div class="formfoot">
+                                        <button id="r-BSignIn" type="submit">注册</button>
+                                    </div>
+                                    <div id="r-otherlogin">
+                                        <span style="font-size:15px;">其他账号登录：</span>
+                                        <ul class="pull-right">
+                                            <li class="pull-right"><a href="#"><img src="~/Content/images/load/网易云.jpg" alt="网易云" /></a></li>
+                                            <li class="pull-right"><a href="#"><img src="~/Content/images/load/微博.jpg" alt="微博" /></a></li>
+                                            <li class="pull-right"><a href="#"><img src="~/Content/images/load/微信.jpg" alt="微信" /></a></li>
+                                            <li class="pull-right"><a href="#"><img src="~/Content/images/load/QQ.jpg" alt="qq" /></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <!-- 找回密码模态框（Modal） -->
+                        <div class="f-overCurtain"></div>
+                        using (Ajax.BeginForm("FindPassword", "UserManage", new AjaxOptions() { HttpMethod = "post", OnSuccess = "LoginSuccess" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            <div class="f-hide-center">
+                                <div id="f-formhead">
+                                    <div id="f-formhead-title">
+                                        找回密码
+                                        <button type="button" id="f-close">X</button>
+                                    </div>
+                                </div>
+                                <div id="f-formbody">
+                                    <div class="f-Title">
+                                        <span class="title">通过绑定手机号码找回</span>
+                                    </div>
+                                    <div class="f-Phone">
+                                        <input id="f-phone" name="phone" class="f-Input" placeholder="请输入手机号" type="text">
+                                        <span id="f-phonecheck" class="red"></span>
+                                    </div>
+                                    <div class="f-Code">
+                                        <input id="confirmcode" name="code" class="f-CodeInput" placeholder="输入验证码" type="text">
+                                        <button id="f-BCode" type="button">发送</button>
+                                    </div>
+                                    <div class="f-Pwd">
+                                        <i class="fa fa-eye-slash hide"></i>
+                                        <input id="f-password" name="password" class="f-Input" placeholder="重置账户密码" type="password">
+                                        <span id="f-passwordcheck" class="red"></span>
+                                    </div>
+                                    <div class="f-Pwd">
+                                        <i class="fa fa-eye-slash hide"></i>
+                                        <input id="f-confirmpassword" name="confirmpassword" class="f-Input" placeholder="确认账户密码" type="password">
+                                        <span id="f-confirmpasswordcheck" class="red"></span>
+                                    </div>
+                                    <div class="formfoot">
+                                        <button id="f-BSignIn" type="submit">重置密码</button>
+                                    </div>
+                                    <div id="f-otherlogin">
+                                        <span style="font-size:15px;">其他账号登录：</span>
+                                        <ul class="pull-right">
+                                            <li class="pull-right"><a href="#"><img src="~/Content/images/load/网易云.jpg" alt="网易云" /></a></li>
+                                            <li class="pull-right"><a href="#"><img src="~/Content/images/load/微博.jpg" alt="微博" /></a></li>
+                                            <li class="pull-right"><a href="#"><img src="~/Content/images/load/微信.jpg" alt="微信" /></a></li>
+                                            <li class="pull-right"><a href="#"><img src="~/Content/images/load/QQ.jpg" alt="qq" /></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </header>
+    <div>
+        @RenderBody()
+    </div>
+    <footer>
+        <div class="footer">
+            <div class="footerLeft">
+                <a href="#">关于音悦</a><span>|</span>
+                <a href="#">客户服务</a><span>|</span>
+                <a href="#">服务条款</a><span>|</span>
+                <a href="#">网站导航</a><span>|</span>
+                <a href="#">意见反馈</a>
+                <p>
+                    软件学院版权所有：&nbsp;&nbsp;江西师范大学先驌楼X3513b
+                </p>
+            </div>
+            <ul class="footerRight">
+                <li>
+                    <a href="#">
+                        <p class="iconfont">&#xe611;</p>
+                        独立音乐人
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <p class="iconfont">&#xe649;</p>
+                        音乐专栏
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <p class="iconfont">&#x347a;</p>
+                        自媒体
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <p class="iconfont">&#xe652;</p>
+                        赞赏
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+    <!-- 右边块 -->
+    <div class="rightNav" style="z-index:999">
+        <div style="border-bottom:1px solid #999"> <span>100%<br>正品</span> </div>
+        <div style="border-bottom:1px solid #999"> <span>七天无理由退货</span> </div>
+        <div style="border-bottom:1px solid #999">
+            <a href="@Url.Action("Carts","Shopping")">
+                <span>
+                    <p class="iconfont">&#xe502;</p>购物车
+                </span>
+                <span></span>
+            </a>
+        </div>
+
+        <div>
+            <a href="#">
+                <span>
+                    <p class="iconfont">&#xe625;</p>客服
+                </span>
+            </a>
+        </div>
+        <div class="toTop">
+            <span>
+                <p class="iconfont">&#xe689;</p>TOP
+            </span>
+        </div>
+    </div>    
+</body>
+</html>
+
+<script src="~/Content/js/Layout.js"></script>

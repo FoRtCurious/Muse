@@ -1,0 +1,75 @@
+﻿@model Models.Users
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>layuiTest</title>
+    <link rel="stylesheet" href="~/Content/layui-v2.5.6/layui/css/layui.css" media="all">
+</head>
+<body>
+    <div style="width:100%; height:100%;">
+        <table class="layui-table">
+            <colgroup>
+                <col width="100">
+                <col width="300">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>属性</th>
+                    <th>属性值</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>用户头像</td>
+                    <td><img src="@Model.photo" width="50" height="50" /></td>
+                </tr>
+                <tr>
+                    <td>用户账号</td>
+                    <td>@Model.userId</td>
+                </tr>
+                <tr>
+                    <td>用户昵称</td>
+                    <td>@Model.name</td>
+                </tr>
+                <tr>
+                    <td>用户密码</td>
+                    <td>@Model.password</td>
+                </tr>
+                <tr>
+                    <td>注册手机号</td>
+                    <td>@Model.phone_num</td>
+                </tr>
+                <tr>
+                    <td>注册时间</td>
+                    <td>@Model.register_time</td>
+                </tr>
+                <tr>
+                    <td>用户性别</td>
+                    <td>@Model.user_sex</td>
+                </tr> 
+                <tr>
+                    <td>用户生日</td>
+                    <td>@Model.birthday</td>
+                </tr>
+                <tr>
+                    <td>用户地址</td>
+                    <td>@Model.area</td>
+                </tr>                 
+                <tr>
+                    <td>会员级别</td>
+                    <td>@Model.UserType.userType_name</td>
+                </tr>
+                <tr>
+                    <td>个人简介</td>
+                    <td>@Model.user_info</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>  
+</body>
+</html>

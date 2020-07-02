@@ -1,0 +1,86 @@
+﻿
+@model IEnumerable<Models.Goods>
+@{
+    Layout = "~/Views/Shared/_MarketLayout.cshtml";
+    ViewBag.Title = "商品列表";
+}
+@section Css{
+    <link href="~/Content/css/list.css" rel="stylesheet" type="text/css" />
+}
+@{ 
+    string class0="", class1="", class2="", class3="", class4="",class5="";
+    string class6 = "", class7 = "", class8 = "", class9 = "";
+    switch(Convert.ToInt32(ViewData["ID"]))
+    {
+        case 0: class0 += "select";break;
+        case 1: class1 += "select"; break;
+        case 2: class2 += "select"; break;
+        case 3: class3 += "select"; break;
+        case 4: class4 += "select"; break;
+        case 5: class5 += "select"; break;
+        default:break;
+    }
+    switch(Convert.ToInt32(ViewData["high"]))
+    {
+        case 0:class6 += "select";break;
+        case 128: class7 += "select"; break;
+        case 199: class8 += "select"; break;
+        case 90000: class9 += "select"; break;
+    }
+  }
+<!-- section -->
+<div class="section">
+    <div class="section-top">
+        <a href="@Url.Action("Index", "Shopping")">首页</a>
+        <span>&nbsp;&nbsp;商品列表</span>
+    </div>
+    <div class="selector">
+        <div class="selector-top">
+            <span>分类：</span>
+            <ul>
+                <li class="@class0"><a href="@Url.Action("goodsList","Shopping",new { ID = 0, search = Request.QueryString["search"]  })">全部</a></li>
+                <li class="@class1"><a href="@Url.Action("goodsList","Shopping",new { ID = 1, search = Request.QueryString["search"] })">耳机</a></li>
+                <li class="@class2"><a href="@Url.Action("goodsList","Shopping",new { ID = 2, search = Request.QueryString["search"]  })">键盘</a></li>
+                <li class="@class3"><a href="@Url.Action("goodsList","Shopping",new { ID = 3, search = Request.QueryString["search"]  })">雨伞</a></li>
+                <li class="@class4"><a href="@Url.Action("goodsList","Shopping",new { ID = 4, search = Request.QueryString["search"]  })">充电宝</a></li>
+                <li class="@class5"><a href="@Url.Action("goodsList","Shopping",new { ID = 5, search = Request.QueryString["search"]  })">尤克里里</a></li>
+            </ul>
+        </div>
+        <div class="selector-bottom">
+            <span>价格：</span>
+            <ul>
+                <li class="@class6"><a href="@Url.Action("goodsList","Shopping",new { search = Request.QueryString["search"]  })">全部</a></li>
+                <li class="@class7"><a href="@Url.Action("goodsList","Shopping",new { low = 0, high = 128, search = Request.QueryString["search"]  })">0-128</a></li>
+                <li class="@class8"><a href="@Url.Action("goodsList","Shopping",new { low = 129, high = 199, search = Request.QueryString["search"]  })">129-199</a></li>
+                <li class="@class9"><a href="@Url.Action("goodsList","Shopping",new { low = 200, high = 90000, search = Request.QueryString["search"]  })">200-90000</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="selector-nav">
+        <a href="javascript:;" class="active">综合</a><span>·</span><a href="@Url.Action("goodsList","Shopping",new { low = Request.QueryString["low"], high = Request.QueryString["high"], method = "small", search = Request.QueryString["search"]  })">价格低到高</a><span>·</span><a href="@Url.Action("goodsList","Shopping",new { low = Request.QueryString["low"], high = Request.QueryString["high"], method = "big", search = Request.QueryString["search"]  })">价格高到低</a>
+    </div>
+
+</div>
+<!-- list -->
+<div class="list">
+    <div class="block">
+        <ul class="ulRec">
+            @foreach (var item in Model)
+        {
+                <li class="liRec">
+                    <a href="@Url.Action("gooddetail", "Shopping",new { id = item.goodsid })" target="_blank" class="detailImg">
+                        <img src="@item.img" alt="" style="width:244px;height:244px;">
+                        <div class="goodName">
+                            <span class="hot">热门</span>
+                            <a href="@Url.Action("gooddetail", "Shopping",new { id = item.goodsid })" target="_blank">@item.goodsname</a>
+                            <p class="price">￥@item.price</p>
+                        </div>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+<script src="~/Content/js/list.js"></script>
+
+

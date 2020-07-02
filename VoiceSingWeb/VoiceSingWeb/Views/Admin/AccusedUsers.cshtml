@@ -1,0 +1,142 @@
+﻿@{
+    Layout = null;
+}
+
+<div style="padding-top:5px;">
+    <label style="width:200px;font-size:15px;font-weight:600">用户管理&nbsp;&rang;&nbsp;被举报用户</label>
+</div>
+<table class="layui-hide" id="demo" lay-filter="tableData"></table>
+
+<script type="text/javascript" src="~/Content/layui-v2.5.6/layui/layui.all.js"></script>
+<script>
+layui.use(['laypage', 'layer', 'table','element'], function(){
+  var laypage = layui.laypage //分页
+  ,layer = layui.layer //弹层
+  ,table = layui.table //表格
+  , element = layui.element //元素操作
+
+  //执行一个 table 实例
+  table.render({
+      elem: '#demo'
+    , id: 'tableData'
+    , url: '/Admin/AccusedUsersJson' //数据接口
+    , title: '被举报用户表'
+    , page: true //开启分页
+    , limit: 12
+    , method: 'get'  //提交方式
+    , toolbar: '#toolbar' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+    ,cols: [[ //表头
+      {type: 'checkbox', fixed: 'left'}
+      ,{field: 'accusedid', title: '流水号', fixed: 'left'}
+      ,{field: 'userId', title: '被举报用户ID',}
+      ,{field: 'accusedtime', title: '举报时间', sort: true, templet: '<div>{{ createTime(d.accusedtime)}}</div>' }
+      ,{field: 'deal_state', title: '处理', width: 250, align: 'center', templet: function (d) {
+              if (d.deal_state == 0) {
+                  return '<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail"><i class="layui-icon layui-icon-search"></i>原因</a>' + '<a class="layui-btn layui-btn-xs" lay-event="back"><i class="layui-icon layui-icon-return"></i>驳回</a>' + '<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="close"><i class="layui-icon layui-icon-close-fill"></i>冻结</a>';
+              }
+              else if (d.deal_state == 1) {
+                  return '<span style="color: #18A4D0;">已处理</span>';
+              }
+          }
+      }
+    ]]
+  });
+
+  //监听行工具事件
+  table.on('tool(tableData)', function(obj) {
+      var data = obj.data;
+      json = JSON.stringify(data);
+      switch(obj.event) {
+          case 'detail':
+              var index = layer.open({
+                  type: 2,
+                  title: "违规详情",
+                  area: ['30%', '70%'],
+                  fix: false,
+                  maxmin: true,
+                  shadeClose: true,
+                  shade: 0.4,
+                  skin: 'layui-layer-rim',
+                  content: ["/Admin/AccusedReasons/" + data.accusedid],
+              });
+              break;
+          case 'back':
+              var backIndex = layer.confirm("确认驳回该举报请求吗?", function (backIndex) {
+                  $.ajax({
+                      url: ["/Admin/BackAccused"],
+                      data: {
+                          accusedid: data.accusedid,
+                      },
+                      type: "post",
+                      success: function (suc) {
+                          if (suc.code == 200) {
+                              layer.msg("驳回成功", {
+                                  icon: 1
+                              });
+                              table.reload('tableData', {
+                                  method: 'post'
+                                  , url: '/Admin/AccusedUsersJson'
+                                  , page: {
+                                      curr: $(".layui-laypage-em").next().html() //重载当前页
+                                  }
+                              });
+                          } else {
+                              layer.msg("驳回失败", {
+                                  icon: 5
+                              });
+                          }
+                      }
+                  });
+                  layer.close(backIndex);
+              });
+              break;
+          case 'close':
+              var delIndex = layer.confirm('确认冻结ID为:' + data.userId + "的用户吗?(冻结后该账号用户将不能使用)", function (delIndex) {
+                  $.ajax({
+                      url: ["/Admin/CloseDownUser"],
+                      data: {
+                          accusedid: data.accusedid,
+                          userId: data.userId,
+                      },
+                      type: "post",
+                      success: function (suc) {
+                          if(suc.code==200) {
+                              obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                              layer.msg("冻结成功", {
+                                  icon: 1
+                              });
+                              table.reload('tableData', {
+                                  method: 'post'
+                                  , url: '/Admin/AccusedUsersJson'
+                                  , page: {
+                                      curr: 1
+                                  }
+                              });
+                          } else {
+                              layer.msg("冻结失败", {
+                                  icon: 5
+                              });
+                          }
+                      }
+                  });
+                  layer.close(delIndex);
+              });
+              break;
+      }
+  });
+
+  //分页
+  laypage.render({
+    elem: 'pageDemo' //分页容器的id
+    ,count: 100 //总页数
+    ,skin: '#1E9FFF' //自定义选中色值
+    //,skip: true //开启跳页
+    ,jump: function(obj, first){
+      if(!first){
+        layer.msg('第'+ obj.curr +'页', {offset: 'b'});
+      }
+    }
+  });
+
+});
+</script>

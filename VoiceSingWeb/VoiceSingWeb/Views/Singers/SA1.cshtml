@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Models.UserMusics>
+@{
+    Layout = null;
+}
+
+@section Css{
+    <link href="~/Content/css/music.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/category.css" rel="stylesheet" type="text/css" />
+}
+
+@foreach (var item in Model)
+{
+<div class="container"  >
+    <div class="row clearfix" style="width:650px;height :80px; overflow-x :hidden ;overflow-y :hidden ;">
+        <div class="col-md-1 column">
+            <img class="img-circle" alt="140x140" src="@item.imgage_url "  style="width :50px;height:50px;"/>
+        </div>
+        <div class="col-md-2 column">
+            <h5>
+                <a class="recommend" title="@item.music_name" href="@Url.Action("Details","Music" ,new { id = @item.music_id})"> @item.music_name  </a>
+            </h5>
+        </div>
+        <div class="col-md-6 column">
+            <small>
+                <a class="recommend" style="color:black ;" title="@item.music_info" href="@Url.Action("Details","Music" ,new { id = @item.music_id})">@item.music_info </a>
+            </small>
+        </div>     
+        <div class="col-md-3 column">
+            <div style="font-size:14px; float:right;">
+                <a href="@Url.Action("GiveLike","UserManage",new { id = item.music_id})" class="like" style="display:inline-block; line-height :1px;">
+                    <span>
+                        <i class="fa fa-thumbs-up" style="line-height :1px;"></i>&nbsp;点赞 &nbsp;|
+                    </span>
+                </a> &nbsp;
+                <a href="@Url.Action("musicCollect","UserManage",new { id = item.music_id})" class="collect" style="display:inline-block;line-height :1px;">
+                    <span>
+                        <i class="fa fa-heart" style="line-height :1px;"></i>&nbsp;收藏
+                    </span>
+                </a>
+            </div>       
+        </div>
+    </div>
+</div>
+}
+
+
+
+
+

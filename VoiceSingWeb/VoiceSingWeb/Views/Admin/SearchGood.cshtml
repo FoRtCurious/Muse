@@ -1,0 +1,66 @@
+﻿@model Models.Goods
+<style>
+    .goods-list-item{
+        width:135px;
+        margin-right:20px;
+        margin-bottom:20px;
+        position:relative;
+        display:inline-block;
+        border:1px solid grey;
+    }
+    .edit-product{
+        position:absolute;
+        z-index:2;
+        background-color:#ff0000;
+        top: 50px;
+        left: 40px;
+        height: 20px;
+        width: 65px;
+        text-align:center;
+        border-radius:2px;
+        cursor:pointer;
+    }
+    .product-name{
+        height:39px;
+        overflow: hidden;
+        text-align:center;
+    }
+
+    .product-name:hover {
+        color: green;
+    }
+
+    a:hover .product-name {
+        color: green;
+    }
+</style>
+<div id="list-content">
+    <div style="padding-top:5px;margin-bottom:10px;">
+        <label style="width:200px;font-size:15px;font-weight:600">商城管理&nbsp;&rang;&nbsp;已上架的商品</label>
+    </div>
+    <div class="layui-form-item">
+        <div style="display:inline-block;height:30px;line-height:30px;">
+            <label>按分类筛选:</label>
+            @Html.DropDownList("goodType", null, htmlAttributes: new { })
+        </div>
+        <div style="display:inline-block;height:30px;line-height:30px;">
+            @using (Ajax.BeginForm("SearchGood", "Admin", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "list-content" }, new { @id = "searchForm" }))
+            {
+                <label>按ID搜索:</label>
+                <input type="text" name="searchId" style="height:20px;" />
+                <a class="layui-btn layui-btn-primary layui-btn-xs" onclick="document: searchForm.submit()"><i class="layui-icon layui-icon-search"></i>搜索</a>
+            }
+        </div>
+    </div>
+    <div class="goods-list-item">
+        <div class="edit-product">@Ajax.ActionLink("编辑商品", "EditProduct", "Admin", new { goodid = Model.goodsid }, new AjaxOptions { UpdateTargetId = "body-content" })</div>
+        <div>
+            <img alt="image" src="@Model.img" style="width:135px;height:120px;" />
+            <div class="product-name">@Model.goodsname</div>
+        </div>
+        <div style="text-align:center;">
+            <span style="color:red;display:block">价格:￥@Model.price</span>
+            <span style="color:grey;">库存: @Model.good_store 件</span>
+        </div>
+    </div>
+</div>

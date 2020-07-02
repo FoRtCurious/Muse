@@ -1,0 +1,274 @@
+﻿@* 获得单个数据 *@
+@model VoiceSingWeb.Models.GoodsdetailsViewModel
+@{
+    Layout = "~/Views/Shared/_MarketLayout.cshtml";
+    ViewBag.Title = "商品详情";
+}
+@section Css{
+    <link rel="stylesheet" type="text/css" href="~/Content/css/goodsdetail.css" />
+}
+
+<div class="section">
+    <div class="section-top">
+        <a href="@Url.Action("Index", "Shopping")">首页</a>
+        <span>&nbsp;&nbsp;@Model.Goodsdatail.goodsname</span>
+        <span class="iconfont">&#xe608;&nbsp;&nbsp;分享</span>
+    </div>
+</div>
+<!-- main -->
+<div class="main">
+    <div class="main-top">
+        <div class="main-top-left">
+            <div class="imgbox">
+                @* ../根目录 *@
+                <img src="@Model.Goodsdatail.img" alt="" id="smallImg" style="width:440px;height:440px;" />
+                <div id="mask"></div>
+                <div class="bigimg">
+                    <img src="@Model.Goodsdatail.img" alt="img">
+                </div>
+            </div>
+            <div class="smnav">
+                <ul>
+                    <li class="active" index="0"><img src="@Model.Goodsdatail.img" alt=""></li>
+                    <li index="1"><img src="@Model.Goodsdatail.img" alt=""></li>
+                    <li index="2"><img src="@Model.Goodsdatail.img" alt=""></li>
+                </ul>
+            </div>
+        </div>
+
+        @using (Ajax.BeginForm("AddCart", "Shopping", new AjaxOptions { HttpMethod = "post", OnSuccess = "success" } ))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <input type="hidden" name="goodid" value="@Model.Goodsdatail.goodsid" />
+            <input type="hidden" name="cost" value="@Model.Goodsdatail.price" />
+            <div class="main-top-right">
+                <div class="basic">
+                    <h2>@Model.Goodsdatail.goodsname</h2>
+                    <p class="price ">¥@Model.Goodsdatail.price</p>
+                    <p class="sale">使用"数码开年超享礼券" ,可省<span class="cutoff">¥40</span></p>
+                    <div class="coupons">
+                        <span class="title">促销: </span>
+                        <span class="coupon">
+                            <span class="label">火热开抢</span>40元&nbsp;&nbsp;数码开年超享礼券,无门槛<span>已领</span>
+                        </span>
+                    </div>
+                    <div class="color-select">
+                        <span class="title">颜色 :</span>
+                        <ul>
+                            <li>红色</li>
+                            <li>黑色</li>
+                            <li>白色</li>
+                        </ul>
+                    </div>
+                    <div class="num">
+                        <span class="title">数量 :</span>
+                        <ul>
+                            <li>-</li>
+                            <span><input type="text" name="goodnum" id="goodnum" value="1"></span>
+                            <li>+</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="services">
+                    <span>服务 : </span>
+                    <span>
+                        <a class="service">• 满119包邮</a>
+                        <a class="service">• 商家发货</a>
+                        <a class="service">• 商家认证</a>
+                    </span>
+                </div>
+                <div class="buy">
+                    <button style="display:inline-block;width:139px;" type="submit"><span class="addcart">加入购物车</span></button>
+                </div>
+            </div>
+            <div class="taocan">
+                <p class="title">优惠套餐</p>
+                <ul class="title-list">
+                    <li class="active" index="6">套餐一</li>
+                    <li index="7">套餐二</li>
+                    <li index="8">套餐三</li>
+                    <li index="9">套餐四</li>
+                </ul>
+                <img src="~/Content/images/shopping/home/6.png" alt="套餐图片">
+            </div>
+            <div class="about">
+                <div class="left">
+                    <div class="section-top">
+                        <span style="font-weight:bold;">商品详情</span>
+                    </div>
+                    <img src="~/Content/images/shopping/home/10.png" alt="">
+                </div>
+                @*数据库展示数据  要用分布视图*@
+                <div class="right">
+                    <div class="section-top">
+                        <span>热门商品</span>
+                    </div>
+                    @Html.Action("goodDetails_hot_Product", "Shopping")
+                </div>
+            </div>
+            <div class="clear"></div>
+        }
+        @using (Html.BeginForm("BuyNow", "Shopping", FormMethod.Get, new { style = "display:inline-block;margin: -1336px 660px;z-index: 200;/* float: right; */position: absolute;" }))
+        {
+            <input type="hidden" name="goodid" value="@Model.Goodsdatail.goodsid">
+            <input type="hidden" name="goodnum" id="num" value="1">
+            <button style="display:inline-block;width:138px;" class="Buynow"><span class="buynow">立即购买</span></button>
+        }
+        @using (Html.BeginForm("AddCollect", "Shopping", FormMethod.Get, new { style = "display:inline-block;margin: -1336px 797px;z-index: 100;/* float: right; */position: absolute;" }))
+        {
+            <input type="hidden" name="goodid" value="@Model.Goodsdatail.goodsid" />
+            <button style="display:inline-block;width:138px;" class="Collect"><span class="collect">添加收藏</span></button>
+        }
+    </div> 
+    <div class="Comment">
+        <ul class="block">
+            @if (Model.Comments != null && Model.Comments.Count() != 0)
+            {
+                int? b = Model.Comments.Count();
+                <li class="sum">
+                    <span>
+                        累计评价：@b
+                    </span>
+                </li>
+                int? a = Model.Sorce.ElementAt(0);
+                <li class="sorce">
+                    <span>与描述相符：<strong class="stone">@a</strong></span>
+                </li>
+
+                if (a >= 4)
+                {
+                    <li class="content">
+                        <span class="our">大家都在说：</span>
+                        <div class="pingjia"><span class="pingjia1">正品，性价好</span></div>
+                        <div class="pingjia"><span class="pingjia1">物流迅速</span></div>
+                        <div class="pingjia"><span class="pingjia1">客服服务超好</span></div>
+                    </li>
+                }
+                else if (a <= 2)
+                {
+                    <li class="content">
+                        <span class="our">大家都在说：</span>
+                        <div class="pingjia"><span class="pingjia1">正品，性价比差</span></div>
+                        <div class="pingjia"> <span class="pingjia1">物流慢</span></div>
+                        <div class="pingjia"><span class="pingjia1">客服服务态度不好</span></div>
+                    </li>
+                }
+                else
+                {
+                    <li class="content">
+                        <span class="our">大家都在说：</span>
+                        <div class="pingjia"><span class="pingjia1">正品，性价不错</span></div>
+                        <div class="pingjia"><span class="pingjia1">物流迅速</span></div>
+                        <div class="pingjia"><span class="pingjia1">客服服务不错</span></div>
+                      </li>
+                }
+                int? c = Model.CommentsGood.Count();
+                int? d = Model.CommentsBad.Count();
+                int? e = Model.CommentsImg.Count();
+                int? f = Model.Add_comment.Count();
+                <li class="select">
+                    <span class="block">                      
+                        <input class="blockinput"  type="radio" name="a"  checked/>
+                        <label>全部(@b)</label>
+                        <input class="blockinput" type="radio"name="a" value="1"/>
+                        <label>好评(@c)</label>
+                        <input  class="blockinput" type="radio"name="a"value="2" />
+                        <label>差评(@d)</label>
+                        <input  class="blockinput" type="radio" name="a" value="3"/>
+                        <label>有图(@e)</label>
+                        <input class="blockinputadd" type="radio"name="a" />
+                        <label>追评(@f)</label>
+                    </span>
+                </li>
+
+                <li class="part" id="part-com">
+                    @{Html.RenderAction("Comment", "Shopping");}
+                </li>
+
+                <li class="part" id="part-add">
+                  @{Html.RenderAction("AddComentPage", "Shopping");}
+                </li>
+            }
+            else
+            {
+                <li> <span>该商品还没有买家评论过哦！</span></li>
+            }
+        </ul>
+    </div>
+</div>
+
+
+
+<script>
+
+    $(".main .main-top .main-top-right .basic .color-select ul li").click(function () {
+        if ($(this).html() == "红色") {
+            $(this).addClass("active").siblings().removeClass();
+            $(".smnav ul li").eq(0).addClass("active").siblings().removeClass();
+
+            bigImg.src = smallImg.src = "@Model.Goodsdatail.img";
+        } else if ($(this).html() == "黑色") {
+            $(this).addClass("active").siblings().removeClass();
+            $(".smnav ul li").eq(1).addClass("active").siblings().removeClass();
+            bigImg.src = smallImg.src = "@Model.Goodsdatail.img";
+        } else {
+            $(this).addClass("active").siblings().removeClass();
+            $(".smnav ul li").eq(2).addClass("active").siblings().removeClass();
+            bigImg.src = smallImg.src = "@Model.Goodsdatail.img";
+        }
+    });
+ 
+    
+    function success(data) {
+        if (data == "success") {
+            alert('加入购物车成功！');
+            location.reload();
+        }
+        else {
+            alert('您还没有登入，请登入！');
+        }
+    };
+
+    $(document).on('click', '.block .blockinput', function () {
+        var sorce = $(this).attr("value");
+        console.log(sorce)
+        var goodid = @Model.Goodsdatail.goodsid;
+        $.ajax({
+            url: '../Comment',
+            type: 'post',
+            data: {
+                sorce: sorce,
+                id: goodid,
+            },
+            success: function (data) {
+                //alert(data);
+                $("#part-com").html(data);
+            }
+        })
+    });
+
+    $("#part-add").hide(100);
+    $(".blockinput").click(function () {
+        if ($("#part-com").css("display") == "none") {
+            $("#part-com").show(100);
+            $("#part-add").hide(100);
+        }
+        else {
+            $("#part-add").hide(100);
+        }
+    });
+    $(".blockinputadd").click(function () {
+        if ($("#part-add").css("display") == "none") {
+            $("#part-add").show(100);
+
+            $("#part-com").hide(100);
+        }
+        else {
+            $("#part-add").hide(100);
+        }
+    });
+
+</script>
+
+

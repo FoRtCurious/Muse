@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Models.Users>
+@using System;
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model)
+{
+
+    <dd>
+        <br>
+        <div class="card">
+            <div class="card-body">
+                <div class="row clearfix" style="min-height :90px; overflow-y :hidden ;">
+                    <div class="col-md-3  column">
+                        <img alt="140x140" src="@item.photo " width="70" />
+                    </div>
+                    <div class="col-md-6 column">
+                        <a href="@Url.Action("userSingerDetails","Singers" ,new { id = @item.userId})">&nbsp;@Html.DisplayFor(model => item.name)</a>
+                        <br>
+                        <small>
+                            @item.user_info 
+                        </small>
+                        <small> <span class="glyphicon glyphicon-user">粉丝：@Html.DisplayFor(modelItem => item.user_fans)</span>  </small>
+                    </div>
+                    <div class="col-md-3 column">
+                        <button type="button" class="btn btn-default" style="height:30px;" onclick="location.href='@Url.Action("Adduser", "UserManage",new{ id = item.userId})' "> <small><span class="glyphicon glyphicon-plus">关注</span> </small> </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dd>
+}

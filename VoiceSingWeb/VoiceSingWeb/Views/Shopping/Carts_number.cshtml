@@ -1,0 +1,11 @@
+﻿
+@{
+    Layout = null;
+}
+
+@*@model Models.Cart*@
+
+<a href="@Url.Action("AddCart_goods", "Shopping")">
+    <div class="iconfont">&#xe502;</div>
+    <span>@ViewData["number"]</span>
+</a>

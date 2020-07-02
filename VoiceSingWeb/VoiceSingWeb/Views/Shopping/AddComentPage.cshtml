@@ -1,0 +1,51 @@
+﻿@model PagedList.IPagedList<Models.Add_comment>
+@using PagedList.Mvc;
+@{
+    Layout = null;
+}
+<link href="~/Content/PagedList.css" rel=" stylesheet" />
+
+@if (Model != null && Model.Count() != 0)
+{
+    foreach (var item in Model)
+    {
+        <div class="partcont">
+            <div class="addcontent-user">
+                <img class="userimg" src="@item.photo" />
+                <span class="usernum"> @item.name</span>
+            </div>
+
+            <div class="addcontent-con">
+                <span>
+                    @Html.Raw(item.content)
+                </span>
+                <span>
+                    初次评价：@item.commmenttime
+                </span>
+            </div>
+
+            <div class="addcontent-add">
+                <span>
+                    @Html.Raw(item.addcontent)
+                </span>
+                <span>
+                    追加评价：@item.addcommmenttime
+                </span>
+            </div>
+            <p></p>
+        </div>
+    }
+}
+else
+{
+    <div> <span>该商品还没有买家追评过哦！</span></div>
+}
+@Html.PagedListPager(Model,
+    page => Url.Action("AddComentPage", "Shopping", new { page = page,id = Model.First().goodsid}),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions {
+        MaximumPageNumbersToDisplay = 5
+    }, new AjaxOptions {
+        HttpMethod = "post",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "part-add"
+    }))

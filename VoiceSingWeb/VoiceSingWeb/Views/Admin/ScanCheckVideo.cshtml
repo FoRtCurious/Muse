@@ -1,0 +1,9 @@
+﻿@model Models.Videos
+@{ 
+    Layout = null;
+}
+<h3 style="color:red;">*管理员请认真审核视频内容是否涉及色情、政治、暴力等违法信息</h3>
+<h3>视频名称:@Model.video_name</h3>
+<h3>上传时间:@Model.video_upTime.ToString()</h3>
+<h3>上传用户:@Model.Users.name (@Model.user_id)</h3>
+<video preload="metadata" controls loop poster="@Model.video_photo" style="width:80%;"><source src="@Model.video_url">您的浏览器不支持HTML5视频播放，请升级浏览器。</video>

@@ -1,0 +1,99 @@
+﻿.C-head {
+    min-height: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #333;
+    width: 1074px;
+    margin-left: 256px;
+}
+
+    .C-head .block {
+        padding: 30px 0 19px 0;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .C-head .pointer {
+        font-size: 16px;
+        color: #999;
+        font-weight: 600;
+    }
+
+
+.Box {
+    width: 1000px;
+    height: 560px;
+    border: 0.5px solid black;
+    background-color: antiquewhite;
+    position: relative;
+    left: 300px;
+    top: 24px;
+}
+    .Box .good-box {
+        float: left;
+        width: 270px;
+        border: 1px solid #c8c8c8;
+        height: 367px;
+    }
+        .Box .good-box .topic {
+            display: block;
+            font-size: 20px;
+            color: #fff;
+            width: 62px;
+            padding: 0px 0 0 20px;
+            border: 1px solid;
+            margin-left: 14px;
+            margin-top: 25px;
+            background-color: #f40;
+        }
+    .Box .good-box .product {
+        width: 220px;
+        height: 252px;
+        border: 1px solid #c8c8c8;
+        margin-left: 12px;
+        margin-top: 9px;
+    }
+    
+    .Box .good-box .product img{
+        width:200px;
+        height:200px;
+        margin-left:10px;
+    }
+    .Box .good-box .product .name{
+        display:block;
+        margin-left:10px;
+           
+    }
+    .Box .good-box .product .time {
+    display: block;
+    margin-left: 10px;
+}
+    .Box .good-sorce {
+        width: 540px;
+    }
+    .Box .good-content {
+        width: 726px;
+        float: right;
+    }
+    .Box .But {
+        width: 104px;
+        margin-left: 274px;
+        margin-top: 320px
+    }
+        .Box .But .tj {
+            height: 31px;
+            display: block;
+            width: 100px;
+            color: #FFF;
+            background-color: #f40;
+            border-radius: 10px;
+ }
+
+
+        .Box .content-one{
+            width:700px;
+            /*height:50px;*/
+            float:right;
+        }
+    .Box .content-one .a{
+        border:0.5px solid #c8c8c8;
+    }

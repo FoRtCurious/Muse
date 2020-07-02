@@ -1,0 +1,68 @@
+﻿@model Models.Users
+@{
+    ViewBag.Title = "我的关注";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Css{
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+}
+
+
+<div class="container">
+    <div class="row clearfix" style="min-height :200px; overflow-y:hidden;">
+        <div class="col-md-12 column">
+            @*顶部导航*@
+            <div class="row clearfix" style="height:90px;">
+                <div class="col-md-1 column">
+                    <img class="img-circle photo" alt="singer" src="@Model.photo" style="width:70px;" />
+                </div>
+                <div class="col-md-3 column">
+                    <p style="color :red">音悦网免费邮箱 </p>
+                    <small>
+                        @@@Model.userId .yinyue.com
+                        <br />
+                        @Model.name
+                    </small>
+                </div>
+                <div class="col-md-8 column">
+                    <ul class="nav nav-pills">
+                        <li>
+                            <a href="@Url.Action("Index", "Mail")"> 邮件</a>
+                        </li>
+                        <li class="active">
+                            <a href="@Url.Action("Friends", "Mail")">  通讯录</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Write", "Mail")">  写信</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("ChatIndex", "Mail")">私信</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row clearfix">
+                @*左侧导航*@
+                <div class="col-md-2 column" style="min-height :200px; overflow-y:hidden;">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <a href="@Url.Action("Friends", "Mail" ,new { id = Model.userId})"> 我的关注 </a>     @*跳转通讯录首页，通讯录首页默认为我的关注*@ 
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <a href="@Url.Action("Fans", "Mail", new { id = Model.userId }) ">  我的粉丝  </a>    @*新建分布式图筛选*@ 
+                        </div>
+                       
+                    </div>
+                </div>                         @*以上为页面固定内容*@
+
+                @*右侧好友信息展示*@
+                <div class="col-md-10 column" style="min-height :200px; overflow-y:hidden;">
+                    @Html.Action("friend1", "Mail", new { id = Model.userId })     @*转入我的关注分页*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

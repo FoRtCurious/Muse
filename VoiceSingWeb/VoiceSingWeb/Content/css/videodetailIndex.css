@@ -1,0 +1,36 @@
+﻿    .thin {
+        color: dimgray;
+    }
+    .center {
+        color: dimgray;
+        text-align:center ;
+    }
+    *{
+        outline:none;
+    }
+    .btn:hover{
+        color:#b40c0c;
+        outline:none;
+    }
+        .hover{
+        color:black;
+        outline:none;
+    }
+    .hover:hover{
+        color:#9c1616;
+    }
+    .mask{
+		width: 130px;
+		height: 75px;
+		position:absolute;
+		background: rgba(0,0,0,.5) url(../../Content/images/videos/load/播放.png) no-repeat center;
+	    display: none;
+		bottom: 0;
+	}
+    .cover{
+        position:relative;
+        display:inline-block;
+    }
+	.cover:hover .mask{
+		display: block;
+	}

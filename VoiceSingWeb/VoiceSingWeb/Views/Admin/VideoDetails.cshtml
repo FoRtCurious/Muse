@@ -1,0 +1,81 @@
+﻿@model Models.Videos
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>layuiTest</title>
+    <link rel="stylesheet" href="~/Content/layui-v2.5.6/layui/css/layui.css" media="all">
+</head>
+<body>
+    <div style="width:100%; height:100%;">
+        <table class="layui-table">
+            <colgroup>
+                <col width="100">
+                <col width="300">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>属性</th>
+                    <th>属性值</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>视频ID</td>
+                    <td>@Model.video_id</td>
+                </tr>
+                <tr>
+                    <td>视频海报</td>
+                    <td><img src="@Model.video_photo" width="80" height="60" /></td>
+                </tr>
+                <tr>
+                    <td>视频名称</td>
+                    <td>@Model.video_name</td>
+                </tr>
+                <tr>
+                    <td>上传用户</td>
+                    <td>@Model.user_id</td>
+                </tr>
+                <tr>
+                    <td>视频类型</td>
+                    <td>@Model.VideoType.typeName</td>
+                </tr>
+                <tr>
+                    <td>上传时间</td>
+                    <td>@Model.video_upTime</td>
+                </tr>
+                <tr>
+                    <td>关联歌曲</td>
+                    <td>@Model.relate_music</td>
+                </tr>
+                <tr>
+                    <td>视频简介</td>
+                    <td>@Model.video_info</td>
+                </tr>
+                <tr>
+                    <td>视频文件地址</td>
+                    <td>@Model.video_url</td>
+                </tr>
+                <tr>
+                    <td>视频状态</td>
+                    @{
+                        if (Model.video_state == 1)
+                        {
+                            <td style="color:deepskyblue;">在线中</td>
+                        }
+                        else if (Model.video_state == 0)
+                        {
+                            <td style="color:red;">离线中</td>
+                        }
+                    }
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

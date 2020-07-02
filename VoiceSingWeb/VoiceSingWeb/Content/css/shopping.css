@@ -1,0 +1,249 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+a,
+u {
+    text-decoration: none;
+    color: #000;
+}
+
+ul {
+    list-style: none;
+}
+/*顶部*/
+header {
+    width: 100%;
+    height: 70px;
+    border-bottom: 1px solid #999;
+}
+
+header .top {
+    width: 1100px;
+    height: 70px;
+    margin: 0 auto;
+}
+
+header .top .logo {
+    float: left;
+    width: 290px;
+    height: 70px;
+}
+
+header .top .topRight {
+    float: right;
+}
+
+header .top .searchbox {
+    float: left;
+    margin-top: 15px;
+    width: 300px;
+    height: 34px;
+    background: url(../images/shopping/home/searchbox.png)
+}
+
+#search {
+    height: 30px;
+    line-height: 34px;
+    border: none;
+    margin-left: 30px;
+    margin-top: 2px;
+    width: 240px;
+    padding-left: 10px;
+}
+
+header .top .shopcart {
+    float: left;
+    margin-left: 41px;
+    margin-top: 12px;
+    position: relative;
+}
+
+header .top .shopcart .iconfont {
+    font-family: "iconfont" !important;
+    font-size: 36px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+header .top .shopcart span {
+    display: block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+    text-align: center;
+    font-size: 13px;
+    line-height: 18px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+}
+
+header .top .userInfo {
+    float: left;
+    width: 62px;
+    height: 36px;
+    line-height: 36px;
+    margin-left: 37px;
+    margin-top: 15px;
+    position: relative;
+}
+
+header .top .userInfo .loginBox {
+        width: 160px;
+        height: 100px;
+        background: url(../images/shopping/home/loginBox.png);
+        position: absolute;
+        box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.4);
+        top: 35px;
+        left: -55px;
+        display:none;
+        z-index: 99999;
+        background-color:rgba(255,255,255,1);
+    } 
+
+header .top .userInfo .loginBox ul {
+    margin-top: 10px;
+}
+
+header .top .userInfo .loginBox ul li {
+    padding-left: 16px;
+    width: 145px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 13px;
+}
+
+header .top .userInfo .loginBox ul li:hover {
+    background: rgba(173, 173, 173, .3);
+}
+
+/*下角*/
+footer {
+    width: 100%;
+    height: 120px;
+    background: #f2f2f2;
+    position: relative;
+    top: 15px;
+    z-index:-1;
+}
+
+footer .footer {
+    width: 1100px;
+    height: 100px;
+    margin: 10px auto;
+    /*position:relative;*/
+
+}
+
+footer .footer .footerLeft {
+    padding-top: 35px;
+}
+
+footer .footer .footerLeft a {
+    color: #999;
+    font-size: 12px;
+}
+
+footer .footer .footerLeft span {
+    margin: 0 8px 0 10px;
+    color: #c2c2c2;
+    font-size: 12px;
+}
+
+footer .footer .footerLeft p {
+    padding-top: 5px;
+    color: #666;
+    font-size: 12px;
+}
+
+footer .footer .footerLeft p .licence {
+    color: #666;
+    font-size: 12px;
+}
+
+footer .footer .footerLeft p .licence:hover {
+    text-decoration: underline
+}
+
+footer .footer .footerRight {
+    float: right;
+    position: relative;
+    top: -50px;
+}
+
+footer .footer .footerRight li {
+    float: left;
+    text-align: center;
+    margin: 0 15px;
+    font-size: 12px;
+    color: #666;
+}
+
+footer .footer .footerRight li p {
+    font-size: 40px;
+    color: #999;
+}
+/*右边*/
+.rightNav {
+    width: 60px;
+    height: 244px;
+    border: 1px solid #999;
+    position: fixed;
+    top: 50%;
+    right: 3%;
+    margin-top: -138px;
+    z-index: 999;
+}
+
+.rightNav p {
+    font-size: 20px
+}
+
+.rightNav div {
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    line-height: 1.5;
+    font-size: 14px;
+    background: #fff;
+}
+
+.rightNav div span {
+    position: relative;
+    top: 8px;
+}
+
+.rightNav .toTop {
+    color: #fff;
+    background: #333333;
+    line-height: 1;
+    cursor: pointer;
+    border: 1px solid #333;
+    margin-left: -1px;
+    margin-top: -1px;
+    height: 35px;
+    display: none
+}
+
+.rightNav .toTop span {
+    top: 0
+}
+
+.rightNav div:nth-child(3) span:last-child {
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    /*background: red;*/
+    color: white;
+    text-align: center;
+    font-size: 12px;
+    line-height: 16px;
+    position: absolute;
+    top: 128px;
+    right: 10px;
+}

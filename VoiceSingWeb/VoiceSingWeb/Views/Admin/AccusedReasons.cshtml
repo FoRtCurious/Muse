@@ -1,0 +1,55 @@
+﻿@model Models.AccusedUsers
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>layuiTest</title>
+    <link rel="stylesheet" href="~/Content/layui-v2.5.6/layui/css/layui.css" media="all">
+</head>
+<body>
+    <div style="width:100%; height:100%;">
+        <table class="layui-table">
+            <colgroup>
+                <col width="200">
+                <col width="300">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>属性</th>
+                    <th>属性值</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>操作编号</td>
+                    <td>@Model.accusedid</td>
+                </tr>
+                <tr>
+                    <td>被举报账号</td>
+                    <td>@Model.userId</td>
+                </tr>
+                <tr>
+                    <td>被举报昵称</td>
+                    <td>@Model.Users.name</td>
+                </tr>
+                <tr>
+                    <td>举报时间</td>
+                    <td>@Model.accusedtime</td>
+                </tr>
+                <tr height="100">
+                    <td>举报原因</td>
+                    <td >@Model.accusedreason</td>
+                </tr>    
+                <tr height="100">
+                    <td>图片凭证</td>
+                    <td><img src="#" style="height:50px;width:50px;"/></td>
+                </tr>            
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

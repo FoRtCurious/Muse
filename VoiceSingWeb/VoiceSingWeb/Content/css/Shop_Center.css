@@ -1,0 +1,318 @@
+﻿.C-body {
+    padding-bottom: 435px;
+    min-height: calc(-233px + 100%);
+    width: 1100px;
+    margin: 0 auto;
+    background: #fff;
+    height: 150px;
+}
+.C-head{
+ min-height:15px;
+ margin-bottom:15px;
+ border-bottom:1px solid #333;
+}
+.C-head .block{
+    padding:30px 0 19px 0;
+    font-size:18px;
+    font-weight:600;
+} 
+.C-head .pointer
+{
+    font-size:16px;
+    color:#999;
+    font-weight:600;
+}
+.Left-list{
+    width:160px;
+    float:left;
+}
+.Left-list .m-Order{
+
+}
+    .Left-list .m-Order .z-sel {
+        background-color: #9E9E9E;
+        display: block;
+        width: 127px;
+        height: 25px;
+        border-radius: 5px;
+        margin-top: 1px;
+    }
+li,s{
+    list-style:none;
+}
+/*地址展示*/
+.Right-list {
+    width: 930px;
+    height: 521px;
+    background-color:antiquewhite;
+    float: right;
+}
+.order-list{
+    float:left;
+    width:480px;
+}
+    .order-list .order-ul{
+        list-style:none;
+        display:inline-block;
+        height:30px;
+    }
+        .order-list .order-ul li {
+            list-style: none;
+            display: block;
+            float: left;  
+        }
+        .order-list .order-ul .spend{
+            width:150px;
+            height:20px;
+            border:0.5px solid #c8c8c8;
+            border-top:none;
+        }
+        .order-list .order-ul .data{
+            width:220px;
+        }
+       
+        #check-detail {
+            cursor: pointer;
+            background-color: #ff9800;
+            border-radius: 5px;
+        }
+#order-show {
+    width: 420px;
+    height:522px;
+    background-color: aliceblue;
+    float: right;
+    border-radius: 10px;
+    OVERFLOW: HIDDEN;
+    OVERFLOW: SCROLL;
+}
+    #order-show ul {
+        list-style: none;
+        display: inline-block;
+        width:400px;
+        height:140px;
+        border:0.5px solid #c8c8c8;
+        border-top:none;
+    }
+
+/*我的收藏*/
+#Right-list3 {
+    OVERFLOW: HIDDEN;
+    OVERFLOW: SCROLL;
+}
+    #Right-list3 .size {
+        display: block;
+        font-size: 19px;
+        margin-left: 35px;
+    }
+    #Right-list3 .table {
+        width: 71%;
+        margin: 0 auto;
+        text-align: center;
+    }
+/*我的待评论*/
+#Right-list4 {
+    OVERFLOW: HIDDEN;
+    OVERFLOW: SCROLL;
+}
+    #Right-list4 .table {
+        width: 77%;
+        margin: 0 auto;
+        text-align: center;
+    }
+        #Right-list4 .table .commentbut {
+            width: 15%;
+            margin: 0 auto;
+            line-height: 100px;
+        }
+            #Right-list4 .table .commentbut #update {       
+                border: 1px solid black;
+                font-size: 20px;
+                border-radius: 5px;
+            }
+/*追评*/
+#Right-list5 {
+    OVERFLOW: HIDDEN;
+    OVERFLOW: SCROLL;
+}
+    #Right-list5 .table {
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+    }
+        #Right-list5 .table .content {
+            width: 10%;
+            margin: 0 auto;
+            
+            font-size:14px;
+        }
+        #Right-list5 .table #update {
+            border: 1px solid black;
+            font-size: 20px;
+            border-radius: 5px;
+        }
+
+
+
+#Right-list1 {
+    display: none;
+    overflow: hidden;
+    overflow: scroll;
+}
+    #Right-list1 .add {
+        width: 280px;
+        height: 100px;
+        background-color:#9E9E9E;
+        margin: 10px;
+        border-radius: 20px;
+    }
+    .add :hover {
+        cursor: pointer;
+    }
+#Right-list1 .address-H {
+    width: 280px;
+    height: 150px;
+    float: left;
+    margin: 10px 10px;
+    border:0.5px solid #c8c8c8;
+    border-radius: 20px;
+}
+    #Right-list1 .address-H .juti{
+        height:100px;
+        width:215px;
+    }
+    #Right-list1 .address-H .chaozhuo {
+        margin-top: 10px;
+        margin-left: 74px
+    }
+    #Right-list1 .address-H #delect {
+        display: inline-block;
+       
+        background-color: #ff9800;
+        border-radius: 5px;
+    }
+    #Right-list1 .address-H #update {
+        display: inline-block;
+       
+        background-color: #ff9800;
+        border-radius: 5px;
+    }
+    /*添加地址*/
+    .Add-adress {
+        width: 400px;
+        height: 350px;
+        /*background: #c8f8f8c;*/
+        margin-left: 500px;
+        margin-top: 5px;
+        border-radius: 25px;
+        border: 1px dashed;
+    }
+
+.add-head {
+    position: relative;
+    width: 500px;
+    height: 80px;
+    font: 500;
+}
+
+    .add-head span {
+        font-size: 18px;
+        margin-left: 20px;
+        margin-top: 10px;
+    }
+
+.add-form {
+    width: 500px;
+}
+
+.m-address {
+    display: block;
+    margin-top: 0em;
+    font-size: 12px;
+    color: #333;
+}
+
+.s-name {
+    position: relative;
+    zoom: 1;
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+.s-name-span {
+    display: inline-block;
+    width: 61px;
+    line-height: 32px;
+    font-size: 14px;
+    margin-right: 12px;
+    vertical-align: top;
+    text-align: right;
+}
+
+.s-phone {
+    position: relative;
+    z-index: 1;
+    zoom: 1;
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+.s-phone-span {
+    display: inline-block;
+    width: 61px;
+    line-height: 32px;
+    font-size: 14px;
+    margin-right: 12px;
+    vertical-align: top;
+    text-align: right;
+}
+
+.s-address {
+    position: relative;
+    z-index: 1;
+    zoom: 1;
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+.s-address-span {
+    display: inline-block;
+    width: 61px;
+    line-height: 32px;
+    font-size: 14px;
+    margin-right: 12px;
+    vertical-align: top;
+    text-align: right;
+}
+
+.pdh {
+    padding: 20px 0 30px 77px;
+}
+
+.pdh-save {
+    display: inline-block;
+    padding: 0;
+    width: 110px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    text-align: center;
+    background: #cb3b3b;
+    color: #fff;
+    cursor: pointer;
+}
+
+.pdh-hide {
+    display: inline-block;
+    padding: 0;
+    width: 110px;
+    height: 38px;
+    line-height: 38px;
+    margin-left: 18px;
+    border: 1px solid #d9d9d9;
+    font-size: 16px;
+    text-align: center;
+    background: white;
+    color: #333;
+    cursor: pointer;
+}
+

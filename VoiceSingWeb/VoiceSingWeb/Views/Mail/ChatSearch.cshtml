@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Models.Users>
+@{
+    ViewBag.Title = "用户查询";
+    int i = 1;
+    string num = "";
+}
+@section Css{
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+}
+<style>
+    a {
+        font-size: 18px;
+        color: green;
+    }
+
+        a:hover {
+            color: red;
+            text-decoration: none;
+        }
+</style>
+<div class="container box">
+    <div class="row clearfix" style="min-height:460px;overflow-y:hidden;">
+        <div class="col-md-12 column">
+            <h4 class="text-success">搜索“<span style="color:red;display:inline-table;font-weight:400;">@ViewBag.keyword</span>”为您查询出 <span style="color:red;display:inline-table">@ViewBag.sum</span> 条结果：</h4>
+            <div style="min-height:390px;">
+                <table class="table" style="height:0">
+                    <thead style="font-weight:600;">
+                        <tr>
+                            <th>
+                                序号
+                            </th>
+                            <th>
+                                用户名
+                            </th>
+                            <th >
+                                账号
+                            </th>
+
+                            <th>
+                                个人专辑
+                            </th>
+                            <th>
+                                Zone
+                            </th>
+                            <th>
+                                写信
+                            </th>
+                            <th>
+                                添加聊天
+                            </th>
+                            <th>
+                                YINYUE.CHAT
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ if (Model != null)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr class="text-success">
+                                        <td style="height:50px;line-height:50px;">
+                                            @{
+                                                if (i < 10)
+                                                {
+                                                    num = "0" + i.ToString();
+                                                    i++;
+                                                }
+                                                else
+                                                {
+                                                    num = i.ToString();
+                                                    i++;
+                                                }
+                                            }
+                                            @num
+                                        </td>
+                                        <td style="height:50px;line-height:50px;">
+                                            <a href="@Url.Action("userSingerDetails","Singers" ,new { id = @item.userId })" style="font-size:14px;">@item.name</a>
+                                        </td>
+                                        <td style="height:50px;line-height:50px;">
+                                            @item.userId 
+                                        </td>
+                                        <td style="height:50px;line-height:50px;">   @*个人专辑*@
+                                            <a href="@Url.Action("SingerAlbum","Singers" ,new { id = @item.userId })" style="font-size:14px;">  <div style="margin-top:15px;"> &nbsp;&nbsp; <i class="glyphicon glyphicon-book"></i></div>   </a>
+                                        </td>
+                                        <td style="height:50px;line-height:50px;">      @*Zone*@
+                                            <a href="@Url.Action("Zone","Circle" ,new { id = @item.userId })" style="font-size:14px;">  <div style="margin-top:15px;"> &nbsp;&nbsp; <i class="glyphicon glyphicon-star"></i></div>    </a>
+                                        </td>
+                                        <td style="height:50px;line-height:50px;">    @*写信*@
+                                            <a href="@Url.Action("Write","Mail" ,new { id = @item.userId })" style="font-size:14px;">  <div style="margin-top:15px;"> &nbsp;&nbsp; <i class="glyphicon glyphicon-envelope"></i></div>    </a>
+                                        </td>
+                                        <td style="height:50px;line-height:50px;">      @*聊天*@
+                                            <a href="@Url.Action("AddChat","Mail" ,new { recipid = item.userId  })" style="font-size:14px;">  <div style="margin-top:15px;"> &nbsp;&nbsp; <i class="glyphicon glyphicon-comment"></i></div>    </a>
+                                        </td>
+                                        <td style="height:50px;line-height:50px;">      @*返回*@
+                                            <a href="@Url.Action("ChatIndex","Mail" ,new { id = @item.userId })" style="font-size:14px;">  <div style="margin-top:15px;"> &nbsp;&nbsp; <i class="glyphicon glyphicon-send"></i>&nbsp;&nbsp;<i class="glyphicon glyphicon-comment"></i> </div>    </a>
+                                        </td>
+                                    </tr>
+                                                    }
+                                                }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

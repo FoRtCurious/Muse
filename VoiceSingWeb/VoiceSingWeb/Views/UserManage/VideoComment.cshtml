@@ -1,0 +1,14 @@
+﻿@model Models.VideoComment
+@{ 
+    Layout = null;
+}
+<div>
+    <a href="@Url.Action("UserSingerInfo","Singers",new { id = Model.user_id})" style="display:inline-block;outline:none;">@@@Model.Users.name</a>
+    <span style="display:inline-block;">
+        @Model.Comment_time.ToString()
+    </span>
+    <div>
+        @Html.Raw(Model.Comment_content)
+    </div>
+</div>  
+
